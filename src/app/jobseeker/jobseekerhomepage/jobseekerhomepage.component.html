@@ -1,0 +1,251 @@
+<!-- Navbar Section -->
+<nav class="navbar">
+  <div class="container">
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link" routerLinkActive="active-link">Home</a>
+        
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a class="nav-link">Resume</a>
+        <div class="hover-content">
+          <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName:fullName,id: id }" routerLinkActive="active-link">CreateResume</a>
+          <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{fullName:fullName,id:id,resumeId: resume?.id}" routerLinkActive="active-link">UpdateResume</a>
+          <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName:fullName,id:id, resumeId: resume?.id}" routerLinkActive="active-link">ViewResume</a>
+        </div>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{ fullName:fullName,id: id}" routerLinkActive="active-link" class="nav-link" >Jobsapplied</a>
+      </div>
+    </div>
+
+    <div class="right-nav">
+      <!-- Search Box with Icon -->
+      <div class="search-container">
+        <button class="search-btn" type="button" (click)="toggleSearch()">
+          <i class="fas fa-search"></i> <!-- Font Awesome search icon -->
+          <input type="text" placeholder="Search jobs..." class="search-input">
+        </button>
+      </div>
+      
+      <span class="user-name">{{ fullName }}</span>
+
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Resume Box Section -->
+<div class="main-container">
+  <div class="resume-container">
+    <div *ngIf="resume; else noData" class="resume-box">
+   
+
+<img *ngIf="resume.profilePhoto" [src]="resume.profilePhoto" alt="Profile Photo" class="profile-photo" />
+      <p>{{ resume.firstName }} {{ resume.middleName }} {{ resume.lastName }}</p>
+      <p>{{ resume.graduation }}</p>
+      </div>
+      <div class="navigation">
+        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link" routerLinkActive="active-link">
+          <img src="https://static.naukimg.com/s/9/105/_next/static/assets/home.svg" alt="Home" class="nav-icon"> My Home
+        </a>
+        <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{fullName: fullName,id: id }" class="nav-link" routerLinkActive="active-link">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" height="25px" width="20px" alt="Blob" class="nav-icon"> CreateResume
+        </a>
+        
+        <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName:fullName,id:id,resumeId: resume?.id}" class="nav-link" routerLinkActive="active-link">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" alt="Companies" class="nav-icon"> UpdateResume
+        </a>
+
+        <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{fullName:fullName,id:id, resumeId: resume?.id}" class="nav-link" routerLinkActive="active-link">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" height="25px" width="20px" alt="Blob" class="nav-icon"> ViewResume
+        </a>
+        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{fullName:fullName, id: id }" class="nav-link" routerLinkActive="active-link">
+          <img src="https://static.naukimg.com/s/9/105/_next/static/assets/jobs.svg" alt="Jobs" class="nav-icon"> Jobs Applied
+        </a>
+      </div>
+  </div>
+
+  <ng-template #noData>
+    <p></p>
+  </ng-template>
+
+  <!-- Job Cards Section --><!-- job-postings.component.html -->
+   <div *ngIf="jobpostings.length > 0; else noJobs" class="job-cards-container">
+    <div *ngFor="let job of jobpostings" class="card job-posting" (click)="viewJobDetails(job)">
+      <div class="card-header">
+        <h3>{{ job.companyName }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="job-details">
+          <div class="job-detail">
+            <strong>JobTitle:</strong>
+            <span>{{ job.jobTitle }}</span>
+          </div>
+          <div class="job-detail">
+            <i class="fas fa-map-marker-alt">:</i> 
+            <span>{{ job.location }}</span>
+          </div>
+          <div class="job-detail">
+            <strong>Employment Type:</strong>
+            <span>{{ job.employmentType }}</span>
+          </div>
+          <div class="job-detail">
+            <strong>Salary:</strong>
+            <span>{{ job.salary }}</span>
+          </div>
+          <div class="job-detail">
+            <strong>Experience:</strong>
+            <span>{{ job.experience }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noJobs>
+    <p>No job postings available</p>
+  </ng-template>
+
+  <!-- Pagination Section -->
+  <div *ngIf="jobpostings.length > 0" class="pagination-wrapper">
+    <div class="pagination">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Footer Section -->
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>
+
+
+<div class="search-wrapper" *ngIf="showSearch">
+  <div class="Wrapper">
+    <div>
+      <div class="logoContainer">
+        <!-- Search Icon -->
+        <img src="https://static.naukimg.com/s/7/103/i/search.9ec0e1ac.svg" id="searchIcon" alt="Search Icon">
+
+        <!-- Input fields for search criteria -->
+        <input 
+          type="text" 
+          [(ngModel)]="searchCriteria.jobTitle" 
+          placeholder="Enter JobTitle" 
+          class="sugginput" 
+          id="input1"
+        >
+
+        <div class="pipe1"></div>
+
+        <input 
+          type="text" 
+          [(ngModel)]="searchCriteria.location" 
+          placeholder="Enter Location" 
+          class="sugginput" 
+          id="input2"
+        >
+
+        <div class="pipe1"></div>
+
+        <!-- Select Experience -->
+        <select 
+        [(ngModel)]="searchCriteria.experience" 
+        id="input3"
+        class="sugginput"
+        placeholder="select experience"
+      >
+        <!-- Placeholder option -->
+        <option value="" disabled selected hidden>Select Experience</option>
+        
+        <option value="fresher">Fresher</option>
+        <option value="1">1 year</option>
+        <option value="2">2 years</option>
+        <option value="3">3 years</option>
+        <option value="4">4 years</option>
+        <option value="5">5 years</option>
+      </select>
+      
+
+        <!-- Submit Button -->
+        <input 
+          type="submit" 
+          class="search" 
+          value="Search" 
+          (click)="searchJobs()"
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Display Job Search Results -->
+   <div *ngIf="jobTableVisible && searchJobPostings && searchJobPostings.length > 0" class="job-table-container">
+  <button class="close-button" (click)="hideJobTable()">×</button>
+  <table class="job-table">
+    <thead>
+      <tr>
+        <th>Job Title</th>
+        <th>Location</th>
+        <th>Experience</th>
+        <th>Company Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of searchJobPostings">
+        <td>{{ job.jobTitle }}</td>
+        <td>{{ job.location }}</td>
+        <td>{{ job.experience }}</td>
+        <td>{{ job.companyName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+  
+  <!-- Display a message when no results are found -->
+  <div *ngIf="jobpostings && jobpostings.length === 0">
+  </div>
+
+
+
+
+<!--
+<div class="job-detail">
+  <strong>Job Category:</strong>
+  <span>{{ job.jobCategory }}</span>
+</div>
+
+<div class="job-detail">
+  <strong>Skills Required:</strong>
+  <span>{{ job.skills }}</span>
+</div>
+
+
+<div class="job-detail">
+  <strong>Last Date to Apply:</strong>
+  <span>{{ job.lastDate | date }}</span>
+</div> -->

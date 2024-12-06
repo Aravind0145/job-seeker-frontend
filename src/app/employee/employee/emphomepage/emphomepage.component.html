@@ -1,0 +1,74 @@
+<nav class="navbar">
+    <div class="container">
+      <!-- Left side: RevHire -->
+      <div class="left-nav">
+        <a class="nav-link active">RevHire</a>
+      </div>
+  
+      <!-- Centered Links: Jobs, Companies, Services -->
+      <div class="center-nav">
+        <div class="nav-item">
+          <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }"           routerLinkActive="active-link"
+          >Home</a>
+        </div>
+        <!-- Jobs Hover Effect with Default Jobs -->
+        <div class="nav-item">
+          <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+        </div>
+  
+        <!-- Companies Hover Effect with Default Companies -->
+        <div class="nav-item">
+          <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+        </div>
+  
+        <!-- Services Hover Effect -->
+        <div class="nav-item">
+      
+        </div>
+      </div>
+  
+  
+      <!-- Right side: Profile and Logout -->
+      <div class="right-nav">
+        <!-- Display full name before the Profile button -->
+        <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+        <div class="dropdown">
+          <button class="dropbtn">Profile</button>
+          <div class="dropdown-content">
+            <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+            <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+          </div>
+        </div>
+        
+        <!-- Logout Button -->
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </div>
+    </div>
+
+
+  </nav>
+<div class="postjobs-box">
+  <div class="postjobs">
+    <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }">View Profile</a>
+  </div>
+  <div class="postjobs">
+    <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }">Update Profile</a>
+  </div>
+  <div class="postjobs">
+    <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }">Post Jobs</a>
+  </div>
+  <div class="postjobs">
+  <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }">View Job Postings</a>
+    </div>
+  </div>
+
+  
+  <div>
+    <img src="https://img.freepik.com/free-photo/cherful-positive-young-colleagues-using-laptop-computer_171337-753.jpg">
+  </div>
+
+
+
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

@@ -1,0 +1,455 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar container */
+  .navbar {
+    background: #fff;
+    padding: 3px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    border-radius: 10px;
+  }/* Search Container */
+  
+  .Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: -590px;
+  }
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    padding: 9px 9px 9px 24px;
+    background: #fff;
+    border: 1.26923px solid #eaf1f5;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgb(86 141 187 / 12%);
+    border-radius: 100px;
+    width: 995px;
+    height: 68px;
+    border: 1px solid white;
+  }
+  #searchIcon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+  #input1 {
+    width: 324px;
+    height: 38px;
+    border: none;
+  }
+  
+  .sugginput {
+    font-size: 15px;
+    line-height: 22px;
+    font-family: "Inter";
+    color: #9098b5;
+    font-weight: 400;
+  }
+  .pipe1 {
+    background: #eaf1f5;
+    border-radius: 2.53846px;
+    width: 1px;
+    height: 28px;
+  }
+  #input3 {
+    width: 223px;
+    height: 40px;
+    border: none;
+  }
+  #input2 {
+    width: 208px;
+    height: 38px;
+    border: none;
+  }
+  input, select {
+    outline: none;
+  }
+  .search {
+    padding: 11px 28px;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    background: #457eff;
+    box-shadow: 0 5.07692px 12.6923px rgb(69 126 255 / 10%);
+    border-radius: 100px;
+    cursor: pointer;
+    color: white;
+    margin-left: 40px;
+    border: none;
+  }
+  .search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    width: fit-content;
+  }
+  
+  .search-btn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .search-btn i {
+    font-size: 16px;
+    color: #007bff;
+    margin-right: 8px;
+  }
+  
+  .search-btn:hover i {
+    color: #0056b3;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 14px;
+    width: 150px;
+    background-color: transparent;
+  }
+  
+  .search-input::placeholder {
+    color: #ccc;
+  }
+  
+  .search-btn:focus-within .search-input {
+    border: none;
+    outline: none;
+  }
+  
+  /* Navbar Links */
+  .nav-link {
+    text-decoration: none;
+    color:blue;
+    font-weight: 500;
+    padding: 10px;
+  }
+  
+  .nav-link.active {
+    font-size: 20px;
+    color: #457eff;
+  }
+  
+  .nav-link:hover {
+    color: #457eff;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .left-nav {
+    flex: 1;
+    margin-left: 100px;
+  }
+  
+  .center-nav {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-left: -130px;
+  }
+  
+  .right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-right: 60px;
+    margin-left: -100px;
+  }
+  
+  /* Navbar Links */
+  .nav-link {
+    text-decoration: none;
+    color:blue;
+    font-weight: 500;
+    padding: 10px;
+  }
+  
+  .nav-link.active {
+    font-size: 20px;
+    color: #457eff;
+  }
+  
+  .nav-link:hover {
+    color: #457eff;
+  }
+  
+  /* Profile Dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropbtn {
+    background-color: #457eff;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    text-decoration: none;
+    display: block;
+    color: #333;
+    padding: 8px 16px;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #0056b3;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d9363e;
+  }.active-link {
+    font-weight: bold;
+    color: #007bff; /* Highlight color */
+    text-decoration: underline; /* Optional */
+  }
+  
+  
+  .nav-item a:hover {
+    color: #0056b3;
+  }
+  
+.home {
+  background-color: #457eff; /* Blue background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding for top/bottom and left/right */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  margin-bottom: 20px;
+  margin-left: 0px;
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
+}
+
+/* Hover Effect */
+.home:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Focus Effect */
+.home:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 5px rgba(69, 126, 255, 0.6); /* Add a focus shadow */
+}
+
+/* Active Effect */
+.home:active {
+  background-color: #004494; /* Even darker blue when pressed */
+}
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.update-resume-container {
+    width: 80%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-top: 70px;
+    margin-left: 100px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-top: -50px;
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 50px;
+    border-collapse: collapse;
+  }
+  
+  table td {
+    padding: 10px;
+    vertical-align: top;
+  }
+  
+  table td label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type="date"] {
+    width: auto;
+  }
+  
+  fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  legend {
+    font-weight: bold;
+  }
+  
+  label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+  }
+  
+  ng-template {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+  }
+
+
+  
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 200px;  /* Adjust width if needed */
+  border-radius: 10px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}
+  

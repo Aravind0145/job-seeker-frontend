@@ -1,0 +1,203 @@
+
+<nav class="navbar">
+  <div class="container">
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link">Home</a>
+        
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a class="nav-link" [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" 
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: false }">
+          Resume
+        </a>
+        <div class="hover-content">
+          <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Create Resume</a>
+          <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" routerLinkActive="active-link">View Resume</a>
+          <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" routerLinkActive="active-link">Update Resume</a>
+        </div>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{fullName:fullName,id: id }" class="nav-link" routerLinkActive="active-link" >Jobsapplied</a>
+      </div>
+    </div>
+
+    <div class="right-nav">
+      <!-- Search Box with Icon -->
+      <span class="user-name">{{ fullName }}</span>
+
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{fullName:fullName, id: id }">View Profile</a>
+          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{fullName:fullName, id: id }">Update Profile</a>
+        </div>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+  <div class="resume-container">
+    <button [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{fullName: fullName, id: id }" class="home">GoBack</button>
+
+    <h2>Resume Details</h2>
+  
+    <div *ngIf="resume; else noResume">
+      <!-- Personal Information -->
+      <section class="personal-info">
+        <h3>Personal Information</h3>
+        <table class="table">
+          <tr>
+            <td><strong>Headline:</strong></td>
+            <td>{{ resume.headline }}</td>
+          </tr>
+          <tr>
+            <td><strong>Full Name:</strong></td>
+            <td>{{ resume.firstName }} {{ resume.middleName }} {{ resume.lastName }}</td>
+          </tr>
+          <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ resume.email }}</td>
+          </tr>
+          <tr>
+            <td><strong>Phone Number:</strong></td>
+            <td>{{ resume.phoneNumber }}</td>
+          </tr>
+          <tr>
+            <td><strong>Date of Birth:</strong></td>
+            <td>{{ resume.dob }}</td>
+          </tr>
+          <tr>
+            <td><strong>Languages:</strong></td>
+            <td>{{ resume.languages }}</td>
+          </tr>
+          <tr>
+            <td><strong>LinkedIn URL:</strong></td>
+            <td><a href="{{ resume.linkedinurl }}" target="_blank">{{ resume.linkedinurl }}</a></td>
+          </tr>
+          <tr>
+            <td><strong>Permanent Address:</strong></td>
+            <td>{{ resume.permanentAddress }}</td>
+          </tr>
+          <tr>
+            <td><strong>Current Address:</strong></td>
+            <td>{{ resume.currentAddress }}</td>
+          </tr>
+        </table>
+      </section>
+  
+      <!-- Education -->
+      <section class="education">
+        <h3>Education</h3>
+        <table class="table">
+          <tr>
+            <td><strong>10th Grade:</strong></td>
+            <td>{{ resume.xth }} (Year: {{ resume.xthYear }})</td>
+          </tr>
+          <tr>
+            <td><strong>12th Grade:</strong></td>
+            <td>{{ resume.xii }} (Year: {{ resume.xiiYear }})</td>
+          </tr>
+          <tr>
+            <td><strong>Graduation:</strong></td>
+            <td>{{ resume.graduation }} (Year: {{ resume.graduationYear }})</td>
+          </tr>
+          <tr>
+            <td><strong>Post-Graduation:</strong></td>
+            <td>{{ resume.pg }} (Status: {{ resume.pgStatus }})</td>
+          </tr>
+        </table>
+      </section>
+  
+      <!-- Skills -->
+      <section class="skills">
+        <h3>Skills</h3>
+        <table class="table">
+          <tr>
+            <td>
+              <strong>skills</strong>
+            </td>
+            <td>
+              {{resume.skills}}
+            </td>
+          </tr>
+        </table>
+      </section>
+  
+      <!-- Project -->
+      <section class="project">
+        <h3>Project</h3>
+        <table class="table">
+          <tr>
+            <td><strong>Title:</strong></td>
+            <td>{{ resume.projectTitle }}</td>
+          </tr>
+          <tr>
+            <td><strong>Description:</strong></td>
+            <td>{{ resume.projectDescription }}</td>
+          </tr>
+        </table>
+      </section>
+  
+      <!-- Certifications -->
+      <section class="certifications">
+        <h3>Certifications</h3>
+        <table class="table">
+          <tr>
+            <td><strong>Name:</strong></td>
+            <td>{{ resume.certificateName }}</td>
+          </tr>
+          <tr>
+            <td><strong>Description:</strong></td>
+            <td>{{ resume.certificateDescription }}</td>
+          </tr>
+        </table>
+      </section>
+  
+      <!-- Work Experience -->
+      <section class="work-experience">
+        <h3>Work Experience</h3>
+        <table class="table">
+          <tr>
+            <td><strong>Company Name:</strong></td>
+            <td>{{ resume.companyName }}</td>
+          </tr>
+          <tr>
+            <td><strong>Job Title:</strong></td>
+            <td>{{ resume.jobTitle }}</td>
+          </tr>
+          <tr>
+            <td><strong>Start Date:</strong></td>
+            <td>{{ resume.startDate }}</td>
+          </tr>
+          <tr>
+            <td><strong>End Date:</strong></td>
+            <td>{{ resume.endDate }}</td>
+          </tr>
+          <tr>
+            <td><strong>Job Description:</strong></td>
+            <td>{{ resume.jobDescription }}</td>
+          </tr>
+        </table>
+      </section>
+    </div>
+  
+    <!-- Fallback if no resume is found -->
+    <ng-template #noResume>
+      <p>No resume details available.</p>
+    </ng-template>
+  </div>
+  

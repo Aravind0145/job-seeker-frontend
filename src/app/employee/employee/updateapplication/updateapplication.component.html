@@ -1,0 +1,132 @@
+<nav class="navbar">
+  <div class="container">
+    <!-- Left side: RevHire -->
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <!-- Centered Links: Jobs, Companies, Services -->
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: jobPostingId  }">Home</a>
+      </div>
+      <div class="nav-item">
+        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: jobPostingId }">Post Jobs</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: jobPostingId }">View Job Postings</a>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+    
+      </div>
+    </div>
+
+
+    <!-- Right side: Profile and Logout -->
+    <div class="right-nav">
+      <!-- Display full name before the Profile button -->
+      <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: jobSeekerId }">View Profile</a>
+          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: jobSeekerId }">Update Profile</a>
+        </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="update-application-form">
+  <div class="header-container">
+    <button 
+      [routerLink]="['/employee/viewjobpostings']" 
+      [queryParams]="{ fullName: fullName, id: jobPostingId }" 
+      class="home"
+    >
+      GoBack
+    </button>
+  </div>
+  <h2>Update Applications</h2>
+
+  <!-- Loop through applications and display a form for each -->
+  <div *ngFor="let app of applications; let i = index">
+    <form (ngSubmit)="onSubmit(app)">
+      <h3>Application {{ i + 1 }}</h3> <!-- Display the index (i + 1) -->
+
+      <!-- Display Job Posting Details -->
+      <div>
+        <label>Job Title:</label>
+        <p>{{ app.jobPosting?.jobTitle }}</p>
+      </div>
+      <div>
+        <label>Company:</label>
+        <p>{{ app.jobPosting?.companyName }}</p>
+      </div>
+      <div>
+        <label>Location:</label>
+        <p>{{ app.jobPosting?.location }}</p>
+      </div>
+      
+
+      <!-- Display Job Seeker Details -->
+      <div>
+        <label>Job Seeker Name:</label>
+        <p>{{ app.jobSeeker?.fullName }}</p>
+      </div>
+      <div>
+        <label>Email:</label>
+        <p>{{ app.jobSeeker?.email }}</p>
+      </div>
+   
+      <!-- Display Resume Details 
+      <div>
+        <label>Resume:</label>
+        <p>{{ app.resume?.fileName }}</p>
+        <a [href]="app.resume?.fileUrl" target="_blank">View Resume</a>
+      </div> -->
+
+      <!-- Application Status -->
+      <div>
+        <label for="status-{{ i }}">Application Status:</label>
+        <select id="status-{{ i }}" [(ngModel)]="app.status" name="status-{{ i }}">
+          <option value="Pending">Pending</option>
+          <option value="Shortlisted">Shortlisted</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-button">Update Application</button>
+    </form>
+  </div>
+</div>
+
+
+
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

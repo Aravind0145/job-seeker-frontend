@@ -1,0 +1,151 @@
+
+
+
+<nav class="navbar">
+  <div class="container">
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName:fullName, id: id }" class="nav-link">Home</a>
+        
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a class="nav-link">Resume</a>
+        <div class="hover-content">
+          <a [routerLink]="['/jobseeker/jobseekerresume']" 
+          [queryParams]="{ fullName: fullName, id: id}" routerLinkActive="active-link">
+          Create Resume
+       </a>
+       <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName:fullName,id:id,resumeId:resumeId}" routerLinkActive="active-link">ViewResume</a>
+
+       
+       <a [routerLink]="['/jobseeker/updateresume']" 
+          [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" routerLinkActive="active-link">
+          Update Resume
+       </a>
+        </div>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{fullName:fullName, id: id }" class="nav-link" routerLinkActive="active-link" >Jobsapplied</a>
+      </div>
+    </div>
+
+    <div class="right-nav">
+      <!-- Search Box with Icon -->
+      <span class="user-name">{{ fullName }}</span>
+
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{fullName:fullName, id: id }">View Profile</a>
+          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{fullName:fullName, id: id }">Update Profile</a>
+        </div>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- job-details.component.html --><!-- job-details.component.html -->
+<div *ngIf="job" class="job-details-container">
+  
+  <div class="job-details-card">
+    <div class="header-container">
+      <button 
+        [routerLink]="['/jobseeker/jobseekerhomepage']" 
+        [queryParams]="{ fullName: fullName, id: id }" 
+        class="home"
+      >
+        GoBack
+      </button>
+    </div>
+      <h3 class="company-name">{{ job.companyName }}</h3>
+      <div class="job-detail">
+        <strong>Job Id</strong><span>{{ job.id }}</span>
+    </div>
+      
+      <div class="job-detail">
+          <strong>Job Title: </strong><span>{{ job.jobTitle }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>Location: </strong><span>{{ job.location }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>Employment Type: </strong><span>{{ job.employmentType }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>Salary: </strong><span>{{ job.salary }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>Experience: </strong><span>{{ job.experience }}</span>
+      </div>
+
+      <div class="job-detail">
+          <strong>Education: </strong><span>{{ job.education }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>Job Category: </strong><span>{{ job.jobCategory }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>Skills: </strong><span>{{ job.skills }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>No. of Openings: </strong><span>{{ job.numberOfOpenings }}</span>
+      </div>
+      <div class="job-detail">
+          <strong>Last Date: </strong><span>{{ job.lastDate | date:'mediumDate' }}</span>
+      </div>
+      <div class="job-detail">
+        <strong>Roles and Responsibilities: </strong><span>{{ job.rolesAndResponsibilities }}</span>
+    </div>
+      
+      <!-- Apply Now Button -->
+      <div class="apply-button-container">
+        <button class="apply-button" (click)="applyForJob()">Apply Now</button>
+      </div>
+  </div>
+</div>
+
+
+
+
+<!-- Footer Section -->
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

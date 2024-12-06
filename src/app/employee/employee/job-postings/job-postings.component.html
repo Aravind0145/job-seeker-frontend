@@ -1,0 +1,464 @@
+<nav class="navbar">
+  <div class="container">
+    <!-- Left side: RevHire -->
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <!-- Centered Links: Jobs, Companies, Services -->
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
+      </div>
+      <div class="nav-item">
+        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+    
+      </div>
+    </div>
+
+
+    <!-- Right side: Profile and Logout -->
+    <div class="right-nav">
+      <!-- Display full name before the Profile button -->
+      <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+
+</nav>
+<!--<div class="job-form-container">
+  <form #jobForm="ngForm" (ngSubmit)="postJobEmployee()">
+    <h1>Post Job</h1>
+
+    <div class="form-group">
+      <label for="jobTitle">Job Title:</label>
+      <input
+        id="jobTitle"
+        name="jobTitle"
+        [(ngModel)]="jobTitle"
+        required
+        type="text"
+        class="form-control"
+        #jobTitleControl="ngModel"
+      />
+      <div *ngIf="jobForm.submitted && jobTitleControl.invalid" class="error">
+        Job Title is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="jobDescription">Job Description:</label>
+      <textarea
+        id="jobDescription"
+        name="jobDescription"
+        [(ngModel)]="jobDescription"
+        required
+        class="form-control"
+        #jobDescriptionControl="ngModel"
+      ></textarea>
+      <div *ngIf="jobForm.submitted && jobDescriptionControl.invalid" class="error">
+        Job Description is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="companyName">Company Name:</label>
+      <input
+        id="companyName"
+        name="companyName"
+        [(ngModel)]="companyName"
+        required
+        type="text"
+        class="form-control"
+        #companyNameControl="ngModel"
+      />
+      <div *ngIf="jobForm.submitted && companyNameControl.invalid" class="error">
+        Company Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location:</label>
+      <input
+        id="location"
+        name="location"
+        [(ngModel)]="location"
+        required
+        type="text"
+        class="form-control"
+        #locationControl="ngModel"
+      />
+      <div *ngIf="jobForm.submitted && locationControl.invalid" class="error">
+        Location is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="employmentType">Employment Type:</label>
+      <select
+        id="employmentType"
+        name="employmentType"
+        [(ngModel)]="employmentType"
+        required
+        class="form-control"
+        #employmentTypeControl="ngModel"
+      >
+        <option value="" disabled>Select Employment Type</option>
+        <option value="full-time">Full-Time</option>
+        <option value="part-time">Part-Time</option>
+        <option value="contract">Contract</option>
+      </select>
+      <div *ngIf="jobForm.submitted && employmentTypeControl.invalid" class="error">
+        Employment Type is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="salary">Salary:</label>
+      <input
+        id="salary"
+        name="salary"
+        [(ngModel)]="salary"
+        pattern="^[0-9]*$"
+        type="text"
+        class="form-control"
+        #salaryControl="ngModel"
+      />
+      <div *ngIf="jobForm.submitted && salaryControl.invalid" class="error">
+        Please enter a valid salary (numbers only).
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="jobCategory">Job Category:</label>
+      <select
+        id="jobCategory"
+        name="jobCategory"
+        [(ngModel)]="jobCategory"
+        required
+        class="form-control"
+        #jobCategoryControl="ngModel"
+      >
+        <option value="" disabled>Select Job Category</option>
+        <option value="IT">IT</option>
+        <option value="Marketing">Marketing</option>
+        <option value="HR">HR</option>
+      </select>
+      <div *ngIf="jobForm.submitted && jobCategoryControl.invalid" class="error">
+        Job Category is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="skills">Skills:</label>
+      <input
+        id="skills"
+        name="skills"
+        [(ngModel)]="skills"
+        required
+        type="text"
+        class="form-control"
+        #skillsControl="ngModel"
+      />
+      <div *ngIf="jobForm.submitted && skillsControl.invalid" class="error">
+        Skills are required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="applicationProcess">Application Process:</label>
+      <textarea
+        id="applicationProcess"
+        name="applicationProcess"
+        [(ngModel)]="applicationProcess"
+        required
+        class="form-control"
+        #applicationProcessControl="ngModel"
+      ></textarea>
+      <div *ngIf="jobForm.submitted && applicationProcessControl.invalid" class="error">
+        Application Process is required.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="jobForm.invalid">Submit</button>
+  </form>
+</div>
+--><div class="job-form-container">
+  <form #jobForm="ngForm" (ngSubmit)="postJobEmployee()">
+    <div class="header-container">
+      <button 
+        [routerLink]="['/employee/emphomepage']" 
+        [queryParams]="{ fullName: fullName, id: id }" 
+        class="home"
+      >
+        GoBack
+      </button>
+    </div>
+    <h1>Post Job</h1>
+
+    <!-- Job Title -->
+    <div class="form-group">
+      <label for="jobTitle">Job Title:</label>
+      <input
+        id="jobTitle"
+        name="jobTitle"
+        [(ngModel)]="jobTitle"
+        type="text"
+        class="form-control"
+        required
+        #jobTitleControl="ngModel"
+      />
+      <div *ngIf="jobTitleControl.invalid && jobTitleControl.touched" class="error">
+        Job Title is required.
+      </div>
+    </div>
+
+    <!-- Job Description -->
+    <div class="form-group">
+      <label for="jobDescription">Job Description:</label>
+      <textarea
+        id="jobDescription"
+        name="jobDescription"
+        [(ngModel)]="jobDescription"
+        class="form-control"
+        required
+        #jobDescriptionControl="ngModel"
+      ></textarea>
+      <div *ngIf="jobDescriptionControl.invalid && jobDescriptionControl.touched" class="error">
+        Job Description is required.
+      </div>
+    </div>
+
+    <!-- Roles and Responsibilities -->
+    <div class="form-group">
+      <label for="rolesResponsibilities">Roles and Responsibilities:</label>
+      <textarea
+        id="rolesAndResponsibilities"
+        name="rolesAndResponsibilities"
+        [(ngModel)]="rolesAndResponsibilities"
+        class="form-control"
+        required
+        #rolesResponsibilitiesControl="ngModel"
+      ></textarea>
+      <div *ngIf="rolesResponsibilitiesControl.invalid && rolesResponsibilitiesControl.touched" class="error">
+        Roles and Responsibilities are required.
+      </div>
+    </div>
+
+    <!-- Company Name -->
+    <div class="form-group">
+      <label for="companyName">Company Name:</label>
+      <input
+        id="companyName"
+        name="companyName"
+        [(ngModel)]="companyName"
+        type="text"
+        class="form-control"
+        required
+        #companyNameControl="ngModel"
+      />
+      <div *ngIf="companyNameControl.invalid && companyNameControl.touched" class="error">
+        Company Name is required.
+      </div>
+    </div>
+
+    <!-- Location -->
+    <div class="form-group">
+      <label for="location">Location:</label>
+      <input
+        id="location"
+        name="location"
+        [(ngModel)]="location"
+        type="text"
+        class="form-control"
+        required
+        #locationControl="ngModel"
+      />
+      <div *ngIf="locationControl.invalid && locationControl.touched" class="error">
+        Location is required.
+      </div>
+    </div>
+
+    <!-- Employment Type -->
+    <div class="form-group">
+      <label for="employmentType">Employment Type:</label>
+      <select
+        id="employmentType"
+        name="employmentType"
+        [(ngModel)]="employmentType"
+        class="form-control"
+        required
+        #employmentTypeControl="ngModel"
+      >
+        <option value="" disabled>Select Employment Type</option>
+        <option value="full-time">Full-Time</option>
+        <option value="part-time">Part-Time</option>
+        <option value="contract">Contract</option>
+      </select>
+      <div *ngIf="employmentTypeControl.invalid && employmentTypeControl.touched" class="error">
+        Employment Type is required.
+      </div>
+    </div>
+
+    <!-- Salary -->
+    <div class="form-group">
+      <label for="salary">Salary:</label>
+      <input
+        id="salary"
+        name="salary"
+        [(ngModel)]="salary"
+        type="text"
+        class="form-control"
+        pattern="^\d+\s*LPA$"
+        #salaryControl="ngModel"
+      />
+      <div *ngIf="salaryControl.invalid && salaryControl.touched" class="error">
+        Please enter a valid salary in the format: '5 LPA'.
+      </div>
+    </div>
+
+    <!-- Job Category -->
+    <div class="form-group">
+      <label for="jobCategory">Job Category:</label>
+      <select
+        id="jobCategory"
+        name="jobCategory"
+        [(ngModel)]="jobCategory"
+        class="form-control"
+        required
+        #jobCategoryControl="ngModel"
+      >
+        <option value="" disabled>Select Job Category</option>
+        <option value="IT">IT</option>
+        <option value="Marketing">Marketing</option>
+        <option value="HR">HR</option>
+      </select>
+      <div *ngIf="jobCategoryControl.invalid && jobCategoryControl.touched" class="error">
+        Job Category is required.
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="form-group">
+      <label for="skills">Skills:</label>
+      <input
+        id="skills"
+        name="skills"
+        [(ngModel)]="skills"
+        type="text"
+        class="form-control"
+        required
+        #skillsControl="ngModel"
+      />
+      <div *ngIf="skillsControl.invalid && skillsControl.touched" class="error">
+        Skills are required.
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="form-group">
+      <label for="experience">Experience:</label>
+      <select
+        id="experience"
+        name="experience"
+        [(ngModel)]="experience"
+        class="form-control"
+        required
+        #experienceControl="ngModel"
+      >
+        <option value="" disabled>Select Experience</option>
+        <option value="fresher">Fresher</option>
+        <option value="1 year">1 Year</option>
+        <option value="2 years">2 Years</option>
+        <option value="3 years">3 Years</option>
+        <option value="4+ years">4+ Years</option>
+      </select>
+      <div *ngIf="experienceControl.invalid && experienceControl.touched" class="error">
+        Experience is required.
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="form-group">
+      <label for="education">Education:</label>
+      <input
+        id="education"
+        name="education"
+        [(ngModel)]="education"
+        type="text"
+        class="form-control"
+        required
+        #educationControl="ngModel"
+      />
+      <div *ngIf="educationControl.invalid && educationControl.touched" class="error">
+        Education is required.
+      </div>
+    </div>
+
+    <!-- Number of Openings -->
+    <div class="form-group">
+      <label for="openings">Number of Openings:</label>
+      <input
+        id="numberOfOpenings"
+        name="numberOfOpenings"
+        [(ngModel)]="numberOfOpenings"
+        type="number"
+        class="form-control"
+        min="1"
+        required
+        #openingsControl="ngModel"
+      />
+      <div *ngIf="openingsControl.invalid && openingsControl.touched" class="error">
+        Please enter a valid number of openings (minimum 1).
+      </div>
+    </div>
+
+    <!-- Last Date to Apply -->
+    <div class="form-group">
+      <label for="lastDate">Last Date to Apply:</label>
+      <input
+        id="lastDate"
+        name="lastDate"
+        [(ngModel)]="lastDate"
+        type="date"
+        class="form-control"
+        required
+        #lastDateControl="ngModel"
+      />
+      <div *ngIf="lastDateControl.invalid && lastDateControl.touched" class="error">
+        Last Date to Apply is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="jobForm.invalid">Post Job</button>
+    </div>
+  </form>
+</div>
+
+
+
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

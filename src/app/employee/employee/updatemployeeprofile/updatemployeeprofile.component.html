@@ -1,0 +1,119 @@
+<nav class="navbar">
+  <div class="container">
+    <!-- Left side: RevHire -->
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <!-- Centered Links: Jobs, Companies, Services -->
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
+      </div>
+      <div class="nav-item">
+        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+    
+      </div>
+    </div>
+
+
+    <!-- Right side: Profile and Logout -->
+    <div class="right-nav">
+      <!-- Display full name before the Profile button -->
+      <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="update-profile-container">
+    <h2>Update Profile</h2>
+    <div class="header-container">
+      <a 
+        [routerLink]="['/employee/emphomepage']" 
+        [queryParams]="{ fullName: fullName, id: id }" 
+        class="home"
+      >
+        GoBack
+    </a>
+    </div>
+  
+    <form (ngSubmit)="onSubmit()">
+      <table>
+        <tr>
+          <td><label for="companyName">Company Name:</label></td>
+          <td><input id="companyName" [(ngModel)]="employee.companyName" name="companyName" required /></td>
+        </tr>
+        <tr>
+          <td><label for="websiteUrl">Website URL:</label></td>
+          <td><input id="websiteUrl" [(ngModel)]="employee.websiteUrl" name="websiteUrl" required /></td>
+        </tr>
+        <tr>
+          <td><label for="industryType">Industry Type:</label></td>
+          <td><input id="industryType" [(ngModel)]="employee.industryType" name="industryType" required /></td>
+        </tr>
+        <tr>
+          <td><label for="fullName">Full Name:</label></td>
+          <td><input id="fullName" [(ngModel)]="employee.fullName" name="fullName" required /></td>
+        </tr>
+        <tr>
+          <td><label for="officialEmail">Official Email:</label></td>
+          <td><input id="officialEmail" [(ngModel)]="employee.officialEmail" name="officialEmail" required /></td>
+        </tr>
+        <tr>
+          <td><label for="mobileNumber">Mobile Number:</label></td>
+          <td><input id="mobileNumber" [(ngModel)]="employee.mobileNumber" name="mobileNumber" required /></td>
+        </tr>
+        <tr>
+          <td><label for="designation">Designation:</label></td>
+          <td><input id="designation" [(ngModel)]="employee.designation" name="designation" required /></td>
+        </tr>
+      </table>
+  
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+  
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

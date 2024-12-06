@@ -1,0 +1,326 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar container */
+  .navbar {
+    background: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    border-radius: 10px;
+  }/* Search Container */
+  /* Navbar Links */
+  .nav-link {
+    text-decoration: none;
+    color:blue;
+    font-weight: 500;
+    padding: 10px;
+  }
+  
+  .nav-link.active {
+    font-size: 20px;
+    color: #457eff;
+  }
+  
+  .nav-link:hover {
+    color: #457eff;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.left-nav {
+  flex: 1;
+  margin-left: 150px;
+  font-size: 22px;
+  color: red;
+  text-decoration: none; /* Remove underline */
+}
+  
+  .center-nav {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-left: -200px;
+  }
+  
+  .right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-right: 60px;
+    margin-left: -100px;
+  }
+  
+  /* Navbar Links */
+  .nav-link {
+    text-decoration: none;
+    color: blue;
+    font-weight: 500;
+    padding: 10px;
+  }
+  
+  .nav-link.active {
+    font-size: 20px;
+    color: #457eff;
+  }
+  
+  .nav-link:hover {
+    color: #457eff;
+  }
+  
+  /* Profile Dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropbtn {
+    background-color: #457eff;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    text-decoration: none;
+    display: block;
+    color: #333;
+    padding: 8px 16px;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #0056b3;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d9363e;
+  }
+  
+
+
+
+
+  /* Profile container *//* Table container */
+.table-container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  h2{
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  /* Table styles */
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .profile-table th, .profile-table td {
+    text-align: left;
+    padding: 12px 15px;
+  }
+  
+  .profile-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 1.1rem;
+  }
+  
+  .profile-table td {
+    background-color: #fafafa;
+    color: #555;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Table row hover effect */
+  .profile-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Loading container */
+  .loading-container {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: #888;
+  }
+  
+  /* Optional - Add transitions to table rows */
+  .profile-table tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  
+.footer {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 100px;
+  border-radius: 10px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 200px;  /* Adjust width if needed */
+  border-radius: 10px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}
+
+.active-link {
+  font-weight: bold;
+  color: #007bff; /* Highlight color */
+  text-decoration: underline; /* Optional */
+}
+
+
+.nav-item a:hover {
+  color: #0056b3;
+}
+
+/* Button Style */
+.header-container {
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Center-align the container's content horizontally */
+  margin-top: 100px; /* Adjust spacing from the top */
+  position: relative; /* For positioning the button and heading */
+}
+
+/* Style for the GoBack button */
+.home {
+  position: absolute; /* Absolute positioning within the container */
+  left: 0; /* Align to the left side of the container */
+  background-color: #457eff; /* Blue background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding for top/bottom and left/right */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  margin-left: 230px;
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
+}
+
+/* Hover Effect for the button */
+.home:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Focus Effect */
+.home:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 5px rgba(69, 126, 255, 0.6); /* Add a focus shadow */
+}
+
+/* Active Effect */
+.home:active {
+  background-color: #004494; /* Even darker blue when pressed */
+}
+
+/* Style for the profile title */
+.profile-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0; /* Remove default margin */
+  color: #333; /* Adjust text color */
+}

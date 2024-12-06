@@ -1,0 +1,207 @@
+<nav class="navbar">
+  <div class="container">
+    <!-- Left side: RevHire -->
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <!-- Centered Links: Jobs, Companies, Services -->
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
+      </div>
+      <div class="nav-item">
+        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id:jobPostingId}" routerLinkActive="active-link">View Job Postings</a>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+    
+      </div>
+    </div>
+
+
+    <!-- Right side: Profile and Logout -->
+    <div class="right-nav">
+      <!-- Display full name before the Profile button -->
+      <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="resumes.length > 0; else noResumes" class="resume-container">
+  <div class="header-container">
+    <button 
+      [routerLink]="['/employee/viewjobpostings']" 
+      [queryParams]="{ fullName: fullName, id: jobPostingId }" 
+      class="home"
+    >
+      GoBack
+    </button>
+  </div>
+    <h3 class="resume-header">Resumes Details</h3>
+  
+    <!-- Loop through each resume and create a separate box for each -->
+    <div *ngFor="let resume of resumes" class="resume-box">
+      <!-- Name Header -->
+      <h4 class="resume-name">
+        Resume Details of {{ resume.firstName }} {{ resume.middleName }} {{ resume.lastName }}
+      </h4>
+  
+      <!-- Resume Details Section -->
+      <div class="resume-details">
+        <!-- Name -->
+        <div class="resume-row">
+          <div class="resume-heading">Full Name:</div>
+          <div class="resume-data">{{ resume.firstName }} {{ resume.middleName }} {{ resume.lastName }}</div>
+        </div>
+        <!-- Email -->
+        <div class="resume-row">
+          <div class="resume-heading">Email:</div>
+          <div class="resume-data">{{ resume.email }}</div>
+        </div>
+        <!-- Phone Number -->
+        <div class="resume-row">
+          <div class="resume-heading">Phone Number:</div>
+          <div class="resume-data">{{ resume.phoneNumber }}</div>
+        </div>
+        <!-- Date of Birth -->
+        <div class="resume-row">
+          <div class="resume-heading">Date of Birth:</div>
+          <div class="resume-data">{{ resume.dob }}</div>
+        </div>
+        <!-- Languages -->
+        <div class="resume-row">
+          <div class="resume-heading">Languages:</div>
+          <div class="resume-data">{{ resume.languages }}</div>
+        </div>
+        <!-- LinkedIn URL -->
+        <div class="resume-row">
+          <div class="resume-heading">LinkedIn:</div>
+          <div class="resume-data">{{ resume.linkedinurl }}</div>
+        </div>
+        <!-- Permanent Address -->
+        <div class="resume-row">
+          <div class="resume-heading">Permanent Address:</div>
+          <div class="resume-data">{{ resume.permanentAddress }}</div>
+        </div>
+        <!-- Current Address -->
+        <div class="resume-row">
+          <div class="resume-heading">Current Address:</div>
+          <div class="resume-data">{{ resume.currentAddress }}</div>
+        </div>
+        <!-- Education -->
+        <div class="resume-row">
+          <div class="resume-heading">Education:</div>
+          <div class="resume-data">{{ resume.graduation }} ({{ resume.graduationYear }})</div>
+        </div>
+        <!-- Skills -->
+        <div class="resume-row">
+          <div class="resume-heading">Skills:</div>
+          <div class="resume-data">{{ resume.skills }}</div>
+        </div>
+        <!-- Project Title -->
+        <div class="resume-row">
+          <div class="resume-heading">Project Title:</div>
+          <div class="resume-data">{{ resume.projectTitle }}</div>
+        </div>
+        <!-- Project Description -->
+        <div class="resume-row">
+          <div class="resume-heading">Project Description:</div>
+          <div class="resume-data">{{ resume.projectDescription }}</div>
+        </div>
+        <!-- Certificate -->
+        <div class="resume-row">
+          <div class="resume-heading">Certificate:</div>
+          <div class="resume-data">{{ resume.certificateName }}</div>
+        </div>
+        <!-- Certificate Description -->
+        <div class="resume-row">
+          <div class="resume-heading">Certificate Description:</div>
+          <div class="resume-data">{{ resume.certificateDescription }}</div>
+        </div>
+        <!-- Company Name -->
+        <div class="resume-row">
+          <div class="resume-heading">Company:</div>
+          <div class="resume-data">{{ resume.companyName }}</div>
+        </div>
+        <!-- Start Date -->
+        <div class="resume-row">
+          <div class="resume-heading">Start Date:</div>
+          <div class="resume-data">{{ resume.startDate }}</div>
+        </div>
+        <!-- End Date -->
+        <div class="resume-row">
+          <div class="resume-heading">End Date:</div>
+          <div class="resume-data">{{ resume.endDate }}</div>
+        </div>
+        <!-- Job Title -->
+        <div class="resume-row">
+          <div class="resume-heading">Job Title:</div>
+          <div class="resume-data">{{ resume.jobTitle }}</div>
+        </div>
+        <!-- Job Description -->
+        <div class="resume-row">
+          <div class="resume-heading">Job Description:</div>
+          <div class="resume-data">{{ resume.jobDescription }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #noResumes>
+    <p class="no-resumes-message">No resumes found for this job posting.</p>
+  </ng-template>
+  
+
+  
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

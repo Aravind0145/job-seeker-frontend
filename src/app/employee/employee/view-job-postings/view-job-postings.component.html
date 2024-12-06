@@ -1,0 +1,226 @@
+<nav class="navbar">
+  <div class="container">
+    <!-- Left side: RevHire -->
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <!-- Centered Links: Jobs, Companies, Services -->
+    <div class="center-nav">
+      <div class="nav-item">
+        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
+      </div>
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+    
+      </div>
+    </div>
+
+
+    <!-- Right side: Profile and Logout -->
+    <div class="right-nav">
+      <!-- Display full name before the Profile button -->
+      <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="jobPostings.length > 0; else noJobPostings" class="profile-container">
+  <div class="header-container">
+    <button 
+      [routerLink]="['/employee/emphomepage']" 
+      [queryParams]="{ fullName: fullName, id: id }" 
+      class="home"
+    >
+      GoBack
+    </button>
+  </div>
+  <h2 class="profile-title">Job Postings for {{ fullName }}</h2>
+
+  <div class="table-container">
+    <!-- Display details for each job posting -->
+    <div *ngFor="let posting of jobPostings; let i = index" class="job-posting-detail">
+      
+      <h3 class="posting-title">Job Posting {{ i + 1 }}</h3>
+
+      <table class="profile-table">
+        
+    
+
+        
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Details</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngIf="posting.id !== undefined && applicantCounts[posting.id] !== undefined">
+            <td>
+              <strong>Number of Applicants</strong>
+            </td>
+            <td>
+              <div class="tooltip-container">
+                <button 
+                  [ngClass]="{
+                    'highlight-job-button': isHighApplicantCount(posting.id),
+                    'low-applicant-job-button': !isHighApplicantCount(posting.id)
+                  }"
+                  [routerLink]="['/employee/resumedetails']" 
+                  [queryParams]="{fullName:fullName, jobPostingId: posting.id }">
+                  {{ applicantCounts[posting.id] }}
+                </button>
+                <span class="tooltip-text">Click to check resumes</span>
+              </div>
+            </td>
+            
+          </tr>
+          <tr>
+            <td><strong>Delete Job Posting</strong></td>
+            <td>
+              <button 
+                class="delete-button" 
+                (click)="deleteJobPosting(posting.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Update-Application</strong>
+            </td>
+            <td>
+              <button 
+  [ngClass]="{
+    'update-button': true
+  }"
+  [routerLink]="['/employee/updateapplication']"
+  [queryParams]="{fullName:fullName, jobPostingId: posting.id }">
+  Update
+</button>
+
+            </td>
+          </tr>
+          
+          
+          
+      
+          <tr>
+            <td><strong>Job Title</strong></td>
+            <td>{{ posting.jobTitle }}{{posting.id}}</td>
+          </tr>
+          <tr>
+            <td><strong>Company Name</strong></td>
+            <td>{{ posting.companyName }}</td>
+          </tr>
+          <tr>
+            <td><strong>Location</strong></td>
+            <td>{{ posting.location }}</td>
+          </tr>
+          <tr>
+            <td><strong>Employment Type</strong></td>
+            <td>{{ posting.employmentType }}</td>
+          </tr>
+          <tr>
+            <td><strong>Salary</strong></td>
+            <td>{{ posting.salary }}</td>
+          </tr>
+          <tr>
+            <td><strong>Job Description</strong></td>
+            <td>{{ posting.jobDescription }}</td>
+          </tr>
+          <tr>
+            <td><strong>Roles and Responsibilities</strong></td>
+            <td>{{ posting.rolesAndResponsibilities }}</td>
+          </tr>
+          <tr>
+            <td><strong>Job Category</strong></td>
+            <td>{{ posting.jobCategory }}</td>
+          </tr>
+          <tr>
+            <td><strong>Skills</strong></td>
+            <td>{{ posting.skills }}</td>
+          </tr>
+          <tr>
+            <td><strong>Experience</strong></td>
+            <td>{{ posting.experience }}</td>
+          </tr>
+          <tr>
+            <td><strong>Education</strong></td>
+            <td>{{ posting.education }}</td>
+          </tr>
+          <tr>
+            <td><strong>Number of Openings</strong></td>
+            <td>{{ posting.numberOfOpenings }}</td>
+          </tr>
+          <tr>
+            <td><strong>Last Date to Apply</strong></td>
+            <td>{{ posting.lastDate | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr class="job-separator" /> <!-- Add a separator between postings -->
+    </div>
+  </div>
+</div>
+
+<ng-template #noJobPostings>
+  <p class="no-job-postings">No job postings found for the selected ID.</p>
+</ng-template>
+
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

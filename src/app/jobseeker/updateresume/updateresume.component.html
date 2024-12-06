@@ -1,0 +1,205 @@
+<!-- Navbar Section -->
+<nav class="navbar">
+  <div class="container">
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link" routerLinkActive="active-link">Home</a>
+      </div>
+
+      <!-- Resume Section -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" 
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: false }">
+          Resume
+        </a>
+        <div class="hover-content">
+          <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Create Resume</a>
+          <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" routerLinkActive="active-link">View Resume</a>
+          <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" routerLinkActive="active-link">Update Resume</a>
+        </div>
+      </div>
+
+      <!-- Jobs Applied Section -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link" routerLinkActive="active-link">Jobsapplied</a>
+      </div>
+    </div>
+
+    <div class="right-nav">
+      <!-- User Name Display -->
+      <span class="user-name">{{ fullName }}</span>
+
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="update-resume-container">
+  <button [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="home">GoBack</button>
+    <h2>Update Resume</h2>
+    <div *ngIf="resume; else loading">
+      <form (ngSubmit)="updateResume()">
+        <table>
+          <!-- Existing Fields -->
+          <tr>
+            <td><label for="headline">Headline:</label></td>
+            <td><input id="headline" [(ngModel)]="resume.headline" name="headline" required /></td>
+          </tr>
+          <tr>
+            <td><label for="firstName">First Name:</label></td>
+            <td><input id="firstName" [(ngModel)]="resume.firstName" name="firstName" required /></td>
+          </tr>
+          <tr>
+            <td><label for="middleName">Middle Name:</label></td>
+            <td><input id="middleName" [(ngModel)]="resume.middleName" name="middleName" /></td>
+          </tr>
+          <tr>
+            <td><label for="lastName">Last Name:</label></td>
+            <td><input id="lastName" [(ngModel)]="resume.lastName" name="lastName" required /></td>
+          </tr>
+          <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input id="email" [(ngModel)]="resume.email" name="email" required /></td>
+          </tr>
+          <tr>
+            <td><label for="phoneNumber">Phone Number:</label></td>
+            <td><input id="phoneNumber" [(ngModel)]="resume.phoneNumber" name="phoneNumber" required /></td>
+          </tr>
+          <tr>
+            <td><label for="dob">Date of Birth:</label></td>
+            <td><input id="dob" [(ngModel)]="resume.dob" name="dob" type="date" /></td>
+          </tr>
+          <tr>
+            <td><label for="languages">Languages:</label></td>
+            <td><input id="languages" [(ngModel)]="resume.languages" name="languages" /></td>
+          </tr>
+          <tr>
+            <td><label for="linkedinurl">LinkedIn URL:</label></td>
+            <td><input id="linkedinurl" [(ngModel)]="resume.linkedinurl" name="linkedinurl" /></td>
+          </tr>
+          
+          <!-- New Fields -->
+          <tr>
+            <td><label for="permanentAddress">Permanent Address:</label></td>
+            <td><input id="permanentAddress" [(ngModel)]="resume.permanentAddress" name="permanentAddress" /></td>
+          </tr>
+          <tr>
+            <td><label for="currentAddress">Current Address:</label></td>
+            <td><input id="currentAddress" [(ngModel)]="resume.currentAddress" name="currentAddress" /></td>
+          </tr>
+          <tr>
+            <td><label for="xthYear">10th Year:</label></td>
+            <td><input id="xthYear" [(ngModel)]="resume.xthYear" name="xthYear" /></td>
+          </tr>
+          <tr>
+            <td><label for="xii">12th Grade:</label></td>
+            <td><input id="xii" [(ngModel)]="resume.xii" name="xii" /></td>
+          </tr>
+          <tr>
+            <td><label for="xiiYear">12th Year:</label></td>
+            <td><input id="xiiYear" [(ngModel)]="resume.xiiYear" name="xiiYear" /></td>
+          </tr>
+          <tr>
+            <td><label for="pg">Post Graduation:</label></td>
+            <td><input id="pg" [(ngModel)]="resume.pg" name="pg" /></td>
+          </tr>
+          <tr>
+            <td><label for="pgStatus">PG Status:</label></td>
+            <td><input id="pgStatus" [(ngModel)]="resume.pgStatus" name="pgStatus" /></td>
+          </tr>
+          <tr>
+            <td><label for="skills">Skills:</label></td>
+            <td><input id="skills" [(ngModel)]="resume.skills" name="skills" /></td>
+
+          </tr>
+          <tr>
+            <td><label for="projectTitle">Project Title:</label></td>
+            <td><input id="projectTitle" [(ngModel)]="resume.projectTitle" name="projectTitle" /></td>
+          </tr>
+          <tr>
+            <td><label for="projectDescription">Project Description:</label></td>
+            <td><textarea id="projectDescription" [(ngModel)]="resume.projectDescription" name="projectDescription"></textarea></td>
+          </tr>
+          <tr>
+            <td><label for="certificateName">Certificate Name:</label></td>
+            <td><input id="certificateName" [(ngModel)]="resume.certificateName" name="certificateName" /></td>
+          </tr>
+          <tr>
+            <td><label for="certificateDescription">Certificate Description:</label></td>
+            <td><textarea id="certificateDescription" [(ngModel)]="resume.certificateDescription" name="certificateDescription"></textarea></td>
+          </tr>
+          <tr>
+            <td><label for="companyName">Company Name:</label></td>
+            <td><input id="companyName" [(ngModel)]="resume.companyName" name="companyName" /></td>
+          </tr>
+          <tr>
+            <td><label for="startDate">Start Date:</label></td>
+            <td><input id="startDate" [(ngModel)]="resume.startDate" name="startDate" type="date" /></td>
+          </tr>
+          <tr>
+            <td><label for="endDate">End Date:</label></td>
+            <td><input id="endDate" [(ngModel)]="resume.endDate" name="endDate" type="date" /></td>
+          </tr>
+          <tr>
+            <td><label for="jobTitle">Job Title:</label></td>
+            <td><input id="jobTitle" [(ngModel)]="resume.jobTitle" name="jobTitle" /></td>
+          </tr>
+          <tr>
+            <td><label for="jobDescription">Job Description:</label></td>
+            <td><textarea id="jobDescription" [(ngModel)]="resume.jobDescription" name="jobDescription"></textarea></td>
+          </tr>
+        </table>
+    
+        <button type="submit" [disabled]="!resume">Save Changes</button>
+      </form>
+    </div>
+    
+    <ng-template #loading>
+      <p>Loading resume...</p>
+    </ng-template>
+  </div>
+  

@@ -1,0 +1,353 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar container */
+  .navbar {
+    background: #fff;
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  /* Navbar Links */
+  .nav-link {
+    text-decoration: none;
+    color:blue;
+    font-weight: 500;
+    padding: 10px;
+  }
+  
+  
+  .container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .left-nav {
+    flex: 1;
+    margin-left: 100px;
+  }
+  
+  .center-nav {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-left: -130px;
+  }
+  
+  .right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-right: 20px;
+    margin-left: -100px;
+  }
+  
+
+  /* Profile Dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropbtn {
+    background-color: #457eff;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    text-decoration: none;
+    display: block;
+    color: #333;
+    padding: 8px 16px;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #0056b3;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d9363e;
+  }
+  
+
+  /* Container Styling *//* Styling the table heading to look like a table header */
+  
+  /* Table Heading Styling */
+.table-heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  margin-left: -100px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  text-align: center; /* Ensure the text aligns centrally */
+
+}
+  
+ 
+  
+  /* Table Styling */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-top: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .table th,
+  .table td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+  }
+  
+  .table th {
+    color: #007bff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .table td {
+    color: #333;
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+  }
+  
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Button Styling */
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Table Heading Adjustments for Small Screens */
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .table {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+  
+    .table th, .table td {
+      padding: 12px;
+    }
+  
+    .table-heading {
+      font-size: 1.5rem;
+      padding: 10px;
+    }
+  }
+  
+  /* Styling for Empty Table State */
+  .table-empty-state {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.2rem;
+    padding: 20px;
+    font-weight: 600;
+  }
+  
+  /* Row Styling for Empty Table (No Applications) */
+  .no-applications-row {
+    text-align: center;
+    font-style: italic;
+    color: #6c757d;
+  }
+  
+
+  
+  
+.footer {
+    background-color: #333;
+    color: white;
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 200px;
+    border-radius: 10px;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 200px;  /* Adjust width if needed */
+  border-radius: 10px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}.highlight-link {
+  color:  #007bff; /* Default color for Jobsapplied */
+  font-weight: bold; /* Make it stand out */
+  text-decoration: underline; /* No underline by default */
+  cursor: pointer; /* Make it look clickable */
+}
+
+.nav_link:hover {
+  color:  #0056b3; /* Change color on hover */
+  text-decoration: none; /* Underline on hover */
+}
+
+.nav_link.active-link.highlight-link {
+  color: #ff5722; /* Different color when active */
+  text-decoration: underline; /* Underline when active */
+}.header-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Center align heading container */
+  position: relative; /* For absolute positioning of the button */
+  width: 100%; /* Ensure it spans the entire width of the table column */
+}
+
+.home {
+  position: absolute; /* Place the button independently */
+  left: 0; /* Align the button to the left side of the container */
+  background-color: #457eff; /* Blue background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding for top/bottom and left/right */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
+}
+
+/* Hover Effect */
+.home:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Focus Effect */
+.home:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 5px rgba(69, 126, 255, 0.6); /* Add a focus shadow */
+}
+
+/* Active Effect */
+.home:active {
+  background-color: #004494; /* Even darker blue when pressed */
+}
+
+/* Heading styles */
+.table-heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  text-align: center; /* Ensure the text aligns centrally */
+}

@@ -1,0 +1,128 @@
+<nav class="navbar">
+  <div class="container">
+    <!-- Left side: RevHire -->
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <!-- Centered Links: Jobs, Companies, Services -->
+    <div class="center-nav">
+      <div class="nav-item">
+        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
+      </div>
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+    
+      </div>
+    </div>
+
+
+    <!-- Right side: Profile and Logout -->
+    <div class="right-nav">
+      <!-- Display full name before the Profile button -->
+      <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="employee" class="profile-container">
+    <h2 class="profile-title">Profile of {{ employee.fullName }}</h2>
+  
+    <div class="table-container">
+      <table class="profile-table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Company Name</strong></td>
+            <td>{{ employee.companyName }}</td>
+          </tr>
+          <tr>
+            <td><strong>Website URL</strong></td>
+            <td><a [href]="employee.websiteUrl" target="_blank">{{ employee.websiteUrl }}</a></td>
+          </tr>
+          <tr>
+            <td><strong>Industry Type</strong></td>
+            <td>{{ employee.industryType }}</td>
+          </tr>
+          <tr>
+            <td><strong>Full Name</strong></td>
+            <td>{{ employee.fullName }}</td>
+          </tr>
+          <tr>
+            <td><strong>Official Email</strong></td>
+            <td>{{ employee.officialEmail }}</td>
+          </tr>
+          <tr>
+            <td><strong>Mobile Number</strong></td>
+            <td>{{ employee.mobileNumber }}</td>
+          </tr>
+          <tr>
+            <td><strong>Designation</strong></td>
+            <td>{{ employee.designation }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- If no employee data is found -->
+  <div *ngIf="!employee" class="loading-container">
+    <p>Loading profile...</p>
+  </div>
+  
+  
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

@@ -1,0 +1,292 @@
+
+.navbar {
+  background: #fff;
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fix the navbar to the top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it stays on top */
+  width: 100%;
+}
+
+/* Navbar navigation list */
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+/* Navbar links */
+.nav-item .nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Active navbar link */
+.nav-item .nav-link.active {
+  font-size: 20px;
+  color: #457eff;
+}
+
+/* Styling for the login button */
+.nav-item.login-button {
+  position: absolute; /* Position the login button absolutely */
+  right: 100px; /* Align it to the right side */
+  top: 20px; /* Set some space from the top */
+}
+
+/* Styling for the login link */
+.nav-item.login-button .nav-link {
+  font-size: 17px;
+  color: #457eff;
+  padding: 5px 15px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for the login button */
+.nav-item.login-button .nav-link:hover {
+  background-color: #457eff;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Centering the Signup Box */
+
+
+
+.signup-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    margin-left: 700px;
+    margin-top: 80px;
+}
+
+/* Form Title */
+.signup-box h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-transform: uppercase;
+
+}
+
+/* Section Titles */
+.signup-box h3 {
+    color: #444;
+    font-size: 18px;
+    margin: 15px 0 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Input and Select Fields */
+.user-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.user-box input,
+.user-box select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.user-box input:focus,
+.user-box select:focus {
+    border-color: #5e9ed6;
+}
+
+/* Labels - Increased Font Size */
+.user-box label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 16px; /* Increased font size */
+    color: #555;
+    background-color: #fff;
+    padding: 0 5px;
+    transition: 0.3s;
+    pointer-events: none;
+    margin-top: 10px;
+}
+
+/* Floating Label Effect */
+.user-box input:focus + label,
+.user-box select:focus + label,
+.user-box input:not(:placeholder-shown) + label,
+.user-box select:not(:placeholder-shown) + label {
+    top: -18px;
+    left: 10px;
+    font-size: 14px; /* Slightly smaller on focus */
+    color: #5e9ed6;
+}
+
+/* Submit Button */
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #5e9ed6;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #4c8fb2;
+}
+
+/* Input field focus animations */
+input[type="submit"]:active {
+    background-color: #387ba1;
+}
+
+small {
+  display: block;
+  color: red; /* Error color */
+  font-size: 12px; /* Smaller text size */
+  margin-top: 2px; /* Reduced space between input and error message */
+}
+button {
+  padding: 10px 20px;
+  background: #457eff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .signup-box {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+
+
+
+/* Section Styling */
+.talent-section {
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 8px;
+  margin: 50px auto;
+  width: 80%;
+  max-width: 400px;
+  margin-top: -550px;
+  margin-left: 100px;
+}
+
+/* Heading Style */
+.talent-section h2 {
+  font-size: 32px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Paragraph Style */
+.talent-section p {
+  font-size: 18px;
+  color: #555;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Highlight Text */
+.highlight {
+  font-weight: bold;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 600px) {
+  .talent-section h2 {
+      font-size: 28px;
+  }
+
+  .talent-section p {
+      font-size: 16px;
+  }
+}
+
+
+/* Image Styling */
+.talent-section img {
+  margin-top: 20px; /* Space between content and image */
+  max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: Add rounded corners to the image */
+}
+
+
+
+.footer {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 200px;
+  border-radius: 10px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}

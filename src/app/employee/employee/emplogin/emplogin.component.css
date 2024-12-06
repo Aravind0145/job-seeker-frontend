@@ -1,0 +1,313 @@
+
+.navbar {
+  background: #fff;
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fix the navbar to the top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it stays on top */
+  width: 100%;
+}
+
+/* Navbar navigation list */
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+/* Navbar links */
+.nav-item .nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Active navbar link */
+.nav-item .nav-link.active {
+  font-size: 20px;
+  color: #457eff;
+}
+
+/* Styling for the login button */
+.nav-item.login-button {
+  position: absolute; /* Position the login button absolutely */
+  right: 100px; /* Align it to the right side */
+  top: 20px; /* Set some space from the top */
+}
+
+/* Styling for the login link */
+.nav-item.login-button .nav-link {
+  font-size: 17px;
+  color: #457eff;
+  padding: 5px 15px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for the login button */
+.nav-item.login-button .nav-link:hover {
+  background-color: #457eff;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.naukri-banner {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin-top: 110px;
+    margin-left: 100px;
+
+
+  }
+  
+  .naukri-banner h1 {
+    color: #0056b3;
+  }
+  
+  .naukri-banner p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .features ul {
+    display: flex; /* Arrange items in a row */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center; /* Center align the items */
+    align-items: center;
+  }
+  
+  .features li {
+    font-size: 18px;
+    padding: 0 15px; /* Add horizontal padding between items */
+    position: relative;
+  }
+  
+  .features li:not(:last-child)::after {
+    content: ''; /* Add a vertical line */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%; /* Adjust the height of the vertical line */
+    border-right: 1px solid #ddd; /* Style of the vertical line */
+  }
+  
+  
+  .hire-btn {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .hire-btn:hover {
+    background-color: #004085;
+  }
+  
+
+
+  .image-container {
+    text-align: center; /* Center-align the image */
+    margin-top: 20px; /* Add spacing above the image */
+  }
+  
+  .image-container img {
+    max-width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: Add rounded corners for a polished look */
+  }
+  
+
+
+  
+  
+  .login-box {
+    cursor: pointer;
+    z-index: 1000;
+    position: absolute;
+    left: 80%;
+    width: 350px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background-color: rgb(232, 227, 227);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 20px;
+    text-align: center;
+    margin-top: -300px;
+  }
+  
+  .login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: black;
+  }
+  
+  .login-box .user-box {
+    position: relative;
+    margin-left: 5px;
+
+  }
+  
+  .login-box .user-box input {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    color: black;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background: transparent;
+  }
+  
+  .login-box .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: black;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .login-box .user-box input:focus~label,
+  .login-box .user-box input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+  }
+  
+  .login-box form {
+    display: inline-block;
+  }
+  
+  .login-box form input[type="submit"] {
+    width: auto;
+    /* background: #03e9f4; */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: black;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  .login-box form input[type="submit"]:hover {
+    background-color: blue;
+    color: white;
+  }
+  
+ /* New CSS for Forgot Password link above the submit button */
+.login-box form .forgot-password {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative; /* Change from margin to position */
+  left: 50%; /* Horizontally center the link */
+  transform: translateX(-50%); /* Ensure proper centering */
+  margin-bottom: 20px;
+  top: -2px; /* Move the link upwards */
+  transition: transform 0.5s ease;
+  color: black;
+}
+
+.login-box form .forgot-password:hover {
+  color: #457eff;
+}
+
+
+
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: -30px;
+}
+
+.error-message small {
+  color: red;
+}
+
+
+button {
+  padding: 10px 20px;
+  background: #457eff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+
+.footer {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: -40px;
+  border-radius: 10px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+

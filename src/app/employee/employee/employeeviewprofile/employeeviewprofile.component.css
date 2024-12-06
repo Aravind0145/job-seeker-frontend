@@ -1,0 +1,291 @@
+.navbar {
+  background: #fff;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropbtn {
+background-color: #457eff;
+color: white;
+padding: 5px 15px;
+border: none;
+cursor: pointer;
+border-radius: 5px;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+right: 0;
+background-color: #f9f9f9;
+box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+z-index: 1;
+}
+
+.dropdown-content a {
+text-decoration: none;
+display: block;
+color: #333;
+padding: 8px 16px;
+}
+
+.dropdown-content a:hover {
+background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+.dropdown:hover .dropbtn {
+background-color: #0056b3;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-nav {
+  flex: 1;
+  margin-left: 100px;
+}
+/* Header Container Styling */
+.center-nav {
+flex: 2;
+display: flex;
+justify-content: center;
+gap: 40px;
+border-radius: 8px;
+align-items: center;
+margin-left: -100px;
+}
+
+/* Links inside .center-nav */
+.center-nav a {
+text-decoration: none; /* Remove underline */
+color: blue; /* Default text color is black */
+padding: 10px 20px; /* Add padding around links */
+border-radius: 4px; /* Slightly rounded corners for hover effect */
+transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover effect for links */
+.center-nav a:hover {
+background-color: #007BFF; /* Add background color on hover */
+color: #fff; /* Change text color to white on hover */
+}
+
+
+
+.right-nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px; /* Space between Profile and Logout */
+  margin-right: 50px;
+}
+/* Navigation Item Styling */
+/* Navbar Links */
+.nav-link {
+  text-decoration: none;
+  color: blue;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.nav-link.active {
+  font-size: 20px;
+  color: #457eff;
+}
+
+  
+  .container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Navbar Links */
+
+.postjobs{
+  margin-top: 100px;
+}
+
+
+
+.footer {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 700px;
+  border-radius: 10px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.table-container {
+    margin-top: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  h2{
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  /* Table styles */
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .profile-table th, .profile-table td {
+    text-align: left;
+    padding: 12px 15px;
+  }
+  
+  .profile-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 1.1rem;
+  }
+  
+  .profile-table td {
+    background-color: #fafafa;
+    color: #555;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Table row hover effect */
+  .profile-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Loading container */
+  .loading-container {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: #888;
+  }
+  
+  /* Optional - Add transitions to table rows */
+  .profile-table tr {
+    transition: background-color 0.3s ease;
+  }
+
+  
+
+.footer {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.logout-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #d9363e;
+}
+
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 200px;  /* Adjust width if needed */
+  border-radius: 10px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}
+
+.active-link {
+  font-weight: bold;
+  color: #007bff; /* Highlight color */
+  text-decoration: underline; /* Optional */
+}
+
+
+.nav-item a:hover {
+  color: #0056b3;
+}

@@ -1,0 +1,465 @@
+.navbar {
+  background: #fff;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropbtn {
+background-color: #457eff;
+color: white;
+padding: 5px 15px;
+border: none;
+cursor: pointer;
+border-radius: 5px;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+right: 0;
+background-color: #f9f9f9;
+box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+z-index: 1;
+}
+
+.dropdown-content a {
+text-decoration: none;
+display: block;
+color: #333;
+padding: 8px 16px;
+}
+
+.dropdown-content a:hover {
+background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+.dropdown:hover .dropbtn {
+background-color: #0056b3;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-nav {
+  flex: 1;
+  margin-left: 100px;
+}
+/* Header Container Styling */
+.center-nav {
+flex: 2;
+display: flex;
+justify-content: center;
+gap: 40px;
+border-radius: 8px;
+align-items: center;
+margin-left: -100px;
+}
+
+/* Links inside .center-nav */
+.center-nav a {
+text-decoration: none; /* Remove underline */
+color: #000; /* Default text color is black */
+padding: 10px 20px; /* Add padding around links */
+border-radius: 4px; /* Slightly rounded corners for hover effect */
+transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover effect for links */
+.center-nav a:hover {
+background-color: #007BFF; /* Add background color on hover */
+color: #fff; /* Change text color to white on hover */
+}
+
+
+
+.right-nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px; /* Space between Profile and Logout */
+  margin-right: 50px;
+}
+/* Navigation Item Styling */
+/* Navbar Links */
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.nav-link.active {
+  font-size: 20px;
+  color: #457eff;
+}
+
+  
+  /* Navbar Links */
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px;
+  }
+  
+  .nav-link.active {
+    font-size: 20px;
+    color: #457eff;
+  }
+  
+  .nav-link:hover {
+    color: #457eff;
+  }
+
+
+
+
+
+
+
+
+
+  .update-button {
+    background-color: green; /* Button background color */
+    color: white;           /* Text color */
+    border: none;           /* Remove borders */
+    padding: 10px 20px;     /* Add some padding */
+    font-size: 16px;        /* Adjust font size */
+    cursor: pointer;        /* Show pointer cursor on hover */
+    border-radius: 5px;     /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .update-button:hover {
+    background-color: darkgreen; /* Darker green on hover */
+  }
+  
+
+
+
+  .footer {
+    background-color: #333;
+    color: white;
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+
+
+  .logout-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d9363e;
+  }
+  
+
+/* CSS for Delete Button */
+.delete-button {
+  background-color: #ff4d4f; /* Bright red for delete */
+  color: white; /* White text for contrast */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 15px; /* Spacing for a clean look */
+  font-size: 14px; /* Standard readable font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.delete-button:hover {
+  background-color: #d9363e; /* Darker red on hover */
+}
+
+.delete-button:active {
+  background-color: #b71c1c; /* Even darker red when clicked */
+}
+
+.delete-button:disabled {
+  background-color: #d3d3d3; /* Grey for disabled state */
+  cursor: not-allowed; /* Prevent interaction when disabled */
+  opacity: 0.6; /* Slight transparency for visual feedback */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Style for table row with more than 5 applicants *//* Button style for job postings with more than 5 applicants */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 160px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 100%; /* Position the tooltip above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+.highlight-job-button {
+  background-color: #388e3c; /* Green background */
+  color: white;
+  font-weight: bold;
+  font-size: 16px; /* Add font size */
+  font-family: 'Arial', sans-serif; /* Set a clean font family */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase; /* Make text uppercase for emphasis */
+  letter-spacing: 1px; /* Add letter spacing for better readability */
+}
+
+.low-applicant-job-button {
+  background-color: black; /* Black background */
+  color: white;
+  font-weight: bold;
+  font-size: 16px; /* Add font size */
+  font-family: 'Arial', sans-serif; /* Set a clean font family */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase; /* Make text uppercase for emphasis */
+  letter-spacing: 1px; /* Add letter spacing for better readability */
+}
+
+/* Add a hover effect to improve interaction feedback */
+button:hover {
+  opacity: 0.9; /* Slight transparency effect on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+/* Optional: Add hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+
+
+.profile-container {
+  margin-top: 50px;
+    padding: 20px;
+    max-width: 70%;
+    margin-left: 200px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  
+  
+  .table-container {
+    display: block;
+    padding: 0 20px;
+  }
+  
+  .job-posting-detail {
+    margin-bottom: 30px;
+  }
+  
+  .posting-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+  
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .profile-table th, .profile-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .profile-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .profile-table td {
+    background-color: #fff;
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .job-separator {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+  }
+  
+  .no-job-postings {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 200px;  /* Adjust width if needed */
+  border-radius: 10px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}
+
+.active-link {
+  font-weight: bold;
+  color: #007bff; /* Highlight color */
+  text-decoration: underline !important; /* Optional */
+}
+
+.nav-item a {
+  color: blue;
+  text-decoration: none;
+}
+
+.nav-item a:hover {
+  color: #0056b3;
+}
+.header-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Center align heading container */
+  position: relative; /* For absolute positioning of the button */
+  width: 100%; /* Ensure it spans the entire width of the table column */
+}
+
+.home {
+  position: absolute; /* Place the button independently */
+  left: 0; /* Align the button to the left side of the container */
+  background-color: #457eff; /* Blue background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding for top/bottom and left/right */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  margin-top: 65px;
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
+}
+
+/* Hover Effect */
+.home:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Focus Effect */
+.home:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 5px rgba(69, 126, 255, 0.6); /* Add a focus shadow */
+}
+
+/* Active Effect */
+.home:active {
+  background-color: #004494; /* Even darker blue when pressed */
+}

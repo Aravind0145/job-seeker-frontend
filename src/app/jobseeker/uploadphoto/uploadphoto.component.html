@@ -1,0 +1,11 @@
+<fieldset>
+    <legend>Upload Profile Photo</legend>
+    <label for="profilePhoto">Profile Photo:</label> 
+    <input type="file" id="profilePhoto" (change)="onPhotoSelected($event)"> <!-- Call onPhotoSelected() -->
+    <button type="button" (click)="onPhotoSelected($event)">Upload Photo</button> <!-- Call onPhotoSelected() -->
+    <div *ngIf="profilePhotoUrl">
+      <p>Photo uploaded successfully!</p>
+      <img [src]="profilePhotoUrl" alt="Uploaded Profile Photo" width="150">
+    </div>
+  </fieldset>
+  

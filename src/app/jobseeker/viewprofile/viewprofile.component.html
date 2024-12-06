@@ -1,0 +1,101 @@
+
+<nav class="navbar">
+  <div class="container">
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName:fullName, id: id }" class="nav-link">Home</a>
+        
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a class="nav-link">Resume</a>
+        <div class="hover-content">
+          <a [routerLink]="['/jobseeker/jobseekerresume']" 
+          [queryParams]="{ fullName: fullName, id: id}" routerLinkActive="active-link">
+          Create Resume
+       </a>
+       
+       <a [routerLink]="['/jobseeker/updateresume']" 
+          [queryParams]="{ fullName: fullName, id: id,resumeId:resumeId}" routerLinkActive="active-link">
+          Update Resume
+       </a>
+        </div>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{fullname:fullName, id: id }" class="nav-link" routerLinkActive="active-link" >Jobsapplied</a>
+      </div>
+    </div>
+
+    <div class="right-nav">
+      <!-- Search Box with Icon -->
+      <span class="user-name">{{ fullName }}</span>
+
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+
+  <div *ngIf="jobseeker" class="profile-container">
+    <div class="header-container">
+      <button [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="home">GoBack</button>
+      <h2 class="profile-title">Profile of {{ jobseeker.fullName }}</h2>
+    </div>    
+    
+    <div class="table-container">
+      <table class="profile-table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Email</strong></td>
+            <td>{{ jobseeker.email }}</td>
+          </tr>
+          <tr>
+            <td><strong>Phone</strong></td>
+            <td>{{ jobseeker.phone }}</td>
+          </tr>
+          <tr>
+            <td><strong>Work Status</strong></td>
+            <td>{{ jobseeker.workStatus }}</td>
+          </tr>
+          <tr>
+            <td><strong>Promotions</strong></td>
+            <td>{{ jobseeker.promotions ? 'Yes' : 'No' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- If no jobseeker data is found -->
+  <div *ngIf="!jobseeker" class="loading-container">
+    <p>Loading profile...</p>
+  </div>
+  
+
+  
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

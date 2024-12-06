@@ -1,0 +1,390 @@
+/* Navbar container */
+.navbar {
+    background: #fff;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Main container */
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-nav {
+    flex: 1;
+    margin-left: 100px;
+}
+
+.center-nav {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px; /* Space between Profile and Logout */
+    margin-right: 60px;
+}
+
+/* Navbar Links */
+.nav-link {
+    text-decoration: none;
+    color: blue;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.nav-link.active {
+    font-size: 20px;
+    color: #457eff;
+}
+
+.nav-link:hover {
+    color: #457eff;
+}
+
+/* Profile Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #457eff;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    display: block;
+    color: #333;
+    padding: 8px 16px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #0056b3;
+}
+
+/* Logout Button */
+.container1{
+    border: 2px solid white;
+    max-width: 70%;
+    margin-left: 200px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 70px;
+
+}
+.logout-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #d9363e;
+}
+
+/* General Container Style *//* General Container Style */
+.content-container {
+  width: 50%; /* Reduced the width */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex; /* Makes the container a flexbox */
+  flex-direction: column; /* Aligns its children vertically */
+  align-items: center; /* Centers children horizontally */
+  justify-content: flex-start; /* Ensures content starts at the top */
+}
+
+
+/* Heading */
+h1 {
+    text-align: center; /* Centers the text */
+    color: #333;
+    margin-top: 20px; /* Removes any top margin */
+    margin-bottom: -23px; /* Adds space below the heading */
+}
+
+/* Fieldset Style */
+fieldset {
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Fieldset Legend Style */
+legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Label Style */
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* Input and Textarea Style */
+input[type="text"],
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Email Input Styling */
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+/* Password Input Styling */
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+/* Style the email and password labels */
+label[for="email"],
+label[for="password"] {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* Input fields focus state (for better user experience) */
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+    background-color: #eaf5ff;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Input file button styling */
+input[type="file"] {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Checkbox Style */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Submit Button Style */
+input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Select Dropdown Styling */
+select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+/* Section/Fieldset Separation */
+fieldset {
+    margin-bottom: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-container {
+        width: 90%; /* Adjusted for smaller screens */
+    }
+
+    input[type="submit"] {
+        width: auto;
+    }
+}
+
+
+.footer {
+    background-color: #333;
+    color: white;
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 30px;
+    border-radius: 10px;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  
+.hover-content {
+    display: none;  /* Hide by default */
+    position: absolute;
+    background-color: white; /* Set background color to white */
+    padding: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 200px;  /* Adjust width if needed */
+    border-radius: 10px;
+  }
+  
+  .hover-content h4 {
+    color: black; /* Set heading text color to black */
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+  /* Show hover content when mouse is over the link */
+  .nav-item:hover .hover-content {
+    display: block;
+  }
+  
+  /* Style for hover content links */
+  .hover-content a {
+    color: black; /* Set link text color to black */
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color on hover */
+  .hover-content a:hover {
+    background-color: #f0f0f0; /* Lighter background on hover */
+  }
+
+  .active-link {
+    font-weight: bold;
+    color: #007bff; /* Highlight color */
+    text-decoration: underline; /* Optional */
+  }
+/* Button Style */
+.home {
+    background-color: #457eff; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding for top/bottom and left/right */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    margin-bottom: 20px;
+    margin-left: 50px;
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
+  }
+  
+  /* Hover Effect */
+  .home:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+  }
+  
+  /* Focus Effect */
+  .home:focus {
+    outline: none; /* Remove the default focus outline */
+    box-shadow: 0 0 5px rgba(69, 126, 255, 0.6); /* Add a focus shadow */
+  }
+  
+  /* Active Effect */
+  .home:active {
+    background-color: #004494; /* Even darker blue when pressed */
+  }
+  
+  
+  .required-star {
+    color: red; /* Makes the star red */
+    margin-left: 5px; /* Adds spacing between the label and the star */
+    font-weight: 200; /* Extra bold font */
+    font-size: 1.4rem; /* Makes the star larger */
+  }
+  

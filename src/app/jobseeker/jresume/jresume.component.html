@@ -1,0 +1,224 @@
+<!-- Navbar Section -->
+<nav class="navbar">
+  <div class="container">
+    <div class="left-nav">
+      <a class="nav-link active">RevHire</a>
+    </div>
+
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: jobseekerId }" class="nav-link" routerLinkActive="active-link">Home</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a class="nav-link" [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName: fullName, id: jobseekerId }" 
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: false }">
+          Resume
+        </a>
+        <div class="hover-content">
+          <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName: fullName, id: jobseekerId }" routerLinkActive="active-link">CreateResume</a>
+          <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName: fullName, id: jobseekerId, resumeId: resumeId }" routerLinkActive="active-link">UpdateResume</a>
+          <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName: fullName, id: jobseekerId, resumeId: resumeId }" routerLinkActive="active-link">ViewResume</a>
+        </div>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{ fullName: fullName, id: jobseekerId }" class="nav-link" routerLinkActive="active-link">Jobsapplied</a>
+      </div>
+    </div>
+
+    <div class="right-nav">
+      <span class="user-name">{{ fullName }}</span>
+
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{ fullName: fullName, id: jobseekerId }" routerLinkActive="active-link">View Profile</a>
+          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{ fullName: fullName, id: jobseekerId }" routerLinkActive="active-link">Update Profile</a>
+        </div>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container1">
+  <form #resumeForm="ngForm" (ngSubmit)="resumecreation()">
+    <h1>Create Your Resume</h1>
+    <button [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: jobseekerId }" class="home">GoBack</button>
+
+    <!-- Resume Headline -->
+    <fieldset>
+      <legend>Resume Headline</legend>
+      <label for="headline">Resume Headline:<span class="required-star">*</span></label>
+      <input [(ngModel)]="headline" name="headline" id="headline" type="text" placeholder="Enter your headline (e.g., JAVA Full Stack Developer)" required>
+    </fieldset>
+
+    <!-- Personal Details -->
+    <fieldset>
+      <legend>Personal Details</legend>
+
+      <!-- First Name, Middle Name, Last Name -->
+      <label for="firstName">First Name:<span class="required-star">*</span></label>
+      <input [(ngModel)]="firstName" name="firstName" id="firstName" type="text" placeholder="Enter your first name" required>
+
+      <label for="middleName">Middle Name:</label>
+      <input [(ngModel)]="middleName" name="middleName" id="middleName" type="text" placeholder="Enter your middle name">
+
+      <label for="lastName">Last Name:<span class="required-star">*</span></label>
+      <input [(ngModel)]="lastName" name="lastName" id="lastName" type="text" placeholder="Enter your last name" required>
+      <label for="email">Email:<span class="required-star">*</span></label>
+      <input [(ngModel)]="email" name="email" id="email" type="email" placeholder="Enter your email" required>
+
+      <!-- Phone Number -->
+      <label for="phoneNumber">Phone Number:<span class="required-star">*</span></label>
+      <input [(ngModel)]="phoneNumber" name="phoneNumber" id="phoneNumber" type="tel" placeholder="Enter your phone number" required>
+
+
+      <!-- Date of Birth -->
+      <label for="dob">Date of Birth:<span class="required-star">*</span></label>
+      <input [(ngModel)]="dob" name="dob" id="dob" type="date" required>
+
+      
+      <!-- Category -->
+      
+      <!-- Languages Known -->
+      <label for="languages">Languages Known:<span class="required-star">*</span></label>
+      <input [(ngModel)]="languages" name="languages" id="languages" type="text" placeholder="Enter languages you know" required>
+
+      <!-- Linked in url-->
+
+      <label for="linkedinurl">Linkedinurl:<span class="required-star">*</span></label>
+      <input [(ngModel)]="linkedinurl" name="linkedinurl" id="linkedinurl" type="text" placeholder="Enter your linkedinurl" required>
+
+
+      <!-- Permanent Address -->
+      <label for="permanentAddress">Permanent Address:<span class="required-star">*</span></label>
+      <textarea [(ngModel)]="permanentAddress" name="permanentAddress" id="permanentAddress" placeholder="Enter permanent address" rows="3" required></textarea>
+
+      <!-- Current Address -->
+      <label for="currentAddress">Current Address:<span class="required-star">*</span></label>
+      <textarea [(ngModel)]="currentAddress" name="currentAddress" id="currentAddress" placeholder="Enter current address" rows="3" required></textarea>
+
+      <!-- Passport Photo  -->
+      <div>
+        <fieldset>
+          <legend>Upload Photo</legend>
+          <label for="profilephoto">Choose Photo:<span class="required-star">*</span></label>
+          <input type="file" id="profilephoto" (change)="onFileChange($event)"> <!-- No ngModel here -->
+          <div *ngIf="profilePhoto">
+            <p>Photo uploaded successfully!</p>
+            <img [src]="profilePhoto" alt="Uploaded Photo" width="150">
+          </div>
+        </fieldset>
+      </div>
+      
+
+
+    </fieldset>
+
+    <!-- Education Details -->
+    <fieldset>
+      <legend>Education Details</legend>
+      <label for="xth">Class 10th - School/Board:<span class="required-star">*</span></label>
+      <input [(ngModel)]="xth" name="xth" id="xth" type="text" placeholder="Enter Class 10th details" required>
+
+      <label for="xthYear">Class 10th - Year of Passing:<span class="required-star">*</span> </label>
+      <input [(ngModel)]="xthYear" name="xthYear" id="xthYear" type="text" placeholder="e.g., 2017" required>
+
+      <label for="xii">Class 12th - School/Board:<span class="required-star">*</span></label>
+      <input [(ngModel)]="xii" name="xii" id="xii" type="text" placeholder="Enter Class 12th details" required>
+
+      <label for="xiiYear">Class 12th - Year of Passing:<span class="required-star">*</span></label>
+      <input [(ngModel)]="xiiYear" name="xiiYear" id="xiiYear" type="text" placeholder="e.g., 2019" required>
+
+      <label for="graduation">Graduation - Degree/Institute:<span class="required-star">*</span></label>
+      <input [(ngModel)]="graduation" name="graduation" id="graduation" type="text" placeholder="Enter Graduation details" required>
+
+      <label for="graduationYear">Graduation - Year of Passing:<span class="required-star">*</span></label>
+      <input [(ngModel)]="graduationYear" name="graduationYear" id="graduationYear" type="text" placeholder="e.g., 2023" required>
+
+      <label for="pg">Post Graduation - Degree/Institute:</label>
+      <input [(ngModel)]="pg" name="pg" id="pg" type="text" placeholder="Enter Post Graduation details (if applicable)">
+
+      <label for="pgStatus">Post Graduation Status:</label>
+      <select [(ngModel)]="pgStatus" name="pgStatus" id="pgStatus">
+        <option value="na">Not Applicable</option>
+
+        <option value="in-progress">In Progress</option>
+        <option value="completed">Completed</option>
+
+      </select>
+    </fieldset>
+
+ <!-- Skills -->
+ <fieldset>
+  <legend>Skills</legend>
+  <label>Programming Languages:<span class="required-star">*</span></label>
+  <input [(ngModel)]="skills" name="skills" id="skills" type="text" placeholder="Enter Skills (if applicable)">
+
+</fieldset>
+
+<!-- Projects -->
+<fieldset>
+  <legend>Projects</legend>
+  <label for="projectTitle">Project Title:<span class="required-star">*</span></label>
+  <input [(ngModel)]="projectTitle" name="projectTitle" id="projectTitle" type="text" placeholder="Enter the project title" required>
+
+  <label for="projectDescription">Project Description:</label>
+  <textarea [(ngModel)]="projectDescription" name="projectDescription" id="projectDescription" placeholder="Describe your project" rows="4" required></textarea>
+</fieldset>
+
+<!-- Certificates -->
+<fieldset>
+  <legend>Certificates</legend>
+  <label for="certificateName">Certificate Name:<span class="required-star">*</span></label>
+  <input [(ngModel)]="certificateName" name="certificateName" id="certificateName" type="text" placeholder="Enter certificate name" required>
+
+  <label for="certificateDescription">Certificate Description:</label>
+  <textarea [(ngModel)]="certificateDescription" name="certificateDescription" id="certificateDescription" placeholder="Describe the certificate" rows="3" required></textarea>
+</fieldset>
+
+<!-- Work Experience -->
+<fieldset>
+  <legend>Work Experience</legend>
+  <label for="companyName">Company Name:</label>
+  <input [(ngModel)]="companyName" name="companyName" id="companyName" type="text" placeholder="Enter company name">
+
+  <label for="startDate">Start Date:</label>
+  <input [(ngModel)]="startDate" name="startDate" id="startDate" type="date">
+
+  <label for="endDate">End Date:</label>
+  <input [(ngModel)]="endDate" name="endDate" id="endDate" type="date">
+
+  <label for="jobTitle">Job Title:</label>
+  <input [(ngModel)]="jobTitle" name="jobTitle" id="jobTitle" type="text" placeholder="Enter job title">
+
+  <label for="jobDescription">Job Description:</label>
+  <textarea [(ngModel)]="jobDescription" name="jobDescription" id="jobDescription" placeholder="Describe your role" rows="3"></textarea>
+  
+    
+
+
+
+
+
+      <input type="submit" value="Create">
+
+    </fieldset>
+      
+  </form>
+</div>
+
+
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>
+
