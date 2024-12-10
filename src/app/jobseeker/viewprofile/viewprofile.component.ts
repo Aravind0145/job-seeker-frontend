@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Jobseeker } from '../../jobseeker';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Resume } from '../../resume';
 
 @Component({
   selector: 'app-viewprofile',
@@ -14,6 +15,8 @@ export class ViewprofileComponent implements OnInit {
   showSearch: boolean = false; // Flag to toggle search visibility
   resumeId: number | null = null; // To store the resume ID
   fullName: string = ''; // Full name of the jobseeker
+  resume: Resume | null = null;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -22,17 +25,27 @@ export class ViewprofileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Retrieve query parameters when the component initializes
-    this.route.queryParams.subscribe(params => {
-      this.fullName = params['fullName'] || 'Guest'; // Set fullName from queryParams or default to 'Guest'
-      this.id = params['id']; // Get jobseeker ID from query params
+    // Retrieve state data passed with navigateByUrl()
+    const state = history.state;
+  
+    if (state) {
+      this.fullName = state['fullName'] || 'Guest';  // Get fullName from state or default to 'Guest'
+      this.id = state['id'];  // Get jobseeker ID from state
+      this.resumeId = state.resumeId || null;
 
+      console.log("resumeId",this.resumeId);
+  
       if (this.id !== null) {
-        this.getJobSeekerProfile(this.id); // Fetch the jobseeker profile if id is available
-        this.getResumeDetails(this.id); // Fetch the resume details if id is available
+        this.getJobSeekerProfile(this.id);  // Fetch jobseeker profile if id is available
       }
-    });
+      if (this.resumeId !== null) {
+        this.getResumeDetails(this.resumeId); // Call getResumeDetails if resumeId exists
+      }
+    } else {
+      console.warn('No state data found.');
+    }
   }
+  
 
   // Toggle the visibility of the search form
   toggleSearch() {
@@ -54,11 +67,10 @@ export class ViewprofileComponent implements OnInit {
   }
 
   // Fetch the resume details by id
-  getResumeDetails(id: number): void {
-    this.jobseekerService.getResumeById(id).subscribe(
-      (data) => {
-        // Ensure that the data.id is a valid number, otherwise set resumeId to null
-        this.resumeId = data.id !== undefined ? data.id : null;
+  getResumeDetails(resumeId: number): void {
+    this.jobseekerService.getResumeById(resumeId).subscribe(
+      (data: Resume) => {
+        this.resume = data;
         console.log('Resume details fetched successfully:', data);
       },
       (error) => {
@@ -67,9 +79,58 @@ export class ViewprofileComponent implements OnInit {
     );
   }
   
+  navigateToHomePage(): void {
+    this.router.navigateByUrl('/jobseekerhomepage', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  
+  navigateToResumePage(): void {
+    // Make sure fullName and id are available
+    console.log('Navigating with:', { fullName: this.fullName, id: this.id });
+  
+    // Use navigateByUrl to pass state
+    this.router.navigateByUrl('/jobseekerresume', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  navigateToUpdateResumePage(): void {
+    this.router.navigateByUrl('/updateresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resume?.id }
+    });
+  }
+
+  navigateToViewResumePage(): void {
+    this.router.navigateByUrl('/viewresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resume?.id }
+    });
+  }
+  
+  
+  navigateToJobsAppliedPage(): void {
+    this.router.navigateByUrl('/applyjobs', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+  navigateToViewProfile(): void {
+    this.router.navigateByUrl('/viewprofile', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id}
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/updateprofile', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+  
   // Logout and navigate to the front page
   logout(): void {
-    localStorage.removeItem('jobseeker'); // Remove jobseeker data from local storage
-    this.router.navigate(['/jobseeker/jfrontpage']); // Navigate to jobseeker front page
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/jfrontpage');
   }
 }

@@ -50,6 +50,12 @@ export class JresumeComponent implements OnInit {
   endDate: string = '';
   jobTitle: string = '';
   jobDescription: string = ''; 
+  originalResume: Resume | null = null;
+  message: string = '';
+  messageClass: string = '';
+  uploadingImage: boolean = false;  // To track the uploading state
+  uploadError: string = ''; 
+
 
   constructor(
     private resumeService: JobseekerserviceService, 
@@ -59,55 +65,82 @@ export class JresumeComponent implements OnInit {
   ) { }
 
   // Handle photo upload via Cloudinary
-  onFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      const formData = new FormData();
-      formData.append('file', file);
-
-      // Cloudinary URL with your cloud name (dxful4bty)
-      const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dxful4bty/image/upload`; // Cloud Name (dxful4bty) is used here
-      formData.append('upload_preset', 'Aravind Image'); // The upload preset name
-      
-      // Now, make the POST request to Cloudinary's API with the above form data
-      this.http.post(cloudinaryUrl, formData).subscribe({
-        next: (response: any) => {
-          if (response.secure_url) {
-            this.profilePhoto = response.secure_url;  // Get the URL of the uploaded image
-            console.log('Uploaded photo URL:', this.profilePhoto);
-            alert('Photo uploaded successfully!');
-          } else {
-            console.error('Upload failed, no secure_url found');
-            alert('Failed to upload photo. Please try again.');
-          }
-        },
-        error: (error) => {
-          console.error('Photo upload failed:', error);
-          alert('Failed to upload photo. Please try again.');
-        }
-      });
-    }
-  }
-
-  ngOnInit(): void {
-    // Retrieve query parameters from the route
-    this.route.queryParams.subscribe(params => {
-      this.fullName = params['fullName'] || 'Guest';
-      this.jobseekerId = params['id'] ? +params['id'] : null;
+  uploadImage(event: Event): void {
+    this.uploadingImage = true;
+    this.uploadError = '';
   
-      // Ensure jobseekerId is available before making a service call
+    const input = event.target as HTMLInputElement;
+  
+    // Check if input is null or if it doesn't have files
+    if (!input || !input.files || input.files.length === 0) {
+      this.uploadingImage = false;
+      return;
+    }
+  
+    const file = input.files[0];
+    
+    // If no file is selected, stop the process
+    if (!file) {
+      this.uploadingImage = false;
+      return;
+    }
+  
+    // Replace this with your cloud storage upload URL and API key
+    const uploadUrl = 'https://api.imgbb.com/1/upload';
+    const apiKey = 'f994aa94e60bf8071dae6a9723f989ef'; // ImgBB API Key
+  
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('key', apiKey);
+  
+    // Make the request using fetch to ImgBB API
+    fetch(uploadUrl, {
+      method: 'POST',
+      body: formData
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.data && data.data.url) {
+          this.profilePhoto = data.data.url; // Get the uploaded image URL
+          alert('Image uploaded successfully.');
+        } else {
+          this.uploadError = 'Failed to upload image. Please try again.';
+          alert(this.uploadError);
+        }
+      })
+      .catch((error) => {
+        console.error('Error uploading image:', error);
+        this.uploadError = 'Failed to upload image. Please try again.';
+        alert(this.uploadError);
+      })
+      .finally(() => {
+        this.uploadingImage = false;
+      });
+  }
+  
+  
+  ngOnInit(): void {
+    // Retrieve state data passed with navigateByUrl()
+    const state = history.state;
+    
+    if (state) {
+      this.fullName = state.fullName || 'Guest';
+      this.jobseekerId = state.id || null;
+  
+      console.log('Full Name:', this.fullName);
+      console.log('Jobseeker ID:', this.jobseekerId);
+  
       if (this.jobseekerId) {
         // Check if resume already exists for this jobseeker
         this.resumeService.checkResumeExistence(this.jobseekerId).subscribe({
           next: (exists: boolean) => {
             this.resumeExists = exists;
+            console.log('Resume Exists:', this.resumeExists);
+
             if (this.resumeExists) {
-              alert('You have already created a resume.');
-              this.router.navigate(['/jobseeker/jobseekerhomepage'], {
-                queryParams: { fullName: this.fullName, id: this.jobseekerId }
+              this.router.navigateByUrl('/jobseekerhomepage', {
+                state: { fullName: this.fullName, id: this.jobseekerId }
               });
-              // Optionally redirect or disable form inputs if needed
             } else {
               console.log('No resume found, ready to create a new one');
             }
@@ -116,14 +149,15 @@ export class JresumeComponent implements OnInit {
             console.error('Error checking resume existence:', error);
           }
         });
-
+  
         // Fetch resume details if a resume exists
         if (!this.resumeExists) {
           this.resumeService.getResumeById(this.jobseekerId).subscribe({
             next: (data: Resume) => {
               this.resume = data;
-              this.resumeId = data.id || null; // Extract resumeId from the response
+              this.resumeId = data.id || null;
               console.log('Resume details fetched successfully:', data);
+              this.originalResume = { ...data };
             },
             error: (error) => {
               console.error('Error fetching resume details:', error);
@@ -131,10 +165,18 @@ export class JresumeComponent implements OnInit {
           });
         }
       } else {
-        console.warn('Jobseeker ID is missing in query parameters.');
+        console.warn('Jobseeker ID is missing.');
       }
-    });
+    } else {
+      console.warn('No state data found.');
+    }
   }
+  
+  preventClick(event: Event) {
+    event.preventDefault();  // Prevent the default link action
+    event.stopPropagation(); // Stop the event from propagating further
+  }
+  
   
   // Submit the form to create a resume
   resumecreation(): void {
@@ -186,10 +228,12 @@ export class JresumeComponent implements OnInit {
     this.resumeService.saveResume(resume, this.jobseekerId).subscribe({
       next: (response) => {
         console.log('Resume saved', response);
-        alert('Successfully created resume!');
-        this.router.navigate(['/jobseeker/jobseekerhomepage'], {
-          queryParams: { fullName: this.fullName, id: this.jobseekerId }
-        }); // Navigate to jobseeker front page after saving resume
+        this.message = 'Resume Created successfully!';
+          this.messageClass = 'success-message';  // You can customize this class for styling
+          setTimeout(() => {
+            this.message = '';  // Clear the message
+            this.messageClass = '';  // Reset the class
+          }, 5000); // Navigate to jobseeker front page after saving resume
       },
       error: (error) => {
         console.error('Failed to save resume:', error);
@@ -198,9 +242,63 @@ export class JresumeComponent implements OnInit {
     });
   }
 
+  isFormUnchanged(): boolean {
+    return JSON.stringify(this.resume) === JSON.stringify(this.originalResume);
+  }
+
+  navigateToHomePage(): void {
+    this.router.navigateByUrl('/jobseekerhomepage', {
+      state: { fullName: this.fullName, id: this.jobseekerId }
+    });
+  }
+  
+  
+  navigateToResumePage(): void {
+    // Make sure fullName and id are available
+    console.log('Navigating with:', { fullName: this.fullName, id: this.jobseekerId });
+  
+    // Use navigateByUrl to pass state
+    this.router.navigateByUrl('/jobseekerresume', {
+      state: { fullName: this.fullName, id: this.jobseekerId }
+    });
+  }
+  navigateToUpdateResumePage(): void {
+    this.router.navigateByUrl('/updateresume', {
+      state: { fullName: this.fullName, id: this.jobseekerId, resumeId: this.resume?.id }
+    });
+  }
+
+  navigateToViewResumePage(): void {
+    this.router.navigateByUrl('/viewresume', {
+      state: { fullName: this.fullName, id: this.jobseekerId, resumeId: this.resume?.id }
+    });
+  }
+  
+  
+  navigateToJobsAppliedPage(): void {
+    this.router.navigateByUrl('/applyjobs', {
+      state: { fullName: this.fullName, id: this.jobseekerId,resumeId: this.resume?.id }
+    });
+  }
+  navigateToViewProfile(): void {
+    this.router.navigateByUrl('/viewprofile', {
+      state: { fullName: this.fullName, id: this.jobseekerId,resumeId: this.resume?.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/updateprofile', {
+      state: { fullName: this.fullName, id: this.jobseekerId,resumeId: this.resume?.id }
+    });
+  }
+  
+
   logout(): void {
     // Placeholder for logout functionality
-    localStorage.removeItem('jobseeker'); // Remove jobseeker data from local storage
-    this.router.navigate(['/jobseeker/jfrontpage']); // Navigate to jobseeker front page after saving resume
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigate(['/jfrontpage']); // Navigate to jobseeker front page after saving resume
   }
 }

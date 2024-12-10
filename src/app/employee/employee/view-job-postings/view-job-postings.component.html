@@ -7,17 +7,17 @@
 
     <!-- Centered Links: Jobs, Companies, Services -->
     <div class="center-nav">
-      <div class="nav-item">
-        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
-      </div>
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+        <a (click)="navigateToHomePage()" routerLinkActive="active-link">Home</a>
+      </div>
+      <div class="nav-item">
+        <a (click)="navigateToPostJobsPage()" routerLinkActive="active-link">Post Jobs</a>
       </div>
 
       <!-- Companies Hover Effect with Default Companies -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+        <a (click)="navigateToViewJobPostings()" class="nav-link home-link" routerLinkActive="active-link">View Job Postings</a>
       </div>
 
       <!-- Services Hover Effect -->
@@ -32,11 +32,12 @@
       <!-- Display full name before the Profile button -->
       <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+        <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown-content">
-          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
-          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
-        </div>
+          <a (click)="navigateToProfile()" routerLinkActive="active-link">View Profile</a>
+
+          <a (click)="navigateToUpdateProfile()" routerLinkActive="active-link">Update Profile</a>
+            </div>
       </div>
       
       <!-- Logout Button -->
@@ -76,143 +77,75 @@
 
 
 
-<div *ngIf="jobPostings.length > 0; else noJobPostings" class="profile-container">
-  <div class="header-container">
-    <button 
-      [routerLink]="['/employee/emphomepage']" 
-      [queryParams]="{ fullName: fullName, id: id }" 
-      class="home"
-    >
-      GoBack
-    </button>
-  </div>
+<button 
+(click)="navigateToHomePage()" 
+  class="home"
+>
+<i class="fas fa-arrow-left"></i>
+</button><div *ngIf="jobPostings.length > 0; else noJobPostings" class="profile-container">
   <h2 class="profile-title">Job Postings for {{ fullName }}</h2>
 
-  <div class="table-container">
+  <div class="card-container">
     <!-- Display details for each job posting -->
-    <div *ngFor="let posting of jobPostings; let i = index" class="job-posting-detail">
+    <div *ngFor="let posting of jobPostings; let i = index" class="job-posting-card">
       
-      <h3 class="posting-title">Job Posting {{ i + 1 }}</h3>
+      <div class="card-header">
+        <h3>{{ posting.jobTitle }}</h3>
+        <span class="company-name">{{ posting.companyName }}</span>
+      </div>
 
-      <table class="profile-table">
-        
-    
+      <div class="card-body">
+        <p><strong>Location:</strong> {{ posting.location }}</p>
+        <p><strong>Employment Type:</strong> {{ posting.employmentType }}</p>
+        <p><strong>Salary:</strong> {{ posting.salary }}</p>
+        <!--<p><strong>Job Description:</strong> {{ posting.jobDescription }}</p>
+        <p><strong>Roles and Responsibilities:</strong> {{ posting.rolesAndResponsibilities }}</p>-->
+        <p><strong>Job Category:</strong> {{ posting.jobCategory }}</p>
+        <p><strong>Skills:</strong> {{ posting.skills }}</p>
+        <p><strong>Experience:</strong> {{ posting.experience }}</p>
+        <p><strong>Education:</strong> {{ posting.education }}</p>
+        <p><strong>Number of Openings:</strong> {{ posting.numberOfOpenings }}</p>
+        <p><strong>Last Date to Apply:</strong> {{ posting.lastDate | date }}</p>
+      </div>
 
-        
-        <thead>
-          <tr>
-            <th>Attribute</th>
-            <th>Details</th>
-          </tr>
-
-        </thead>
-        <tbody>
-          <tr *ngIf="posting.id !== undefined && applicantCounts[posting.id] !== undefined">
-            <td>
-              <strong>Number of Applicants</strong>
-            </td>
-            <td>
-              <div class="tooltip-container">
-                <button 
-                  [ngClass]="{
-                    'highlight-job-button': isHighApplicantCount(posting.id),
-                    'low-applicant-job-button': !isHighApplicantCount(posting.id)
-                  }"
-                  [routerLink]="['/employee/resumedetails']" 
-                  [queryParams]="{fullName:fullName, jobPostingId: posting.id }">
-                  {{ applicantCounts[posting.id] }}
-                </button>
-                <span class="tooltip-text">Click to check resumes</span>
-              </div>
-            </td>
-            
-          </tr>
-          <tr>
-            <td><strong>Delete Job Posting</strong></td>
-            <td>
-              <button 
-                class="delete-button" 
-                (click)="deleteJobPosting(posting.id)">
-                Delete
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Update-Application</strong>
-            </td>
-            <td>
-              <button 
-  [ngClass]="{
-    'update-button': true
-  }"
-  [routerLink]="['/employee/updateapplication']"
-  [queryParams]="{fullName:fullName, jobPostingId: posting.id }">
-  Update
-</button>
-
-            </td>
-          </tr>
+      <!-- Action buttons at the bottom of the card -->
+      <div class="card-footer">
+        <div class="actions">
+          <div class="applicant-count">
+            <!-- Only display the applicant count if posting.id is valid -->
+            <button
+            *ngIf="posting.id && applicantCounts[posting.id] !== undefined"
+            [ngClass]="{
+              'highlight-job-button': isHighApplicantCount(posting.id),
+              'low-applicant-job-button': !isHighApplicantCount(posting.id)
+            }"
+            (click)="navigateToResumeDetails(posting.id)"
+            class="tooltip-button"
+          >
+            {{ applicantCounts[posting.id] }}
+            <span class="tooltip-text">Check for resumes</span>
+          </button>
           
-          
-          
+          </div>
       
-          <tr>
-            <td><strong>Job Title</strong></td>
-            <td>{{ posting.jobTitle }}{{posting.id}}</td>
-          </tr>
-          <tr>
-            <td><strong>Company Name</strong></td>
-            <td>{{ posting.companyName }}</td>
-          </tr>
-          <tr>
-            <td><strong>Location</strong></td>
-            <td>{{ posting.location }}</td>
-          </tr>
-          <tr>
-            <td><strong>Employment Type</strong></td>
-            <td>{{ posting.employmentType }}</td>
-          </tr>
-          <tr>
-            <td><strong>Salary</strong></td>
-            <td>{{ posting.salary }}</td>
-          </tr>
-          <tr>
-            <td><strong>Job Description</strong></td>
-            <td>{{ posting.jobDescription }}</td>
-          </tr>
-          <tr>
-            <td><strong>Roles and Responsibilities</strong></td>
-            <td>{{ posting.rolesAndResponsibilities }}</td>
-          </tr>
-          <tr>
-            <td><strong>Job Category</strong></td>
-            <td>{{ posting.jobCategory }}</td>
-          </tr>
-          <tr>
-            <td><strong>Skills</strong></td>
-            <td>{{ posting.skills }}</td>
-          </tr>
-          <tr>
-            <td><strong>Experience</strong></td>
-            <td>{{ posting.experience }}</td>
-          </tr>
-          <tr>
-            <td><strong>Education</strong></td>
-            <td>{{ posting.education }}</td>
-          </tr>
-          <tr>
-            <td><strong>Number of Openings</strong></td>
-            <td>{{ posting.numberOfOpenings }}</td>
-          </tr>
-          <tr>
-            <td><strong>Last Date to Apply</strong></td>
-            <td>{{ posting.lastDate | date }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <hr class="job-separator" /> <!-- Add a separator between postings -->
+          <div class="action-buttons">
+            <button
+              *ngIf="posting.id && applicantCounts[posting.id] <= 1"
+              class="delete-button"
+              (click)="deleteJobPosting(posting.id)"
+            >
+              Delete
+            </button>
+            <button
+              class="update-button"
+              (click)="posting.id !== undefined && navigateToUpdateApplication(posting.id)"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>

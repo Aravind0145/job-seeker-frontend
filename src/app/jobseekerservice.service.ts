@@ -87,6 +87,14 @@ checkResumeExistence(jobseekerId: number): Observable<boolean> {
     });
   }
 
+  checkApplicationStatus(jobId: number, userId: number): Observable<{ hasApplied: boolean }> {
+    return this.http.get<{ hasApplied: boolean }>(`${this.apiUrl}/applications/status`, {
+      params: { jobId: jobId.toString(), userId: userId.toString() }
+    });
+}
+
+  
+  
 
   
   submitApplication(

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
+import { Resume } from '../../resume';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -8,34 +9,48 @@ import { JobseekerserviceService } from '../../jobseekerservice.service';
   styleUrls: ['./applied-jobs.component.css']
 })
 export class AppliedJobsComponent implements OnInit {
+  resume: Resume | null = null;
   fullName: string = '';
-  jobSeekerId: number | null = null;
+  id: number | null = null;
   resumeId: number | null = null; // Store resumeId
   applications: any[] = []; // Array to store applications
+  applicationMessage: string = ''; // Default message is empty
+  applicationMessageClass: string = ''; // Default class is empty
+
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private jobseekerService: JobseekerserviceService
   ) {}
 
   ngOnInit(): void {
-    // Retrieve query parameters
-    this.route.queryParams.subscribe((params) => {
-      this.fullName = params['fullName'] || 'Guest';  
-      this.jobSeekerId = params['id']; // Get jobSeekerId from query params
-      this.resumeId = params['resumeId']; // Get resumeId from query params if available
-
-      if (this.jobSeekerId) {
-        this.loadApplications(this.jobSeekerId); // Load applications if id is available
-        this.getResumeDetails(this.jobSeekerId); // Fetch the resume details as well
+    // Retrieve state data passed with navigateByUrl()
+    const state = history.state;
+  
+    if (state) {
+      this.fullName = state.fullName || 'Guest';
+      this.id = state.id || null; // Ensure id is set or fallback to null
+      this.resumeId = state.resumeId || null; // Ensure resumeId is set or fallback to null
+  
+      console.log('jobseekerId:', this.id);
+  
+      if (this.id) {
+        this.loadApplications(this.id); // Load applications if id is available
       }
-    });
+  
+      if (this.resumeId !== null) {
+        this.getResumeDetails(this.resumeId); // Fetch the resume details only if resumeId is not null
+      }
+    } else {
+      console.warn('No state data found.');
+    }
   }
+  
+  
 
   // Fetch the job applications for the job seeker
-  loadApplications(jobSeekerId: number): void {
-    this.jobseekerService.getApplicationsByJobSeeker(jobSeekerId).subscribe(
+  loadApplications(id: number): void {
+    this.jobseekerService.getApplicationsByJobSeeker(id).subscribe(
       (applications) => {
         this.applications = applications; // Store the applications in the component
       },
@@ -47,15 +62,11 @@ export class AppliedJobsComponent implements OnInit {
 
   // Fetch the resume by job seeker ID
 // Fetch the resume by job seeker ID
-getResumeDetails(id: number): void {
-  this.jobseekerService.getResumeById(id).subscribe(
-    (data) => {
-      if (data && data.id !== undefined) {
-        this.resumeId = data.id; // Assign a valid number to resumeId
-        console.log('Resume details fetched successfully:', data);
-      } else {
-        this.resumeId = null; // Ensure resumeId is null if no valid id is found
-      }
+getResumeDetails(resumeId: number): void {
+  this.jobseekerService.getResumeById(resumeId).subscribe(
+    (data: Resume) => {
+      this.resume = data;
+      console.log('Resume details fetched successfully:', data);
     },
     (error) => {
       console.error('Error fetching resume details:', error);
@@ -63,31 +74,96 @@ getResumeDetails(id: number): void {
   );
 }
 
-
   // Method to withdraw application
   withdrawApplication(applicationId: number): void {
-    if (this.jobSeekerId) {
-      this.jobseekerService.withdrawApplication(this.jobSeekerId, applicationId).subscribe(
+    if (this.id) {
+      this.jobseekerService.withdrawApplication(this.id, applicationId).subscribe(
         () => {
           // Remove the application from the list after successful deletion
           this.applications = this.applications.filter(application => application.applicationId !== applicationId);
-          alert('Application withdrawn successfully!');
-
+          
+          // Set the message for success
+          this.applicationMessage = 'Application withdrawn successfully!';
+          this.applicationMessageClass = 'success-message'; // You can customize this class for success
+  
+          // Clear the message after 3 seconds (Optional)
+          setTimeout(() => {
+            this.applicationMessage = '';
+            this.applicationMessageClass = '';
+          }, 5000);
+  
           // Navigate to jobseeker homepage and pass jobSeekerId and jobSeekerFullName as query parameters
-          this.router.navigate(['/jobseeker/jobseekerhomepage'], {
-            queryParams: { fullName: this.fullName, id: this.jobSeekerId }
-          });
         },
         (error) => {
           console.error('Error withdrawing application:', error);
+  
+          // Set the message for error
+          this.applicationMessage = 'Error withdrawing application. Please try again.';
+          this.applicationMessageClass = 'error-message'; // Customize the class for error
+  
+          // Clear the message after 3 seconds (Optional)
+          setTimeout(() => {
+            this.applicationMessage = '';
+            this.applicationMessageClass = '';
+          }, 3000);
         }
       );
     }
   }
+  
+  navigateToHomePage(): void {
+    this.router.navigateByUrl('/jobseekerhomepage', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  navigateToResumePage(): void {
+    // Make sure fullName and id are available
+    console.log('Navigating with:', { fullName: this.fullName, id: this.id });
+  
+    // Use navigateByUrl to pass state
+    this.router.navigateByUrl('/jobseekerresume', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  navigateToUpdateResumePage(): void {
+    this.router.navigateByUrl('/updateresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resume?.id }
+    });
+  }
+
+  navigateToViewResumePage(): void {
+    this.router.navigateByUrl('/viewresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resume?.id }
+    });
+  }
+  
+  
+  navigateToJobsAppliedPage(): void {
+    this.router.navigateByUrl('/applyjobs', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+
+  navigateToViewProfile(): void {
+    this.router.navigateByUrl('/viewprofile', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/updateprofile', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+  
+  
 
   // Logout method
   logout(): void {
-    localStorage.removeItem('jobseeker'); // Remove jobseeker data from local storage
-    this.router.navigate(['/jobseeker/jfrontpage']); // Navigate to jobseeker front page after saving resume
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigate(['/jfrontpage']); // Navigate to jobseeker front page after saving resume
   }
 }

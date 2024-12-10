@@ -9,15 +9,15 @@
     <div class="center-nav">
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
+        <a (click)="navigateToHomePage()" routerLinkActive="active-link">Home</a>
       </div>
       <div class="nav-item">
-        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+        <a (click)="navigateToPostJobsPage()" routerLinkActive="active-link">Post Jobs</a>
       </div>
 
       <!-- Companies Hover Effect with Default Companies -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+        <a (click)="navigateToViewJobPostings()" routerLinkActive="active-link">View Job Postings</a>
       </div>
 
       <!-- Services Hover Effect -->
@@ -32,11 +32,12 @@
       <!-- Display full name before the Profile button -->
       <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+        <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown-content">
-          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
-          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
-        </div>
+          <a (click)="navigateToProfile()" routerLinkActive="active-link">View Profile</a>
+
+          <a (click)="navigateToUpdateProfile()" class="nav-link home-link" routerLinkActive="active-link">Update Profile</a>
+            </div>
       </div>
       
       <!-- Logout Button -->
@@ -66,16 +67,20 @@
 
 
 
+
+
 <div class="update-profile-container">
+  
     <h2>Update Profile</h2>
     <div class="header-container">
-      <a 
-        [routerLink]="['/employee/emphomepage']" 
-        [queryParams]="{ fullName: fullName, id: id }" 
+      <a (click)="navigateToHomePage()" 
         class="home"
       >
-        GoBack
+      <i class="fas fa-arrow-left"></i>
     </a>
+    <div *ngIf="message" [ngClass]="messageClass">
+      {{ message }}
+    </div>
     </div>
   
     <form (ngSubmit)="onSubmit()">
@@ -105,13 +110,38 @@
           <td><input id="mobileNumber" [(ngModel)]="employee.mobileNumber" name="mobileNumber" required /></td>
         </tr>
         <tr>
+          <td>
+            <label for="profilephoto">Choose Photo:<span class="required-star">*</span></label>
+          </td>
+          <td>
+            <input type="file" id="profilephoto" (change)="uploadImage($event)">
+            <div *ngIf="employee.profilePhoto">
+              <p>Photo uploaded successfully!</p>
+              <img [src]="employee.profilePhoto" alt="Uploaded Photo" width="150">
+            </div>
+            <div *ngIf="uploadingImage">
+              <p>Uploading...</p> <!-- Show loading message while uploading -->
+            </div>
+            <div *ngIf="uploadError">
+              <p style="color: red;">{{ uploadError }}</p> <!-- Show error message if upload fails -->
+            </div>
+          </td>
+        </tr>
+        
+  
+        <tr>
           <td><label for="designation">Designation:</label></td>
           <td><input id="designation" [(ngModel)]="employee.designation" name="designation" required /></td>
         </tr>
       </table>
   
-      <button type="submit">Save Changes</button>
-    </form>
+      <a href="javascript:void(0);" 
+      class="btn btn-primary" 
+      [class.disabled-link]="!isFormModified()" 
+      [attr.aria-disabled]="!isFormModified()">
+      Save Changes
+   </a>
+       </form>
   </div>
   
 <footer class="footer">

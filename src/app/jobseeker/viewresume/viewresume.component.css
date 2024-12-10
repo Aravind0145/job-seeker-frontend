@@ -23,9 +23,14 @@
   align-items: center;
 }
 
-.left-nav {
+.left-nav1 {
   flex: 1;
   margin-left: 100px;
+  font-size: 1.2em !important;
+  font-weight: 500px !important;
+  color: #457eff;
+
+
 }
 
 .center-nav {
@@ -53,7 +58,7 @@
 }
 
 .nav-link.active {
-  font-size: 20px;
+  font-size: 15px;
   color: #457eff;
 }
 
@@ -109,7 +114,7 @@
   background-color: #ff4d4f;
   color: white;
   border: none;
-  padding: 5px 5px;
+  padding: 5px 9px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -146,7 +151,7 @@
   h2, h3 {
     color: #333;
     text-align: center;
-    margin-top: -80px;
+    margin-top: -100px;
   }
   
   h3 {
@@ -248,37 +253,63 @@
   color: #0056b3;
 }
 
-
 .home {
-  background-color: #457eff; /* Blue background */
-  color: white; /* White text */
-  padding: 10px 20px; /* Padding for top/bottom and left/right */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 16px; /* Font size */
-  font-weight: bold; /* Bold text */
-  margin-bottom: 20px;
-  margin-left: 30px;
-  margin-top: 110px;
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
+  color: blue;               /* Blue text */
+  border: 1px solid black;   /* Black border */
+  border-radius: 50%;        /* Make it a perfect circle */
+  width: 35px;               /* Fixed width for the circle */
+  height: 35px;              /* Fixed height for the circle */
+  display: flex;             /* Use flexbox to center the icon */
+  align-items: center;       /* Vertically center the icon */
+  justify-content: center;   /* Horizontally center the icon */
+  font-size: 16px;           /* Base font size */
+  font-weight: bold;         /* Bold text */
+  margin-bottom: 10px;
+  margin-top: 70px;
+  margin-left: 0px;
+  background-color: yellow;
+  cursor: pointer;           /* Pointer cursor on hover */
 }
 
-/* Hover Effect */
-.home:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.05); /* Slightly enlarge the button */
+.home i {
+  font-size: 24px;           /* Increase the font size of the icon */
 }
 
-/* Focus Effect */
-.home:focus {
-  outline: none; /* Remove the default focus outline */
-  box-shadow: 0 0 5px rgba(69, 126, 255, 0.6); /* Add a focus shadow */
+
+.home-link1 {
+  font-size: 1.2em;
+  color: #007bff !important;
+  text-decoration: underline;
+
+}
+.nav-link1{
+  font-size: 1.2em;
+  text-decoration: underline !important;
+  color: #007bff !important;
 }
 
-/* Active Effect */
-.home:active {
-  background-color: #004494; /* Even darker blue when pressed */
+.profile-photo-container {
+  display: flex;
+  justify-content: flex-end;  /* Aligns the image to the right */
+  margin-right: 80px;
+}
+
+.profile-photo-container img {
+  width: 100px;  /* Optional, adjust size as needed */
+  height: 100px; /* Optional, adjust size as needed */
+  border-radius: 50%;  /* This makes the image round */
+  object-fit: cover; 
+}
+
+.user-name{
+  color: #007bff;
+
+}
+.profile-icon {
+  font-size: 35px;  /* Adjust the icon size */
+  cursor: pointer;  /* Pointer cursor on hover */
+  color: #333;      /* Icon color */
+  margin-right: 10px; /* Add some space from other elements if needed */
 }
 
 

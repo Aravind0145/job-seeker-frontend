@@ -6,6 +6,7 @@ export interface Employee {
     fullName: string;
     officialEmail: string;
     mobileNumber: string;
+    profilePhoto?:string;
     designation: string;
     password: string;
 }

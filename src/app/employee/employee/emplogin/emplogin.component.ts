@@ -42,12 +42,18 @@ export class EmploginComponent {
         const fullName = response.fullName;
         const id = response.id;
         console.log('User role:', role);
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('role', role);
+        localStorage.setItem('fullName', fullName);
+        localStorage.setItem('id', String(id));
+
 
         if (role === 'employee') {
           console.log('Navigating to admin dashboard');
-          this.router.navigate(['/employee/emphomepage'], {
-            queryParams: { fullName,id }
-          });        } else {
+          this.router.navigateByUrl('/emphomepage', {
+            state: { fullName, id }
+          });  
+               } else {
           console.log('Invalid role');
           alert('Incorrect Email and password');
         }

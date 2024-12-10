@@ -4,6 +4,7 @@ export interface Jobseeker {
     email: string 
     password: string 
     phone: string 
+    profilePhoto?:string
     workStatus: string 
     promotions: boolean 
 }

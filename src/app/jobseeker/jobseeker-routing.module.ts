@@ -12,20 +12,24 @@ import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
 import { ViewresumeComponent } from './viewresume/viewresume.component';
 import { UpdateresumeComponent } from './updateresume/updateresume.component';
 import { UploadphotoComponent } from './uploadphoto/uploadphoto.component';
+import { JobseekerregisterComponent } from './jobseekerregister/jobseekerregister.component';
 
 const routes: Routes = [
   
   {
     path:'jregister',
-    component:RegisterComponent
+    component:JobseekerregisterComponent
   },
   {
     path:'jfrontpage',
-    component:FrontpageComponent
+    component:FrontpageComponent,
+
+    
   },
   {
     path:'jobseekerhomepage',
     component:JobseekerhomepageComponent
+    
   },
   {
     path:'jobseekerresume',

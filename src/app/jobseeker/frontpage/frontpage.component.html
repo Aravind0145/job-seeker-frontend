@@ -3,7 +3,11 @@
 <nav class="navbar">
     <div class="container">
         <div class="left-nav">
-            <a class="nav-link active" href="jobs.html">RevHire</a>
+          <a class="nav-link active">
+            <img class="resized-image" src="https://res.cloudinary.com/dxful4bty/image/upload/v1733812791/revhire1_x2w3dn.jpg" />
+          </a>
+          
+
           </div>
        <div class="auth-buttons">
         <ul class="navbar-nav">
@@ -48,7 +52,7 @@
                     </div>
               
                     <!-- Forgot Password link above the submit button -->
-                    <a routerLink="/jobseeker/jobseekerforgotpassword" class="forgot-password">Forgot Password</a>
+                    <a routerLink="/jobseekerforgotpassword" class="forgot-password">Forgot Password</a>
               
                     <!-- Submit Button -->
 
@@ -61,14 +65,14 @@
               </div>
               
               
-    <button class="btn btn-success"><a routerLink="/jobseeker/jregister">Register</a></button>
+    <button class="btn btn-success"><a routerLink="/jregister">Register</a></button>
     <div class="vertical-line"></div>
 
             <div class="dropdown">
                 <button class="btn1">Employer</button>
                 <div class="dropdown-content">
-                  <a routerLink="/employee/empregister">Register</a>
-                  <a routerLink="/employee/emplogin">Login</a>
+                  <a routerLink="/empregister">Register</a>
+                  <a routerLink="/emplogin">Login</a>
                 </div>
               </div>
               
@@ -76,31 +80,7 @@
     </div>
 </nav>
 
-<div class="body-background">
-    <header class="header">
-        <h1>Find your dream job now</h1>
-        <p>5 lakh+ jobs for you to explore</p>
-    </header>
-    <div class="search-wrapper">
-        <div class="logo-container">
-            <img src="https://static.naukimg.com/s/7/103/i/search.9ec0e1ac.svg" id="searchIcon" alt="Search Icon">
-            <input type="text" placeholder="Enter Skills / designations / companies" id="input1">
-            <div class="divider"></div>
-            <input type="text" placeholder="Enter location" id="input2">
-            <div class="divider"></div>
-            <select id="input3">
-                <option value="" hidden>Select Experience</option>
-                <option value="1">Freshers</option>
-                <option value="2">1 year</option>
-                <option value="3">2 years</option>
-                <option value="4">3 years</option>
-                <option value="5">4 years</option>
-                <option value="6">5 years</option>
-            </select>
-            <input type="submit" class="search-btn" value="Search"  (click)="onSearchClick($event)">
-        </div>
-    </div>
-</div>
+
 
 
 
@@ -191,4 +171,70 @@
 
  
             </div> 
+</div>
+
+
+<div id="footer">
+    <section class="footer">
+        <div class="footer-row">
+            <div class="footer-col">
+              <h4>Info</h4>
+              <ul class="links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Compressions</a></li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Collection</a></li>
+              </ul>
+            </div>
+    
+            <div class="footer-col">
+              <h4>Explore</h4>
+              <ul class="links">
+                <li><a href="#">Free Designs</a></li>
+                <li><a href="#">Latest Designs</a></li>
+                <li><a href="#">Themes</a></li>
+                <li><a href="#">Popular Designs</a></li>
+                <li><a href="#">Art Skills</a></li>
+                <li><a href="#">New Uploads</a></li>
+              </ul>
+            </div>
+    
+            <div class="footer-col">
+              <h4>Legal</h4>
+              <ul class="links">
+                <li><a href="#">Customer Agreement</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">GDPR</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Media Kit</a></li>
+              </ul>
+            </div>
+    
+            <div class="footer-col">
+              <h4>Contact Us</h4>
+              <p>
+                Any Queries ? Don't Hesitate To Contact Us
+              </p>
+              <form action="#">
+               
+              </form>
+              <div class="icons">
+                <a href="#" aria-label="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" aria-label="Twitter">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" aria-label="GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>              
+            </div>
+          </div>
+    </section>
 </div>

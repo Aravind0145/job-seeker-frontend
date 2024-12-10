@@ -22,6 +22,11 @@ body {
   border-radius: 10px;
 }/* Search Container */
 
+.search-wrapper {
+  position: relative;
+  z-index: 2; /* Keep search elements above the blurred content */
+}
+
 .Wrapper {
   display: flex;
   align-items: center;
@@ -142,6 +147,17 @@ input, select {
 .search-btn:focus-within .search-input {
   border: none;
   outline: none;
+}
+/* Initial main content styling */
+.main-wrapper {
+  transition: filter 0.3s ease; /* Smooth transition for blur effect */
+}
+
+
+/* Ensure the search button stays on top */
+.search-container {
+  position: relative;
+  z-index: 2;
 }
 
 /* Navbar Links */
@@ -299,16 +315,47 @@ input, select {
 }
 
 
-/* Navigation styling */
-.navigation {
-  margin-top: 10px;
+/* Navigation styling */.side-navigation {
+  position: fixed;
+  margin-top: 80px;
+  left: 40px;
+  width: 180px;
+  height: 50%;
+  background-color: #fff;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border: 2px solid #007bff;
-  border-radius: 8px;
-
+  gap: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
 }
+
+.side-nav-item {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.top{
+  margin-top: 40px;
+}
+
+.side-nav-item:hover {
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
 
 .nav-link {
   color: #007bff;
@@ -319,11 +366,6 @@ input, select {
   align-items: center;
 }
 
-.nav-icon {
-  width: 25px;
-  height: 25px;
-  margin-right: 8px;
-}
 
 .nav-link:hover {
   text-decoration: underline;
@@ -345,23 +387,32 @@ input, select {
   gap: 40px;
   justify-content: flex-start;
   margin-top: 130px; /* Ensure some spacing between the resume box and job cards */
-  margin-left: 130px; /* Reduced left margin to shrink container width */
+  margin-left: 350px; /* Reduced left margin to shrink container width */
   padding: 0 20px; /* Added padding to balance the layout */
 }
 
-/* Card Style */
-.card {
+/* Card Style */.card {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  flex: 1 1 calc(45% - 20px); /* 2 cards per row, reduced width to shrink cards */
-  max-width: calc(45% - 40px); /* Adjusted max-width to make cards smaller */
+  flex: 1 1 calc(50% - 40px); /* 2 cards per row, reduced width to shrink cards */
+  max-width: calc(40% - 30px); /* Adjusted max-width to make cards smaller */
   margin-bottom: 20px;
-  margin-left: 30px; /* Reduced left margin between cards */
+  margin-left: 40px; /* Reduced left margin between cards */
   height: auto; /* Allow the card height to adjust based on content */
   max-height: 200px; /* Limit the maximum height of the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  position: relative; /* For z-index to work properly */
 }
+
+/* Hover effect */
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  z-index: 10; /* Bring the card to the front */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
 
 /* Card header, body, footer styles */
 .card-header {
@@ -385,19 +436,6 @@ input, select {
 }
 
 /* Apply button styling */
-.apply-button {
-  padding: 8px 16px; /* Reduced padding */
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.apply-button:hover {
-  background-color: #218838;
-}
-
 
 /* Pagination Styles */
 .pagination-wrapper {
@@ -455,7 +493,7 @@ input, select {
   position: relative;
   bottom: 0;
   width: 100%;
-  margin-top: -50px;
+  margin-top: 100px;
   border-radius: 10px;
 }
 
@@ -604,16 +642,46 @@ input, select {
 .hover-content a:hover {
   background-color: #f0f0f0; /* Lighter background on hover */
 }
-.active-link {
-  font-weight: bold;
-  color: #007bff; /* Highlight color */
-  text-decoration: underline; /* Optional */
+
+.home-link {
+  font-size: 1.2em;
+  color: #007bff;
+  text-decoration: underline;
+
 }
-/* Prevent underline on hover for RevHire link */
-.nav-link.active {
-  text-decoration: none; /* Ensure no underline even on hover */
+.user-name{
+  color: #007bff;
+
+}
+.profile-icon {
+  font-size: 35px;  /* Adjust the icon size */
+  cursor: pointer;  /* Pointer cursor on hover */
+  color: #333;      /* Icon color */
+  margin-right: 10px; /* Add some space from other elements if needed */
 }
 
-.nav-link.active:hover {
-  text-decoration: none; /* Override underline for hover */
+
+
+
+
+
+.resized-image {
+  width: 200px;      /* Set the width */
+  height: 35px;     /* Set the height */
+  object-fit: cover; /* Ensures the image fills the box without stretching */
+}
+
+
+/* Main content styling *//* Apply blur effect to main container */
+.main-container.blurred {
+  filter: blur(5px); /* Blur effect */
+  transition: filter 0.3s ease; /* Smooth transition */
+}
+
+
+
+/* Ensure the search container stays above the blurred content */
+.search-container {
+  position: relative;
+  z-index: 2;
 }

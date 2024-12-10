@@ -9,15 +9,15 @@
     <div class="center-nav">
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: jobPostingId  }">Home</a>
+        <a (click)="navigateToHomePage()" routerLinkActive="active-link">Home</a>
       </div>
       <div class="nav-item">
-        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: jobPostingId }">Post Jobs</a>
+        <a (click)="navigateToPostJobsPage()" routerLinkActive="active-link">Post Jobs</a>
       </div>
 
       <!-- Companies Hover Effect with Default Companies -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: jobPostingId }">View Job Postings</a>
+        <a (click)="navigateToViewJobPostings()" routerLinkActive="active-link">View Job Postings</a>
       </div>
 
       <!-- Services Hover Effect -->
@@ -32,11 +32,12 @@
       <!-- Display full name before the Profile button -->
       <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+        <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown-content">
-          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: jobSeekerId }">View Profile</a>
-          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: jobSeekerId }">Update Profile</a>
-        </div>
+          <a (click)="navigateToProfile()" routerLinkActive="active-link">View Profile</a>
+
+          <a (click)="navigateToUpdateProfile()" routerLinkActive="active-link">Update Profile</a>
+            </div>
       </div>
       
       <!-- Logout Button -->
@@ -61,15 +62,19 @@
 
 
 
+
+<div *ngIf="message" [ngClass]="messageClass">
+  {{ message }}
+</div>
 <div class="update-application-form">
+
   <div class="header-container">
     <button 
-      [routerLink]="['/employee/viewjobpostings']" 
-      [queryParams]="{ fullName: fullName, id: jobPostingId }" 
+    (click)="navigateToViewJobPostings()"
       class="home"
     >
-      GoBack
-    </button>
+    <i class="fas fa-arrow-left"></i>
+  </button>
   </div>
   <h2>Update Applications</h2>
 
@@ -77,6 +82,10 @@
   <div *ngFor="let app of applications; let i = index">
     <form (ngSubmit)="onSubmit(app)">
       <h3>Application {{ i + 1 }}</h3> <!-- Display the index (i + 1) -->
+
+      <div *ngIf="message" [ngClass]="messageClass">
+        {{ message }}
+      </div>
 
       <!-- Display Job Posting Details -->
       <div>

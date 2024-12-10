@@ -8,26 +8,49 @@
     <div class="center-nav">
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: jobseekerId }" class="nav-link" routerLinkActive="active-link">Home</a>
+        <a (click)="navigateToHomePage()" class="nav-link">Home</a>
       </div>
+      
 
       <!-- Companies Hover Effect with Default Companies -->
       <div class="nav-item">
-        <a class="nav-link" [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName: fullName, id: jobseekerId }" 
+        <a (click)="navigateToResumePage()" routerLinkActive="active-link" 
            routerLinkActive="active-link"
-           [routerLinkActiveOptions]="{ exact: false }">
+           [routerLinkActiveOptions]="{ exact: false }" class="nav-link1">
           Resume
         </a>
         <div class="hover-content">
-          <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName: fullName, id: jobseekerId }" routerLinkActive="active-link">CreateResume</a>
-          <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName: fullName, id: jobseekerId, resumeId: resumeId }" routerLinkActive="active-link">UpdateResume</a>
-          <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName: fullName, id: jobseekerId, resumeId: resumeId }" routerLinkActive="active-link">ViewResume</a>
+<!-- Show a loading message while checking --><div *ngIf="resumeExists === null">
+  Checking resume status...
+</div>
+
+<!-- Display Create Resume Link only if resume does not exist -->
+<a *ngIf="resumeExists === false" 
+   class="nav-link create-resume-link" 
+   routerLink="/create-resume" 
+   routerLinkActive="active-link">
+   Create Resume
+</a>
+
+<!-- Disabled Link if Resume exists -->
+<a *ngIf="resumeExists === true" 
+   class="nav-link resume-exists-link disabled-link" 
+   href="javascript:void(0);" 
+   [attr.aria-disabled]="true" 
+   (click)="preventClick($event)">
+   Resume Exists
+</a>
+
+
+
+          <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
+          <a (click)="navigateToViewResumePage()" routerLinkActive="active-link">ViewResume</a>
         </div>
       </div>
 
       <!-- Services Hover Effect -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{ fullName: fullName, id: jobseekerId }" class="nav-link" routerLinkActive="active-link">Jobsapplied</a>
+        <a (click)="navigateToJobsAppliedPage()" class="nav-link" routerLinkActive="active-link">Jobsapplied</a>
       </div>
     </div>
 
@@ -36,10 +59,10 @@
 
       <!-- Profile Dropdown -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+        <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown-content">
-          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{ fullName: fullName, id: jobseekerId }" routerLinkActive="active-link">View Profile</a>
-          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{ fullName: fullName, id: jobseekerId }" routerLinkActive="active-link">Update Profile</a>
+          <a (click)="navigateToViewProfile()" routerLinkActive="active-link">View Profile</a>
+          <a (click)="navigateToUpdateProfile()" routerLinkActive="active-link">Update Profile</a>
         </div>
       </div>
 
@@ -50,9 +73,10 @@
 
 
 <div class="container1">
+  <button (click)="navigateToHomePage()" class="home"><i class="fas fa-arrow-left"></i></button>
+
   <form #resumeForm="ngForm" (ngSubmit)="resumecreation()">
     <h1>Create Your Resume</h1>
-    <button [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: jobseekerId }" class="home">GoBack</button>
 
     <!-- Resume Headline -->
     <fieldset>
@@ -108,17 +132,27 @@
       <textarea [(ngModel)]="currentAddress" name="currentAddress" id="currentAddress" placeholder="Enter current address" rows="3" required></textarea>
 
       <!-- Passport Photo  -->
-      <div>
+      <td>
         <fieldset>
           <legend>Upload Photo</legend>
           <label for="profilephoto">Choose Photo:<span class="required-star">*</span></label>
-          <input type="file" id="profilephoto" (change)="onFileChange($event)"> <!-- No ngModel here -->
+          <input type="file" id="profilephoto" (change)="uploadImage($event)"> <!-- No ngModel here -->
+          
           <div *ngIf="profilePhoto">
             <p>Photo uploaded successfully!</p>
             <img [src]="profilePhoto" alt="Uploaded Photo" width="150">
           </div>
+      
+          <div *ngIf="uploadingImage">
+            <p>Uploading...</p> <!-- Show loading message while uploading -->
+          </div>
+      
+          <div *ngIf="uploadError">
+            <p style="color: red;">{{ uploadError }}</p> <!-- Show error message if upload fails -->
+          </div>
         </fieldset>
-      </div>
+      </td>
+      
       
 
 
@@ -209,8 +243,12 @@
 
 
 
+  <input
+  type="submit"
+  value="Create"
+  class="btn btn-primary"
+/>
 
-      <input type="submit" value="Create">
 
     </fieldset>
       

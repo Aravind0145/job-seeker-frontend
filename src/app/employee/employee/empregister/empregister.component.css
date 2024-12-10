@@ -226,7 +226,7 @@ button:disabled {
   margin: 50px auto;
   width: 80%;
   max-width: 400px;
-  margin-top: -550px;
+  margin-top: -650px;
   margin-left: 100px;
 }
 
@@ -282,7 +282,7 @@ button:disabled {
   position: relative;
   bottom: 0;
   width: 100%;
-  margin-top: 200px;
+  margin-top: 350px;
   border-radius: 10px;
 }
 

@@ -40,12 +40,17 @@ export class FrontpageComponent {
         const fullName = response.fullName;
         const id = response.id;
         console.log('User role:', role);
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('role', role);
+        localStorage.setItem('fullName', fullName);
+        localStorage.setItem('id', String(id));
 
         if (role === 'jobseeker') {
           console.log('Navigating to admin dashboard');
-          this.router.navigate(['/jobseeker/jobseekerhomepage'], {
-            queryParams: { fullName,id }
-          });        } else {
+          this.router.navigateByUrl('/jobseekerhomepage', {
+            state: { fullName, id }
+          });        
+        } else {
           console.log('Invalid role');
           alert('Access denied');
         }

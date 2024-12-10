@@ -8,29 +8,28 @@
     <div class="center-nav">
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName:fullName, id: id }" class="nav-link">Home</a>
+       
         
+        <a  (click)="navigateToHomePage()" class="nav-link" routerLinkActive="active-link">Home</a>
       </div>
 
-      <!-- Companies Hover Effect with Default Companies -->
+      <!-- Resume Section -->
       <div class="nav-item">
-        <a class="nav-link">Resume</a>
+        <a (click)="navigateToUpdateResumePage()"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: false }" class="nav-link">
+          Resume
+        </a>
         <div class="hover-content">
-          <a [routerLink]="['/jobseeker/jobseekerresume']" 
-          [queryParams]="{ fullName: fullName, id: id}" routerLinkActive="active-link">
-          Create Resume
-       </a>
-       
-       <a [routerLink]="['/jobseeker/updateresume']" 
-          [queryParams]="{ fullName: fullName, id: id,resumeId:resumeId}" routerLinkActive="active-link">
-          Update Resume
-       </a>
+          <a (click)="navigateToResumePage()" routerLinkActive="active-link">CreateResume</a>
+          <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
+          <a (click)="navigateToViewResumePage()" routerLinkActive="active-link">ViewResume</a>
         </div>
       </div>
 
-      <!-- Services Hover Effect -->
+      <!-- Jobs Applied Section -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{fullname:fullName, id: id }" class="nav-link" routerLinkActive="active-link" >Jobsapplied</a>
+        <a (click)="navigateToJobsAppliedPage()" class="nav-link" routerLinkActive="active-link">Jobsapplied</a>
       </div>
     </div>
 
@@ -40,10 +39,12 @@
 
       <!-- Profile Dropdown -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
-        <div class="dropdown-content">
-          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">View Profile</a>
-          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+        <i class="fas fa-user-circle profile-icon">
+
+        </i>     
+           <div class="dropdown-content">
+          <a (click)="navigateToViewProfile()" class="nav-link home-link1" routerLinkActive="active-link">View Profile</a>
+          <a (click)="navigateToUpdateProfile()" routerLinkActive="active-link">Update Profile</a>
         </div>
       </div>
 
@@ -53,14 +54,24 @@
 </nav>
 
 
+
+
+<button (click)="navigateToHomePage()"  class="home">
+  <i class="fas fa-arrow-left"></i>
+</button>
   <div *ngIf="jobseeker" class="profile-container">
+
     <div class="header-container">
-      <button [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="home">GoBack</button>
       <h2 class="profile-title">Profile of {{ jobseeker.fullName }}</h2>
+
+
     </div>    
     
     <div class="table-container">
+      <img [src]="jobseeker.profilePhoto" alt="Profile Photo" class="profile-photo">
+
       <table class="profile-table">
+        
         <thead>
           <tr>
             <th>Attribute</th>

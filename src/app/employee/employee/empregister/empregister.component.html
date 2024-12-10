@@ -3,7 +3,7 @@
     <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link active">RevHire</a></li>
       <li class="nav-item login-button">
-        <a class="nav-link" routerLink="/jobseeker/jfrontpage">BacktoHome</a>
+        <a class="nav-link" routerLink="/jfrontpage">BacktoHome</a>
           <a class="nav-link" routerLink="/employee/emplogin">Login</a>
         </li>
     </ul>
@@ -68,13 +68,29 @@
           name="companyName" 
           [(ngModel)]="companyName" 
           required 
+          minlength="3"
           #companyNameInput="ngModel"
+          (ngModelChange)="validateCompanyName()" 
+          (blur)="validateCompanyName()"
         />
         <label>Company Name</label>
-        <small *ngIf="companyNameInput.touched && companyNameInput.invalid" class="text-danger">
+      
+        <!-- Error for required field -->
+        <small *ngIf="companyNameInput.touched && companyNameInput.invalid && companyNameInput.hasError('required')" class="text-danger">
           Company name is required.
         </small>
+      
+        <!-- Error for only spaces -->
+        <small *ngIf="hasOnlySpacesCompany && companyNameInput.touched" class="text-danger">
+          Please enter a valid company name (not just spaces).
+        </small>
+      
+        <!-- Error for minimum length -->
+        <small *ngIf="companyNameInput.touched && companyNameInput.hasError('minlength')" class="text-danger">
+          Company name must be at least 3 characters long.
+        </small>
       </div>
+      
 
       <div class="user-box">
         <input 
@@ -94,8 +110,33 @@
       <!-- Recruiter Information -->
       <h3>Recruiter Information</h3>
       <div class="user-box">
-        <input type="text" name="fullName" [(ngModel)]="fullName" required>
-        <label>Full Name</label>
+        <input
+        type="text"
+        name="fullName"
+        [(ngModel)]="fullName"
+        #fullNameInput="ngModel"
+        required
+        minlength="3"
+        (ngModelChange)="validateFullName()"
+        (blur)="validateFullName()"  
+      />
+      <label>Full Name</label>
+      
+      <!-- Error for required field -->
+      <small *ngIf="fullNameInput.invalid && fullNameInput.touched && fullNameInput.hasError('required')">
+        Full name is required.
+      </small>
+    
+      <!-- Error for only spaces -->
+      <small *ngIf="hasOnlySpaces && fullNameInput.touched">
+        Please enter a valid name (not just spaces).
+      </small>
+    
+      <!-- Error for minimum length -->
+      <small *ngIf="fullNameInput.invalid && fullNameInput.touched && fullNameInput.hasError('minlength')">
+        Full name must be at least 3 characters long.
+      </small>        
+     
       </div>
       <div class="user-box">
         <input 
@@ -103,22 +144,32 @@
           name="officialEmail" 
           [(ngModel)]="officialEmail" 
           required 
-          (blur)="checkEmail()" 
+          email
           #emailInput="ngModel"
         />
         <label>Official Email Address</label>
-
-        <!-- Email validation messages -->
-        <small *ngIf="emailInput.touched && emailInput.invalid && emailInput.errors?.['required']" class="text-danger">
-          Email is required.
+      
+        <!-- Validation for required field -->
+        <small *ngIf="emailInput.touched && emailInput.hasError('required')" class="text-danger">
+          Official email is required.
         </small>
-        <small *ngIf="emailInput.touched && emailInput.invalid && emailInput.errors?.['email']" class="text-danger">
+      
+        <!-- Validation for incorrect email format -->
+        <small *ngIf="emailInput.touched && emailInput.hasError('email')" class="text-danger">
           Please enter a valid email address (e.g., user&#64;example.com).
         </small>
+      
+        <!-- Validation for custom domain check -->
+        <small *ngIf="emailInput.touched && invalidDomain" class="text-danger">
+          Please enter a valid domain (e.g., user&#64;gmail.com).
+        </small>
+      
+        <!-- Validation for email already exists -->
         <small *ngIf="emailExists && !emailInput.invalid" class="text-danger">
           This email is already registered.
         </small>
       </div>
+      
       
       <!-- Designation -->
       <div class="user-box">
@@ -137,22 +188,30 @@
 
       <!-- Mobile Number -->
       <div class="user-box">
-        <input 
-          type="tel" 
-          name="mobileNumber" 
-          [(ngModel)]="mobileNumber" 
-          required 
+        <input
+          type="tel"
+          name="mobileNumber"
+          [(ngModel)]="mobileNumber"
+          (keypress)="restrictToDigits($event)"
+          (input)="validatePhoneLength()"
+          maxlength="10"
+          required
           pattern="^[0-9]{10}$"
           #mobileInput="ngModel"
         />
         <label>Mobile Number</label>
 
-        <!-- Mobile Number validation messages -->
-        <small *ngIf="mobileInput.touched && mobileInput.invalid && mobileInput.value?.length !== 10" class="text-danger">
-          Phone number must be exactly 10 digits.
+        <!-- Validation for required field -->
+        <small *ngIf="mobileInput.touched && mobileInput.hasError('required')" class="text-danger">
+          Mobile number is required.
+        </small>
+      
+        <!-- Validation for exact 10 digits -->
+        <small *ngIf="mobileInput.touched && mobileInput.value?.length < 10" class="text-danger">
+          Mobile number must be exactly 10 digits.
         </small>
       </div>
-
+      
       <!-- Password -->
       <h3>Account Security</h3>
       <div class="user-box">

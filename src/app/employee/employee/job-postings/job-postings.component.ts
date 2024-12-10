@@ -27,6 +27,11 @@ export class JobPostingsComponent implements OnInit {
   education: string = ''; // Added field for education
   numberOfOpenings: number | null = null; // Ensure proper initialization
   lastDate: Date = new Date(); // Add this line to bind the last date
+  message: string = '';
+  messageClass: string = '';
+
+  isHomeActive: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -41,14 +46,20 @@ export class JobPostingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get the name and id from query params
-    this.route.queryParams.subscribe((params) => {
-      this.fullName = params['fullName'] || 'Guest'; // If 'fullName' is not present, set it as 'Guest'
-      this.id = params['id'] ? +params['id'] : null; // Convert 'id' to number if it exists, otherwise set it to null
+    // Retrieve state data passed with navigateByUrl()
+    const state = history.state;
+    
+    // Check if state is available and assign values
+    if (state) {
+      this.fullName = state.fullName || 'Guest'; // If 'fullName' is not present, set it as 'Guest'
+      this.id = state.id || null; // If 'id' is not present, set it to null
       console.log('Welcome user:', this.fullName);
       console.log('Employee ID:', this.id); // Log the id
-    });
+    } else {
+      console.warn('No state data found.');
+    }
   }
+  
 
   postJobEmployee(): void {
     if (!this.id) {
@@ -84,10 +95,12 @@ export class JobPostingsComponent implements OnInit {
     this.employeeService.postJobEmployee(jobposting, this.id).subscribe(
       (response) => {
         console.log('Job posted successfully:', response);
-        alert('Job has been posted successfully!');
-        this.router.navigate(['/employee/emphomepage'], {
-          queryParams: { fullName: this.fullName, id: this.id },
-        });
+        this.message = 'Resume Created successfully!';
+        this.messageClass = 'success-message';  // You can customize this class for styling
+        setTimeout(() => {
+          this.message = '';  // Clear the message
+          this.messageClass = '';  // Reset the class
+        }, 5000); 
       },
       (error) => {
         console.error('Error posting job:', error);
@@ -96,9 +109,45 @@ export class JobPostingsComponent implements OnInit {
     );
   }
   
+  navigateToHomePage(): void {
+    this.isHomeActive = true;
+    this.router.navigateByUrl('/emphomepage', {
+      
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToPostJobsPage(): void {
+    this.router.navigateByUrl('/postjobs', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToViewJobPostings(): void {
+    this.router.navigateByUrl('/viewjobpostings', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToProfile(): void {
+    this.router.navigateByUrl('/employeeprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/employeeupdateprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  
+
   logout(): void {
-    // Clear local storage and navigate to the front page
-    localStorage.removeItem('jobseeker');
-    this.router.navigate(['jobseeker/jfrontpage']);
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/jfrontpage');
   }
 }

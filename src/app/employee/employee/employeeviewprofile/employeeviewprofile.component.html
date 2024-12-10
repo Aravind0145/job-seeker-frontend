@@ -7,17 +7,17 @@
 
     <!-- Centered Links: Jobs, Companies, Services -->
     <div class="center-nav">
-      <div class="nav-item">
-        <a [routerLink]="['/employee/emphomepage']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Home</a>
-      </div>
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/postjobs']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Post Jobs</a>
+        <a (click)="navigateToHomePage()" routerLinkActive="active-link">Home</a>
+      </div>
+      <div class="nav-item">
+        <a (click)="navigateToPostJobsPage()" routerLinkActive="active-link">Post Jobs</a>
       </div>
 
       <!-- Companies Hover Effect with Default Companies -->
       <div class="nav-item">
-        <a [routerLink]="['/employee/viewjobpostings']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Job Postings</a>
+        <a (click)="navigateToViewJobPostings()" routerLinkActive="active-link">View Job Postings</a>
       </div>
 
       <!-- Services Hover Effect -->
@@ -32,11 +32,12 @@
       <!-- Display full name before the Profile button -->
       <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+        <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown-content">
-          <a [routerLink]="['/employee/employeeprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">View Profile</a>
-          <a [routerLink]="['/employee/employeeupdateprofile']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
-        </div>
+          <a (click)="navigateToProfile()" class="nav-link home-link"  routerLinkActive="active-link">View Profile</a>
+
+          <a (click)="navigateToUpdateProfile()" routerLinkActive="active-link">Update Profile</a>
+            </div>
       </div>
       
       <!-- Logout Button -->
@@ -71,10 +72,16 @@
 
 
 
-
+<a (click)="navigateToHomePage()" 
+  class="home"
+>
+<i class="fas fa-arrow-left"></i>
+</a>
 <div *ngIf="employee" class="profile-container">
-    <h2 class="profile-title">Profile of {{ employee.fullName }}</h2>
+
   
+    <h2 class="profile-title">Profile of {{ employee.fullName }}</h2>
+     <img [src]="employee.profilePhoto" alt="Profile Photo" class="profile-photo">
     <div class="table-container">
       <table class="profile-table">
         <thead>

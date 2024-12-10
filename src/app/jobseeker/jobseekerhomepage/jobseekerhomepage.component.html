@@ -8,23 +8,22 @@
     <div class="center-nav">
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link" routerLinkActive="active-link">Home</a>
-        
+        <a (click)="navigateToHomePage()" class="nav-link home-link" routerLinkActive="active-link">Home</a>
       </div>
 
       <!-- Companies Hover Effect with Default Companies -->
       <div class="nav-item">
         <a class="nav-link">Resume</a>
         <div class="hover-content">
-          <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName:fullName,id: id }" routerLinkActive="active-link">CreateResume</a>
-          <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{fullName:fullName,id:id,resumeId: resume?.id}" routerLinkActive="active-link">UpdateResume</a>
-          <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName:fullName,id:id, resumeId: resume?.id}" routerLinkActive="active-link">ViewResume</a>
+          <a (click)="navigateToResumePage()" routerLinkActive="active-link">CreateResume</a>
+          <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
+          <a (click)="navigateToViewResumePage()" routerLinkActive="active-link">ViewResume</a>
         </div>
       </div>
 
       <!-- Services Hover Effect -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{ fullName:fullName,id: id}" routerLinkActive="active-link" class="nav-link" >Jobsapplied</a>
+        <a (click)="navigateToJobsAppliedPage()" routerLinkActive="active-link" class="nav-link" >Jobsapplied</a>
       </div>
     </div>
 
@@ -41,10 +40,10 @@
 
       <!-- Profile Dropdown -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+        <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown-content">
-          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">View Profile</a>
-          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{fullName:fullName, id: id }" routerLinkActive="active-link">Update Profile</a>
+          <a (click)="navigateToViewProfile()" routerLinkActive="active-link">View Profile</a>
+          <a (click)="navigateToUpdateProfile()" routerLinkActive="active-link">Update Profile</a>
         </div>
       </div>
 
@@ -55,35 +54,37 @@
 
 
 <!-- Resume Box Section -->
-<div class="main-container">
-  <div class="resume-container">
-    <div *ngIf="resume; else noData" class="resume-box">
-   
+<div class="main-container" [class.blurred]="isBlurred">
+  
+   <!-- Side Navigation Bar -->
+<div class="side-navigation">
+  <div class="top">
+  <a (click)="navigateToHomePage()" class="side-nav-item" routerLinkActive="active-link">
+    <img src="https://static.naukimg.com/s/9/105/_next/static/assets/home.svg" alt="Home" class="nav-icon"> My Home
+  </a>
+  
+  <a (click)="navigateToResumePage()" class="side-nav-item" routerLinkActive="active-link">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" 
+         alt="Create Resume" 
+         class="nav-icon"> Create Resume
+  </a>
+  
+  
+  <a (click)="navigateToUpdateResumePage()" class="side-nav-item" routerLinkActive="active-link">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" alt="Update Resume" class="nav-icon"> Update Resume
+  </a>
+  
+  <a (click)="navigateToViewResumePage()" class="side-nav-item" routerLinkActive="active-link">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" alt="View Resume" class="nav-icon"> View Resume
+  </a>
+  
+  <a (click)="navigateToJobsAppliedPage()" class="side-nav-item" routerLinkActive="active-link">
+    <img src="https://static.naukimg.com/s/9/105/_next/static/assets/jobs.svg" alt="Jobs" class="nav-icon"> Jobs Applied
+  </a>
+  
+</div>
+</div>
 
-<img *ngIf="resume.profilePhoto" [src]="resume.profilePhoto" alt="Profile Photo" class="profile-photo" />
-      <p>{{ resume.firstName }} {{ resume.middleName }} {{ resume.lastName }}</p>
-      <p>{{ resume.graduation }}</p>
-      </div>
-      <div class="navigation">
-        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link" routerLinkActive="active-link">
-          <img src="https://static.naukimg.com/s/9/105/_next/static/assets/home.svg" alt="Home" class="nav-icon"> My Home
-        </a>
-        <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{fullName: fullName,id: id }" class="nav-link" routerLinkActive="active-link">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" height="25px" width="20px" alt="Blob" class="nav-icon"> CreateResume
-        </a>
-        
-        <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName:fullName,id:id,resumeId: resume?.id}" class="nav-link" routerLinkActive="active-link">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" alt="Companies" class="nav-icon"> UpdateResume
-        </a>
-
-        <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{fullName:fullName,id:id, resumeId: resume?.id}" class="nav-link" routerLinkActive="active-link">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" height="25px" width="20px" alt="Blob" class="nav-icon"> ViewResume
-        </a>
-        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{fullName:fullName, id: id }" class="nav-link" routerLinkActive="active-link">
-          <img src="https://static.naukimg.com/s/9/105/_next/static/assets/jobs.svg" alt="Jobs" class="nav-icon"> Jobs Applied
-        </a>
-      </div>
-  </div>
 
   <ng-template #noData>
     <p></p>

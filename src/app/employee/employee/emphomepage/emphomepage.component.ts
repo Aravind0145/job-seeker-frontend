@@ -10,6 +10,8 @@ import { EmployeeserviceService } from '../../../employeeservice.service';
 export class EmphomepageComponent implements OnInit {
   fullName: string = '';
   id: number | null = null; // Allow null as a valid type
+  isHomeActive: boolean = false;
+  currentUrl: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -19,20 +21,59 @@ export class EmphomepageComponent implements OnInit {
 
   ngOnInit(): void {
     // Get the name and id from query params
-    this.route.queryParams.subscribe(params => {
-      this.fullName = params['fullName'] || 'Guest'; // If 'fullName' is not present, set it as 'Guest'
-      this.id = params['id'] ? +params['id'] : null; // Convert 'id' to number if it exists, otherwise set it to null
-      console.log('Welcome user:', this.fullName);
-      console.log('Job Seeker ID:', this.id); // Log the id
+    const state = history.state;
+
+  // Set fullName and id from the state or default values if not available
+  this.fullName = state?.fullName || 'Guest'; // Use optional chaining to avoid errors if state is undefined
+  console.log("fullName:", this.fullName);
+  
+  this.id = state?.id || null; // Set id as null if not available in the state
+  console.log("id:", this.id);
+  }
+
+  navigateToHomePage(): void {
+    this.isHomeActive = true;
+    this.router.navigateByUrl('/emphomepage', {
+      
+      state: { fullName: this.fullName, id: this.id }
     });
   }
+
+  navigateToPostJobsPage(): void {
+    this.router.navigateByUrl('/postjobs', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToViewJobPostings(): void {
+    this.router.navigateByUrl('/viewjobpostings', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToProfile(): void {
+    this.router.navigateByUrl('/employeeprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/employeeupdateprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  
+  
 
   // Method to fetch resumes using the jobseekerService
   
   logout(): void {
-    // Clear local storage and navigate to the front page
-    localStorage.removeItem('jobseeker');
-    this.router.navigate(['jobseeker/jfrontpage']);
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/jfrontpage');
   }
 }
 

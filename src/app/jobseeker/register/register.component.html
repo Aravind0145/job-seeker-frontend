@@ -4,8 +4,8 @@
       <li class="nav-item">
         <a class="nav-link active">RevHire</a></li>
       <li class="nav-item login-button">
-        <a class="nav-link" routerLink="/jobseeker/jfrontpage">BacktoHome</a>
-        <a class="nav-link" routerLink="/jobseeker/jfrontpage">Login</a>
+        <a class="nav-link" routerLink="/jfrontpage">BacktoHome</a>
+        <a class="nav-link" routerLink="/jfrontpage">Login</a>
       </li>
     </ul>
   </div>
@@ -33,9 +33,26 @@
     <!-- Full Name -->
     <div class="user-box">
       <label>Full Name</label>
-      <input type="text" name="fullName" [(ngModel)]="fullName" required #fullNameInput="ngModel">
-      <small *ngIf="fullNameInput.touched && fullNameInput.invalid">Full name is required</small>
+      <input type="text" name="fullName" [(ngModel)]="fullName" #fullNameInput="ngModel" required minlength="3" (ngModelChange)="validateFullName()" (blur)="validateFullName()" />
+
+      
+      <!-- Error for required field -->
+      <small *ngIf="fullNameInput.invalid && fullNameInput.touched && fullNameInput.hasError('required')">
+        Full name is required.
+      </small>
+    
+      <!-- Error for only spaces -->
+      <small *ngIf="hasOnlySpaces && fullNameInput.touched">
+        Please enter a valid name (not just spaces).
+      </small>
+    
+      <!-- Error for minimum length -->
+      <small *ngIf="fullNameInput.invalid && fullNameInput.touched && fullNameInput.hasError('minlength')">
+        Full name must be at least 3 characters long.
+      </small>
     </div>
+    
+    
 
     <!-- Email ID -->
  <!-- Email ID -->
@@ -46,23 +63,31 @@
     name="email" 
     [(ngModel)]="email" 
     required 
-    (blur)="checkEmail()" 
+    email
+    (blur)="checkEmail()"
     #emailInput="ngModel"
   />
+  
   <!-- Validation for required field -->
-  <small *ngIf="emailInput.touched && emailInput.invalid">
-    Email ID is required
+  <small *ngIf="emailInput.touched && emailInput.hasError('required')">
+    Email ID is required.
   </small>
+
   <!-- Validation for incorrect email format -->
-  <small *ngIf="emailInput.touched && emailInput.value && !emailInput.value.includes('@')">
-    Please check your email format (e.g., user&#64;gmail.com)
+  <small *ngIf="emailInput.touched && emailInput.hasError('email')">
+    Please enter a valid email format (e.g., user&#64;gmail.com).
   </small>
+
+  <!-- Validation for custom domain check -->
+  <small *ngIf="emailInput.touched && invalidDomain">
+    Please enter a valid domain (e.g., user&#64;gmail.com).
+  </small>
+
   <!-- Validation for email already exists -->
   <small *ngIf="emailExists && !emailInput.invalid" class="text-danger">
     This email is already registered.
   </small>
 </div>
-
 
 
     <!-- Password -->
@@ -83,18 +108,28 @@
     <!-- Mobile Number -->
     <div class="user-box">
       <label>Mobile Number</label>
-      <input type="tel" name="phone" [(ngModel)]="phone" pattern="[0-9]{10}" required #phoneInput="ngModel">
+      <input
+        type="tel"
+        name="phone"
+        [(ngModel)]="phone"
+        (keypress)="restrictToDigits($event)"
+        (input)="validatePhoneLength()"
+        maxlength="10"
+        required
+        #phoneInput="ngModel"
+      />
+      
       <!-- Validation for required field -->
-      <small *ngIf="phoneInput.touched && phoneInput.invalid">Mobile number is required</small>
-      <!-- Validation for phone number length -->
-      <small *ngIf="phoneInput.touched && phoneInput.value?.length > 10">
-        Mobile number cannot be more than 10 digits
+      <small *ngIf="phoneInput.touched && phoneInput.hasError('required')">
+        Mobile number is required.
       </small>
+    
+      <!-- Validation for exact 10 digits -->
       <small *ngIf="phoneInput.touched && phoneInput.value?.length < 10">
-        Mobile number must be exactly 10 digits
+        Mobile number must be exactly 10 digits.
       </small>
     </div>
-
+    
     <!-- Work Status -->
     <div class="work-status">
       <label>Work Status</label>
@@ -111,14 +146,16 @@
     <!-- Promotions Checkbox -->
     <div>
       <label>
-        <input type="checkbox" name="promotions" [(ngModel)]="promotions">
-        Send me important updates & promotions via SMS, email, and WhatsApp
+        <input type="checkbox" name="promotions" [(ngModel)]="promotions" required>
+        Send me important updates to mail
       </label>
     </div>
-
+  
     <!-- Submit Button -->
     <div>
-      <button type="submit" [disabled]="signupForm.invalid">Register</button>
+      <button type="submit" [disabled]="signupForm.invalid || !promotions">
+        Register
+      </button>
     </div>
   </form>
 </div>

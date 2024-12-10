@@ -14,6 +14,8 @@ export class ResumedetailsComponent implements OnInit {
   id: number | null = null;
   resumes: Resume[] = [];
   jobPostingId: number | null = null;
+  isHomeActive: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -22,20 +24,27 @@ export class ResumedetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(params => {
-      this.fullName = params.get('fullName') || 'Guest'; // Default to 'Guest' if not present
-      const idParam = params.get('id');
-      this.id = idParam ? +idParam : null; // Convert to number if present
+    const state = history.state;
   
-      const jobPostingIdParam = params.get('jobPostingId'); // Correctly declare jobPostingIdParam
-      if (jobPostingIdParam) {
-        this.jobPostingId = +jobPostingIdParam; // Safely convert to number if it's not null
+    if (state) {
+      // Retrieve data from the state
+      this.fullName = state.fullName || 'Guest'; // Default to 'Guest' if not present
+      this.id = state.id || null; // Use 'id' from state, or null if not available
+      this.jobPostingId = state.jobPostingId || null; // Use 'jobPostingId' from state, or null if not available
+  
+      console.log('Full Name:', this.fullName);
+      console.log('Employee ID:', this.id);
+      console.log('Job Posting ID:', this.jobPostingId);
+  
+      // Call fetchResumeDetails if jobPostingId is available
+      if (this.jobPostingId !== null) {
         this.fetchResumeDetails(this.jobPostingId);
-      } else {
-        console.error('No jobPostingId found in the query parameters.');
       }
-    });
+    } else {
+      console.error('State is not available.');
+    }
   }
+  
   
 
   fetchResumeDetails(jobPostingId: number): void {
@@ -55,10 +64,46 @@ export class ResumedetailsComponent implements OnInit {
       }
     );
   }
+
+  
+  navigateToHomePage(): void {
+    this.isHomeActive = true;
+    this.router.navigateByUrl('/emphomepage', {
+      
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToPostJobsPage(): void {
+    this.router.navigateByUrl('/postjobs', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToViewJobPostings(): void {
+    this.router.navigateByUrl('/viewjobpostings', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToProfile(): void {
+    this.router.navigateByUrl('/employeeprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/employeeupdateprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
   
   logout(): void {
-    // Clear local storage and navigate to the front page
-    localStorage.removeItem('jobseeker');
-    this.router.navigate(['jobseeker/jfrontpage']);
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/jfrontpage');
   }
 }

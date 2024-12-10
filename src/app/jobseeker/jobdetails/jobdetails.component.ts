@@ -13,6 +13,11 @@ export class JobdetailsComponent implements OnInit {
   id: number | null = null; // job_seeker_id
   resumeId: number | null = null; // Add resumeId property
   job: any;
+  message: string = ''; // Variable to store the message
+  messageClass: string = ''; // Class to style the message
+  hasApplied: boolean = false;
+  applicationMessage: string = ''; // Default message is empty
+  applicationMessageClass: string = ''; // Default class is empty
 
   constructor(
     private route: ActivatedRoute,
@@ -21,17 +26,52 @@ export class JobdetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.fullName = params['fullName'] || 'Guest';
-      this.id = params['id'] ? +params['id'] : null;
-      this.resumeId = params['resumeId'] ? +params['resumeId'] : null; // Extract resumeId
-
-      if (params['jobData']) {
-        const jobData = JSON.parse(params['jobData']);
-        this.job = jobData;
-      }
-    });
+    // Retrieve data from the state object
+    const state = history.state;
+  
+    this.fullName = state['fullName'] || 'Guest';
+    this.id = state['id'] || null;
+    this.resumeId = state['resumeId'] || null;
+    this.job = state['jobData'] || null;
+  
+    // Debugging logs
+    console.log('Full Name:', this.fullName);
+    console.log('ID:', this.id);
+    console.log('Resume ID:', this.resumeId);
+    console.log('Job Data:', this.job);
+    this.checkIfAlreadyApplied();
   }
+
+  checkIfAlreadyApplied() {
+    console.log('Job ID:', this.job.id);  // Debug log
+    console.log('User ID:', this.id);     // Debug log
+  
+    if (this.job.id && this.id) {
+      this.applicationService.checkApplicationStatus(this.job.id, this.id).subscribe(
+        (response) => {
+          console.log('API response:', response);  // Log the response here
+  
+          if (response) {  // response is a boolean (true or false)
+            this.message = 'Already Applied.';
+            this.messageClass = 'success-message';
+          } else {
+            
+            this.messageClass = 'error-message';
+          }
+  
+          console.log('Message:', this.message);  // Log the message
+          console.log('Message Class:', this.messageClass);
+        },
+        (error) => {
+          console.error('Error checking application status:', error);
+        }
+      );
+    } else {
+      console.error('Invalid Job ID or User ID');
+    }
+  }
+  
+  
 
   applyForJob(): void {
     if (!this.id || !this.job || !this.job.id || !this.resumeId) {
@@ -47,31 +87,25 @@ export class JobdetailsComponent implements OnInit {
   
     // Pass applicationData to the service
     this.applicationService
-      .submitApplication(applicationData, this.job.id, this.id, this.resumeId)
-      .subscribe(
-        (response) => {
-          console.log('Application submitted successfully:', response);
-          alert('Application submitted successfully!');
-          this.router.navigate(['/jobseeker/jobseekerhomepage'], {
-            queryParams: { fullName: this.fullName, id: this.id }
-          }); 
-        },
-        (error) => {
-          console.error('Error submitting application:', error);
-
-          if (error.status === 400) {
-            alert('You have already applied for this job!');
-            this.router.navigate(['/jobseeker/jobseekerhomepage'], {
-              queryParams: { fullName: this.fullName, id: this.id }
-            });
-          } else {
-            alert('Failed to submit application. Please try again.');
-            this.router.navigate(['/jobseeker/jobseekerhomepage'], {
-              queryParams: { fullName: this.fullName, id: this.id }
-            });
-          }
-        }
-      );
+    .submitApplication(applicationData, this.job.id, this.id, this.resumeId)
+    .subscribe(
+      (response) => {
+        console.log('Application submitted successfully:', response);
+        this.applicationMessage = 'Applied successfully!';
+        this.applicationMessageClass = 'success-message';
+        setTimeout(() => {
+          this.applicationMessage = '';  // Clear the message
+          this.applicationMessageClass = '';  // Reset the class
+        }, 5000);
+        
+        // Optionally navigate to another page
+      },
+      (error) => {
+        console.error('Error submitting application:', error);
+        this.applicationMessage = 'Error submitting application. Please try again.';
+        this.applicationMessageClass = 'error-message';
+      }
+    );
   }
   getResumeDetails(id: number): void {
     this.applicationService.getResumeById(id).subscribe(
@@ -89,8 +123,59 @@ export class JobdetailsComponent implements OnInit {
     );
   }
   
+  navigateToHomePage(): void {
+    this.router.navigateByUrl('/jobseekerhomepage', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  
+  navigateToResumePage(): void {
+    // Make sure fullName and id are available
+    console.log('Navigating with:', { fullName: this.fullName, id: this.id });
+  
+    // Use navigateByUrl to pass state
+    this.router.navigateByUrl('/jobseekerresume', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  navigateToUpdateResumePage(): void {
+    this.router.navigateByUrl('/updateresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resumeId }
+    });
+  }
+
+  navigateToViewResumePage(): void {
+    this.router.navigateByUrl('/viewresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resumeId }
+    });
+  }
+  
+  
+  navigateToJobsAppliedPage(): void {
+    this.router.navigateByUrl('/applyjobs', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resumeId }
+    });
+  }
+  navigateToViewProfile(): void {
+    this.router.navigateByUrl('/viewprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/updateprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+
+  
   logout(): void {
-    localStorage.removeItem('jobseeker'); // Remove jobseeker data from local storage
-    this.router.navigate(['/jobseeker/jfrontpage']); // Navigate to jobseeker front page after saving resume
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigate(['/jfrontpage']); // Navigate to jobseeker front page after saving resume
   }
 }

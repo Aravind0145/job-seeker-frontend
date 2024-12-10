@@ -3,11 +3,12 @@ import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-jobseekerregister',
+  templateUrl: './jobseekerregister.component.html',
+  styleUrl: './jobseekerregister.component.css'
 })
-export class RegisterComponent {
+export class JobseekerregisterComponent {
+  
 
   fullName: string = '';
   email: string = '';
@@ -29,28 +30,34 @@ export class RegisterComponent {
   constructor(private jobService: JobseekerserviceService, private router: Router) {}
 
   // Check if the email exists
-  checkEmail(): void {
-    this.emailExists = false;      // Reset previous email existence check
-    this.invalidDomain = false;    // Reset previous domain validation
-
+  checkEmail(event: Event): void {
+    console.log('checkEmail called');
+    event.preventDefault();
+    
+    this.emailExists = false;
+    this.invalidDomain = false;
+  
     if (this.email) {
-      // Perform custom domain validation
+      console.log('Email entered:', this.email);
       this.validateDomain();
-
-      if (!this.invalidDomain) {
-        // Call the service to check if the email already exists
+  
+      if (this.invalidDomain) {
+        console.log('Invalid domain');
+      } else {
+        console.log('Valid domain, checking if email exists...');
         this.jobService.checkEmailExists(this.email).subscribe({
           next: (response) => {
+            console.log('Email check response:', response);
             this.emailExists = response.exists;
           },
           error: (error) => {
             console.error('Error checking email:', error);
-            this.emailExists = false; // Reset emailExists on error
           }
         });
       }
     }
   }
+  
 
   validateDomain(): void {
     const domainPattern = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
@@ -66,6 +73,11 @@ export class RegisterComponent {
     }
   
   }
+  preventEnter(event: Event): void {
+    event.preventDefault();
+  }
+  
+  
 
   validateFullName() {
     this.hasOnlySpaces = this.fullName.trim().length === 0 && this.fullName.length > 0;
@@ -85,6 +97,8 @@ export class RegisterComponent {
 
   // Registration method
   register() {
+    console.log("registration started")
+
     if (this.password !== this.confirmPassword) {
       alert('Passwords do not match');
       return;
@@ -104,7 +118,10 @@ export class RegisterComponent {
       response => {
         console.log('Registration successful', response);
         alert('JobSeeker Registration successful');
-        this.router.navigate(['/jobseeker/jfrontpage']);
+        setTimeout(() => {
+          this.router.navigate(['/jfrontpage']);
+        }, 5000)
+      
       },
       error => {
         console.error('Registration failed:', error);
@@ -114,4 +131,5 @@ export class RegisterComponent {
   }
   
   
+
 }

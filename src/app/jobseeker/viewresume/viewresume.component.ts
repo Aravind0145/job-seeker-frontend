@@ -22,17 +22,28 @@ export class ViewresumeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Get 'resumeId' and other queryParams
-    this.route.queryParams.subscribe((params) => {
-      this.fullName = params['fullName'] || 'Guest';
-      this.id = params['id'] ? +params['id'] : null;
-
-      const resumeId = params['resumeId'];
-      if (resumeId) {
-        this.getResumeDetails(+resumeId); // Convert to number before passing
+    // Retrieve state data passed with navigateByUrl()
+    const state = history.state;
+  
+    if (state) {
+      this.fullName = state.fullName || 'Guest';
+      this.id = state.id || null;
+      this.resumeId = state.resumeId || null;
+  
+      console.log('Full Name:', this.fullName);
+      console.log('ID:', this.id);
+      console.log('Resume ID:', this.resumeId);
+  
+      if (this.resumeId) {
+        this.getResumeDetails(this.resumeId); // Fetch resume details
+      } else {
+        console.error('No resumeId found.');
       }
-    });
+    } else {
+      console.warn('No state data found.');
+    }
   }
+  
 
   toggleSearch(): void {
     console.log('Toggling search visibility');
@@ -53,8 +64,59 @@ export class ViewresumeComponent implements OnInit {
     );
   }
 
+  navigateToHomePage(): void {
+    this.router.navigateByUrl('/jobseekerhomepage', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  navigateToResumePage(): void {
+    // Make sure fullName and id are available
+    console.log('Navigating with:', { fullName: this.fullName, id: this.id });
+  
+    // Use navigateByUrl to pass state
+    this.router.navigateByUrl('/jobseekerresume', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  navigateToUpdateResumePage(): void {
+    this.router.navigateByUrl('/updateresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resume?.id }
+    });
+  }
+
+  navigateToViewResumePage(): void {
+    this.router.navigateByUrl('/viewresume', {
+      state: { fullName: this.fullName, id: this.id, resumeId: this.resume?.id }
+    });
+  }
+  
+  
+  navigateToJobsAppliedPage(): void {
+    this.router.navigateByUrl('/applyjobs', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+
+  
+  navigateToViewProfile(): void {
+    this.router.navigateByUrl('/viewprofile', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/updateprofile', {
+      state: { fullName: this.fullName, id: this.id,resumeId: this.resume?.id }
+    });
+  }
+  
+
   logout(): void {
-    localStorage.removeItem('jobseeker');
-    this.router.navigate(['/jobseeker/jfrontpage']);
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/jfrontpage');
   }
 }

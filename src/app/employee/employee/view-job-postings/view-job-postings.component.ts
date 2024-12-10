@@ -13,6 +13,8 @@ export class ViewJobPostingsComponent implements OnInit {
   fullName: string = '';
   id: number | null = null; // ID to fetch specific job postings
   applicantCounts: { [key: number]: number } = {}; // Store applicant counts by jobPostingId
+  isHomeActive: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -21,16 +23,17 @@ export class ViewJobPostingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Get 'id' and 'fullName' from query parameters
-    this.route.queryParams.subscribe((params) => {
-      this.fullName = params['fullName'] || 'Guest'; // Default to 'Guest' if not present
-      this.id = params['id'] ? +params['id'] : null; // Convert to number if present
-
-      if (this.id !== null) {
-        this.getJobPostingsById(this.id); // Fetch job postings for the given ID
-      }
-    });
+    // Get 'id' and 'fullName' from state
+    const state = history.state;
+  
+    this.fullName = state?.fullName || 'Guest'; // Default to 'Guest' if not present
+    this.id = state?.id || null; // Set to null if 'id' is not present
+  
+    if (this.id !== null) {
+      this.getJobPostingsById(this.id); // Fetch job postings for the given ID
+    }
   }
+  
   isHighApplicantCount(postingId: number): boolean {
     return (this.applicantCounts[postingId] || 0) > 5;
   }
@@ -85,11 +88,61 @@ export class ViewJobPostingsComponent implements OnInit {
       });
     }
   }
+
+  
+  navigateToHomePage(): void {
+    this.isHomeActive = true;
+    this.router.navigateByUrl('/emphomepage', {
+      
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToPostJobsPage(): void {
+    this.router.navigateByUrl('/postjobs', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToViewJobPostings(): void {
+    this.router.navigateByUrl('/viewjobpostings', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+
+  navigateToProfile(): void {
+    this.router.navigateByUrl('/employeeprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+  navigateToUpdateProfile(): void {
+    this.router.navigateByUrl('/employeeupdateprofile', {
+      state: { fullName: this.fullName, id: this.id }
+    });
+  }
+  
+
+  navigateToResumeDetails(jobPostingId: number): void {
+    this.router.navigateByUrl('/resumedetails', {
+      state: { fullName: this.fullName,id:this.id, jobPostingId: jobPostingId },
+    });
+  }
+  
+  
+  navigateToUpdateApplication(jobPostingId: number): void {
+    this.router.navigateByUrl('/updateapplication', {
+      state: { fullName: this.fullName,id:this.id, jobPostingId: jobPostingId },
+    });
+  }
+  
   
 
   logout(): void {
-    // Clear local storage and navigate to the front page
-    localStorage.removeItem('jobseeker');
-    this.router.navigate(['jobseeker/jfrontpage']);
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('role');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/jfrontpage');
   }
 }

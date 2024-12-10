@@ -333,6 +333,7 @@ color: #fff; /* Change text color to white on hover */
   font-size: 16px; /* Font size */
   margin-top: 40px;
   margin-left: 50px;
+  border-radius: 20px;
   font-weight: bold; /* Bold text */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
@@ -368,4 +369,45 @@ color: #fff; /* Change text color to white on hover */
 
 .logout-btn:hover {
   background-color: #d9363e;
+}
+
+
+.user-name{
+  color: #007bff;
+
+}
+.profile-icon {
+  font-size: 35px;  /* Adjust the icon size */
+  cursor: pointer;  /* Pointer cursor on hover */
+  color: #333;      /* Icon color */
+  margin-right: 10px; /* Add some space from other elements if needed */
+}
+
+
+div[ngClass] {
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-color: #004494;
+}
+
+/* Style for the error message */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Style for the success message */
+.success-message {
+  color: white;
+  margin-top: 40px;
+  border: 1px solid #c3e6cb;
+  background-color: green;
+  margin-left: 400px;
+  padding: 5px 10px;
 }

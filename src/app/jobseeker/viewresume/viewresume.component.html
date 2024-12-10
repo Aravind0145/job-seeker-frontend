@@ -1,34 +1,33 @@
 
 <nav class="navbar">
   <div class="container">
-    <div class="left-nav">
-      <a class="nav-link active">RevHire</a>
+    <div class="left-nav1">
+      <a >RevHire</a>
     </div>
 
     <div class="center-nav">
       <!-- Jobs Hover Effect with Default Jobs -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{ fullName: fullName, id: id }" class="nav-link">Home</a>
+        <a   (click)="navigateToHomePage()" class="nav-link">Home</a>
         
       </div>
 
       <!-- Companies Hover Effect with Default Companies -->
       <div class="nav-item">
-        <a class="nav-link" [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" 
+        <a (click)="navigateToViewResumePage()" 
            routerLinkActive="active-link"
-           [routerLinkActiveOptions]="{ exact: false }">
+           [routerLinkActiveOptions]="{ exact: false }" class="nav-link1">
           Resume
         </a>
         <div class="hover-content">
-          <a [routerLink]="['/jobseeker/jobseekerresume']" [queryParams]="{ fullName: fullName, id: id }" routerLinkActive="active-link">Create Resume</a>
-          <a [routerLink]="['/jobseeker/viewresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" routerLinkActive="active-link">View Resume</a>
-          <a [routerLink]="['/jobseeker/updateresume']" [queryParams]="{ fullName: fullName, id: id, resumeId: resumeId }" routerLinkActive="active-link">Update Resume</a>
-        </div>
+          <a (click)="navigateToResumePage()" routerLinkActive="active-link">CreateResume</a>
+          <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
+          <a (click)="navigateToViewResumePage()" class="nav-link home-link1" routerLinkActive="active-link">ViewResume</a></div>
       </div>
 
       <!-- Services Hover Effect -->
       <div class="nav-item">
-        <a [routerLink]="['/jobseeker/applyjobs']" [queryParams]="{fullName:fullName,id: id }" class="nav-link" routerLinkActive="active-link" >Jobsapplied</a>
+        <a (click)="navigateToJobsAppliedPage()" class="nav-link" routerLinkActive="active-link" >Jobsapplied</a>
       </div>
     </div>
 
@@ -38,10 +37,10 @@
 
       <!-- Profile Dropdown -->
       <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+        <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown-content">
-          <a [routerLink]="['/jobseeker/viewprofile']" [queryParams]="{fullName:fullName, id: id }">View Profile</a>
-          <a [routerLink]="['/jobseeker/updateprofile']" [queryParams]="{fullName:fullName, id: id }">Update Profile</a>
+          <a (click)="navigateToViewProfile()" routerLinkActive="active-link">View Profile</a>
+          <a (click)="navigateToUpdateProfile()"  routerLinkActive="active-link">Update Profile</a>
         </div>
       </div>
 
@@ -51,15 +50,20 @@
 </nav>
 
   <div class="resume-container">
-    <button [routerLink]="['/jobseeker/jobseekerhomepage']" [queryParams]="{fullName: fullName, id: id }" class="home">GoBack</button>
-
-    <h2>Resume Details</h2>
-  
+    <a (click)="navigateToHomePage()" class="home"><i class="fas fa-arrow-left"></i></a>
     <div *ngIf="resume; else noResume">
+      <div class="profile-photo-container">
+        <img [src]="resume.profilePhoto" alt="Profile Photo" width="100" height="100" />
+      </div>
+      
+    <h2>Resume Details</h2>
       <!-- Personal Information -->
       <section class="personal-info">
         <h3>Personal Information</h3>
         <table class="table">
+          
+          
+        
           <tr>
             <td><strong>Headline:</strong></td>
             <td>{{ resume.headline }}</td>

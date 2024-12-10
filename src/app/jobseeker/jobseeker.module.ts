@@ -16,6 +16,7 @@ import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
 import { ViewresumeComponent } from './viewresume/viewresume.component';
 import { UpdateresumeComponent } from './updateresume/updateresume.component';
 import { UploadphotoComponent } from './uploadphoto/uploadphoto.component';
+import { JobseekerregisterComponent } from './jobseekerregister/jobseekerregister.component';
 
 
 @NgModule({
@@ -31,13 +32,15 @@ import { UploadphotoComponent } from './uploadphoto/uploadphoto.component';
     AppliedJobsComponent,
     ViewresumeComponent,
     UpdateresumeComponent,
-    UploadphotoComponent
+    UploadphotoComponent,
+    JobseekerregisterComponent
   ],
   imports: [
     CommonModule,
     JobseekerRoutingModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    
   ]
 })
 export class JobseekerModule { }
