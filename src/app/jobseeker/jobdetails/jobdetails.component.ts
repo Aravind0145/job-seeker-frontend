@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Application } from '../../application';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-jobdetails',
@@ -18,11 +19,14 @@ export class JobdetailsComponent implements OnInit {
   hasApplied: boolean = false;
   applicationMessage: string = ''; // Default message is empty
   applicationMessageClass: string = ''; // Default class is empty
+  resumeExists: boolean = false; // Track if resume already exists
+
 
   constructor(
     private route: ActivatedRoute,
     private router :Router,
-    private applicationService: JobseekerserviceService // Inject service
+    private applicationService: JobseekerserviceService,
+    private toaster:ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -34,13 +38,27 @@ export class JobdetailsComponent implements OnInit {
     this.resumeId = state['resumeId'] || null;
     this.job = state['jobData'] || null;
   
-    // Debugging logs
-    console.log('Full Name:', this.fullName);
-    console.log('ID:', this.id);
-    console.log('Resume ID:', this.resumeId);
-    console.log('Job Data:', this.job);
-    this.checkIfAlreadyApplied();
+    if (this.id) {
+      // Check if the resume exists for the provided job seeker ID
+      this.applicationService.checkResumeExistence(this.id).subscribe({
+        next: (exists: boolean) => {
+          this.resumeExists = exists;
+          console.log('Resume Exists:', this.resumeExists);
+  
+          if (this.resumeExists) {
+          } else {
+            console.log('No resume found, ready to create a new one');
+          }
+        },
+        error: (error) => {
+          console.error('Error checking resume existence:', error);
+        },
+      });
+      }
+  
+    this.checkIfAlreadyApplied(); // Check if the user has already applied for the job
   }
+  
 
   checkIfAlreadyApplied() {
     console.log('Job ID:', this.job.id);  // Debug log

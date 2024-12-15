@@ -146,6 +146,7 @@
           required 
           email
           #emailInput="ngModel"
+          (blur)="checkEmail()"
         />
         <label>Official Email Address</label>
       
@@ -159,8 +160,8 @@
           Please enter a valid email address (e.g., user&#64;example.com).
         </small>
       
-        <!-- Validation for custom domain check -->
-        <small *ngIf="emailInput.touched && invalidDomain" class="text-danger">
+       
+        <small *ngIf="invalidDomain">
           Please enter a valid domain (e.g., user&#64;gmail.com).
         </small>
       

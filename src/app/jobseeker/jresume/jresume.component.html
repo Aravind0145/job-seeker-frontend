@@ -19,28 +19,25 @@
            [routerLinkActiveOptions]="{ exact: false }" class="nav-link1">
           Resume
         </a>
-        <div class="hover-content">
-<!-- Show a loading message while checking --><div *ngIf="resumeExists === null">
-  Checking resume status...
-</div>
-
-<!-- Display Create Resume Link only if resume does not exist -->
-<a *ngIf="resumeExists === false" 
-   class="nav-link create-resume-link" 
-   routerLink="/create-resume" 
-   routerLinkActive="active-link">
-   Create Resume
-</a>
-
-<!-- Disabled Link if Resume exists -->
-<a *ngIf="resumeExists === true" 
-   class="nav-link resume-exists-link disabled-link" 
-   href="javascript:void(0);" 
-   [attr.aria-disabled]="true" 
-   (click)="preventClick($event)">
-   Resume Exists
-</a>
-
+        <div class="hover-content"><div *ngIf="resumeExists === null">
+          Checking resume status...
+        </div>
+        
+        <a *ngIf="resumeExists === false"
+           class="nav-link create-resume-link"
+           (click)="navigateToResumePage()"
+           routerLinkActive="active-link">
+           Create Resume
+        </a>
+        
+        <a *ngIf="resumeExists === true"
+           class="nav-link resume-exists-link disabled-link"
+           href="javascript:void(0);"
+           aria-disabled="true"
+           (click)="preventClick($event)">
+           Resume Exists
+        </a>
+        
 
 
           <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
@@ -73,7 +70,7 @@
 
 
 <div class="container1">
-  <button (click)="navigateToHomePage()" class="home"><i class="fas fa-arrow-left"></i></button>
+  <a (click)="navigateToHomePage()" class="home"><i class="fas fa-arrow-left"></i> </a>
 
   <form #resumeForm="ngForm" (ngSubmit)="resumecreation()">
     <h1>Create Your Resume</h1>

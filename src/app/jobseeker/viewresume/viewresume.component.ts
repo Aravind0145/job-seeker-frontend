@@ -15,6 +15,9 @@ export class ViewresumeComponent implements OnInit {
   id: number | null = null;
   resumeId: number | null = null; // Added resumeId to store the resume's ID
 
+  resumeExists: boolean = false; // Track if resume already exists
+
+
   constructor(
     private route: ActivatedRoute,
     private jobseekerService: JobseekerserviceService,
@@ -39,10 +42,33 @@ export class ViewresumeComponent implements OnInit {
       } else {
         console.error('No resumeId found.');
       }
+  
+      if (this.id !== null) {
+        // Check if the resume exists for the provided job seeker ID
+        this.jobseekerService.checkResumeExistence(this.id).subscribe({
+          next: (exists: boolean) => {
+            this.resumeExists = exists;
+            console.log('Resume Exists:', this.resumeExists);
+  
+            if (this.resumeExists) {
+              // Fetch resume details if a resume exists
+            } else {
+              console.log('No resume found, ready to create a new one');
+            }
+          },
+          error: (error) => {
+            console.error('Error checking resume existence:', error);
+          },
+        });
+      } else {
+        console.warn('No job seeker ID found.');
+      }
+  
     } else {
       console.warn('No state data found.');
     }
   }
+  
   
 
   toggleSearch(): void {

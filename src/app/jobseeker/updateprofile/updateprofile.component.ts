@@ -5,6 +5,8 @@ import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Jobseeker } from '../../jobseeker';
 import { Resume } from '../../resume'; // Ensure the correct import path for Resume model
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { ToasterService } from '../../toaster.service';
 
 
 @Component({
@@ -31,12 +33,15 @@ export class UpdateprofileComponent implements OnInit, OnDestroy {
   messageType: string = '';
   uploadingImage: boolean = false;  // To track the uploading state
   uploadError: string = ''; 
+  resumeExists: boolean = false; // Track if resume already exists
+
 
   constructor(
     private router: Router,
     private jobseekerService: JobseekerserviceService,
     private platformLocation: PlatformLocation, // Use PlatformLocation
-    private http: HttpClient
+    private http: HttpClient,
+    private toaster: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -44,28 +49,48 @@ export class UpdateprofileComponent implements OnInit, OnDestroy {
     window.onpopstate = () => {
       history.go(1); // Pushes the user forward to prevent back navigation
     };
-
+  
     // Retrieve state data passed with navigateByUrl()
     const state = history.state;
-
+  
     if (state) {
       this.routeFullName = state['fullName'] || 'Guest'; // Get fullName from state
       this.id = state['id'] || null; // Get id from state
       this.resumeId = state['resumeId'] || null; // Get resumeId from state
-
+  
       console.log('State Data:', state); // Debugging state data
-
+  
       if (this.id !== null) {
         this.getJobseeker(this.id); // Call getJobseeker if id exists
       }
-
+  
       if (this.resumeId !== null) {
         this.getResumeDetails(this.resumeId); // Call getResumeDetails if resumeId exists
+      }
+  
+      // Check if the resume exists for the provided job seeker ID
+      if (this.id) {
+        this.jobseekerService.checkResumeExistence(this.id).subscribe({
+          next: (exists: boolean) => {
+            this.resumeExists = exists;
+            console.log('Resume Exists:', this.resumeExists);
+  
+            if (this.resumeExists) {
+              // Fetch resume details if a resume exists
+            } else {
+              console.log('No resume found, ready to create a new one');
+            }
+          },
+          error: (error) => {
+            console.error('Error checking resume existence:', error);
+          },
+        });
       }
     } else {
       console.warn('No state data found.');
     }
   }
+  
 
   ngOnDestroy(): void {
     // Clean up the onpopstate event listener when the component is destroyed
@@ -151,7 +176,9 @@ export class UpdateprofileComponent implements OnInit, OnDestroy {
     if (this.id !== null) {
       this.jobseekerService.updateJobSeeker(this.id, this.jobseeker).subscribe(
         (updatedJobseeker: Jobseeker) => {
-          this.message = 'Profile updated successfully!';
+          this.toaster.showSuccess('updated Successful!', 'Success'); // Success toast
+
+          this.message = '';
           this.messageType = 'success-message'; // Set message type to success
           setTimeout(() => {
             this.message = '';  // Clear the message

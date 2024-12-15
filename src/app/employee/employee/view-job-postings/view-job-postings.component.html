@@ -77,12 +77,13 @@
 
 
 
-<button 
+<a 
 (click)="navigateToHomePage()" 
   class="home"
 >
 <i class="fas fa-arrow-left"></i>
-</button><div *ngIf="jobPostings.length > 0; else noJobPostings" class="profile-container">
+</a>
+<div *ngIf="jobPostings.length > 0; else noJobPostings" class="profile-container">
   <h2 class="profile-title">Job Postings for {{ fullName }}</h2>
 
   <div class="card-container">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Router } from '@angular/router';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -17,7 +18,8 @@ export class ForgotpasswordComponent {
 
   constructor(
     private jobService: JobseekerserviceService,
-    private router: Router
+    private router: Router,
+    private toaster: ToasterService
   ) {}
 
 
@@ -29,13 +31,13 @@ export class ForgotpasswordComponent {
           response => {
             this.message = 'Password updated successfully!';
             console.log(response);
-            alert('Password Updated Successfully');
-            this.router.navigate(['/jobseeker/jfrontpage']); 
+            this.toaster.showSuccess('Password updated successfully',"Success");
+            this.router.navigate(['/jfrontpage']); 
           },
           error => {
             this.message = 'Error updating password. Please try again.';
             console.error(error);
-            alert('Incorrect email please check it');
+            this.toaster.showError('Error updating password',"Error");
             this.email = '';
           this.password = '';
           }

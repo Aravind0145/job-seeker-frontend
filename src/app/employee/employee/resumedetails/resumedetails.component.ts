@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http'; // Import HttpErrorResponse
-import { EmployeeserviceService } from '../../../employeeservice.service';
+import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
 import { Resume } from '../../../resume';
 
 @Component({

@@ -287,7 +287,6 @@ body {
 
 .home1 {
   color: blue;               /* Blue text */
-  border: 1px solid black;   /* Black border */
   border-radius: 50%;        /* Make it a perfect circle */
   width: 35px;               /* Fixed width for the circle */
   height: 35px;              /* Fixed height for the circle */
@@ -298,7 +297,6 @@ body {
   font-weight: bold;         /* Bold text */
   margin-top: 40px;
   margin-left: 0px;
-  background-color: yellow;
   cursor: pointer;           /* Pointer cursor on hover */
 }
 
@@ -354,3 +352,8 @@ div[ngClass] {
 
 
 
+.disabled-link {
+  color: gray;
+  cursor: not-allowed;
+  margin-left: 10px;
+}

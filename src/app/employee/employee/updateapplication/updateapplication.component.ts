@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '../../../application';
-import { EmployeeserviceService } from '../../../employeeservice.service';
+import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
+import { ToasterService } from '../../../toaster.service';
 
 @Component({
   selector: 'app-updateapplication',
@@ -27,7 +28,8 @@ export class UpdateapplicationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private appService: EmployeeserviceService
+    private appService: EmployeeserviceService,
+    private toaster: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -101,8 +103,8 @@ export class UpdateapplicationComponent implements OnInit {
       this.appService.updateApplication(app.applicationId, app).subscribe(
         (updatedApplication: Application) => {
           console.log('Updated Application:', updatedApplication); // Log the updated application response
-
-          this.message = 'Application Updated!';
+          this.toaster.showSuccess("Updated Application Status","Success");
+          this.message = '';
           this.messageClass = 'success-message';  // You can customize this class for styling
           setTimeout(() => {
             this.message = '';  // Clear the message

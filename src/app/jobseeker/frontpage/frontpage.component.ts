@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Router } from '@angular/router';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-frontpage',
@@ -20,7 +21,8 @@ export class FrontpageComponent {
   
   constructor(
     private jobService: JobseekerserviceService,
-    private router: Router
+    private router: Router,
+    private toaster:ToasterService
   ) {}
 
   login() {
@@ -47,17 +49,18 @@ export class FrontpageComponent {
 
         if (role === 'jobseeker') {
           console.log('Navigating to admin dashboard');
+          this.toaster.showSuccess("loggedInSuccessfull",'Success')
           this.router.navigateByUrl('/jobseekerhomepage', {
             state: { fullName, id }
           });        
         } else {
           console.log('Invalid role');
-          alert('Access denied');
+          this.toaster.showError("please check invalid email and password","Error")
         }
       },
       error => {
         console.error('Login error:', error);
-        alert('Incorrect password or email please check it');
+        this.toaster.showError("please check invalid email and password","Error")
         this.email = '';
       this.password = '';
       }

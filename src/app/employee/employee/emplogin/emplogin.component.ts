@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeserviceService } from '../../../employeeservice.service';
+import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
+import { ToasterService } from '../../../toaster.service';
 
 @Component({
   selector: 'app-emplogin',
@@ -22,7 +23,8 @@ export class EmploginComponent {
   
   constructor(
     private jobService: EmployeeserviceService,
-    private router: Router
+    private router: Router,
+    private toaster: ToasterService
   ) {}
 
   login() {
@@ -50,6 +52,7 @@ export class EmploginComponent {
 
         if (role === 'employee') {
           console.log('Navigating to admin dashboard');
+          this.toaster.showSuccess("loggedInSuccessfull",'Success')
           this.router.navigateByUrl('/emphomepage', {
             state: { fullName, id }
           });  
@@ -60,7 +63,7 @@ export class EmploginComponent {
       },
       error => {
         console.error('Login error:',error);
-        alert('Incorrect mail and password Please check! ');
+        this.toaster.showError("Invalid Email and password","Error");
         this.email = '';
       this.password = '';
       }

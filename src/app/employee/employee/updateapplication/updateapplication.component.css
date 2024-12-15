@@ -334,9 +334,7 @@ color: #fff; /* Change text color to white on hover */
 .home {
   position: absolute; /* Place the button independently */
   left: 0; /* Align the button to the left side of the container */
-  background-color: #457eff; /* Blue background */
-  color: white; /* White text */
-  padding: 7px 15px; /* Padding for top/bottom and left/right */
+  color: blue; /* White text */
   border: none; /* Remove default border */
   border-radius: 5px; /* Rounded corners */
   font-size: 16px; /* Font size */
@@ -348,24 +346,10 @@ color: #fff; /* Change text color to white on hover */
   transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and transform */
 }
 
-/* Hover Effect */
-.home:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.05); /* Slightly enlarge the button */
+
+.home i {
+  font-size: 24px;           /* Increase the font size of the icon */
 }
-
-/* Focus Effect */
-.home:focus {
-  outline: none; /* Remove the default focus outline */
-  box-shadow: 0 0 5px rgba(69, 126, 255, 0.6); /* Add a focus shadow */
-}
-
-/* Active Effect */
-.home:active {
-  background-color: #004494; /* Even darker blue when pressed */
-}
-
-
 
 .user-name{
   color: #007bff;

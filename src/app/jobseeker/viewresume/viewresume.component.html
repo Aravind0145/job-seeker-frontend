@@ -20,7 +20,19 @@
           Resume
         </a>
         <div class="hover-content">
-          <a (click)="navigateToResumePage()" routerLinkActive="active-link">CreateResume</a>
+<!-- Display this link if the resume does not exist -->
+<a
+  *ngIf="!resumeExists"
+  (click)="navigateToResumePage()"
+  routerLinkActive="active-link"
+>
+  Create Resume
+</a>
+
+<!-- Display this text if the resume exists -->
+<span *ngIf="resumeExists" class="disabled-link">
+  Create Resume
+</span>
           <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
           <a (click)="navigateToViewResumePage()" class="nav-link home-link1" routerLinkActive="active-link">ViewResume</a></div>
       </div>

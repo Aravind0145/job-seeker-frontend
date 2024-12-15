@@ -685,3 +685,24 @@ input, select {
   position: relative;
   z-index: 2;
 }
+
+
+.disabled-link1 {
+  color: gray;
+
+  cursor: not-allowed;
+}
+
+
+.disabled-link {
+  color: gray;
+  margin-left: 10px;
+  cursor: not-allowed;
+}
+.left-nav1 {
+  flex: 1;
+  margin-left: 100px;
+  font-size: 1.2em !important;
+  color: #457eff;
+
+}

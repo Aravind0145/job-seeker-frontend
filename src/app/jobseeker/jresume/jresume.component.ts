@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Resume } from '../../resume'; // Ensure the interface is updated to include new fields
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { HttpClient } from '@angular/common/http';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-jresume',
@@ -61,7 +62,8 @@ export class JresumeComponent implements OnInit {
     private resumeService: JobseekerserviceService, 
     private router: Router, 
     private route: ActivatedRoute, 
-    private http: HttpClient
+    private http: HttpClient,
+    private toaster:ToasterService
   ) { }
 
   // Handle photo upload via Cloudinary
@@ -171,10 +173,11 @@ export class JresumeComponent implements OnInit {
       console.warn('No state data found.');
     }
   }
-  
-  preventClick(event: Event) {
-    event.preventDefault();  // Prevent the default link action
-    event.stopPropagation(); // Stop the event from propagating further
+
+  preventClick(event: Event): void {
+    if (this.resumeExists) {
+      event.preventDefault();
+    }
   }
   
   
@@ -228,7 +231,8 @@ export class JresumeComponent implements OnInit {
     this.resumeService.saveResume(resume, this.jobseekerId).subscribe({
       next: (response) => {
         console.log('Resume saved', response);
-        this.message = 'Resume Created successfully!';
+        this.toaster.showSuccess("Resume Created sucessfylly!","Success")
+        this.message = '';
           this.messageClass = 'success-message';  // You can customize this class for styling
           setTimeout(() => {
             this.message = '';  // Clear the message
@@ -237,7 +241,7 @@ export class JresumeComponent implements OnInit {
       },
       error: (error) => {
         console.error('Failed to save resume:', error);
-        alert('Failed to create resume. Please try again.');
+        this.toaster.showError("Failed to create resume!","Error");
       }
     });
   }

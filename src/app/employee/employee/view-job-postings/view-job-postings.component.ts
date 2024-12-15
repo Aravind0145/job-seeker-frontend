@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Jobpostings } from '../../../jobpostings';
-import { EmployeeserviceService } from '../../../employeeservice.service';
+import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
+import { ToasterService } from '../../../toaster.service';
 
 @Component({
   selector: 'app-view-job-postings',
@@ -19,7 +20,8 @@ export class ViewJobPostingsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private empService: EmployeeserviceService // Inject the EmployeeService
+    private empService: EmployeeserviceService,
+    private toaster:ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +80,7 @@ export class ViewJobPostingsComponent implements OnInit {
     if (confirmation) {
       this.empService.deleteJobPosting(jobPostingId).subscribe({
         next: () => {
-          alert('Job posting deleted successfully.');
+          this.toaster.showSuccess("Deleted Sucessfully","Success");
           this.jobPostings = this.jobPostings.filter(posting => posting.id !== jobPostingId);
         },
         error: (err) => {

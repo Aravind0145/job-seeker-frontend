@@ -338,7 +338,6 @@ button:disabled {
 
 .home {
   color: blue;               /* Blue text */
-  border: 1px solid black;   /* Black border */
   border-radius: 50%;        /* Make it a perfect circle */
   width: 35px;               /* Fixed width for the circle */
   height: 35px;              /* Fixed height for the circle */
@@ -350,7 +349,6 @@ button:disabled {
   margin-bottom: 10px;
   margin-top: 10px;
   margin-left: -790px;
-  background-color: yellow;
   cursor: pointer;           /* Pointer cursor on hover */
 }
 

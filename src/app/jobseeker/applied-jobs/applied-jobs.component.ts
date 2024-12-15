@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Resume } from '../../resume';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -16,11 +17,13 @@ export class AppliedJobsComponent implements OnInit {
   applications: any[] = []; // Array to store applications
   applicationMessage: string = ''; // Default message is empty
   applicationMessageClass: string = ''; // Default class is empty
+  resumeExists: boolean = false; // Track if resume already exists
 
 
   constructor(
     private router: Router,
-    private jobseekerService: JobseekerserviceService
+    private jobseekerService: JobseekerserviceService,
+    private toaster:ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +38,25 @@ export class AppliedJobsComponent implements OnInit {
       console.log('jobseekerId:', this.id);
   
       if (this.id) {
-        this.loadApplications(this.id); // Load applications if id is available
+        // Check if the resume exists for the provided job seeker ID
+        this.jobseekerService.checkResumeExistence(this.id).subscribe({
+          next: (exists: boolean) => {
+            this.resumeExists = exists;
+            console.log('Resume Exists:', this.resumeExists);
+  
+            if (this.resumeExists) {
+              // Fetch resume details if a resume exists
+            } else {
+              console.log('No resume found, ready to create a new one');
+            }
+          },
+          error: (error) => {
+            console.error('Error checking resume existence:', error);
+          },
+        });
+  
+        // Load applications if id is available
+        this.loadApplications(this.id);
       }
   
       if (this.resumeId !== null) {
@@ -45,6 +66,7 @@ export class AppliedJobsComponent implements OnInit {
       console.warn('No state data found.');
     }
   }
+  
   
   
 
@@ -81,9 +103,9 @@ getResumeDetails(resumeId: number): void {
         () => {
           // Remove the application from the list after successful deletion
           this.applications = this.applications.filter(application => application.applicationId !== applicationId);
-          
+          this.toaster.showSuccess("Withdraw application successfully!","Success");
           // Set the message for success
-          this.applicationMessage = 'Application withdrawn successfully!';
+          this.applicationMessage = '';
           this.applicationMessageClass = 'success-message'; // You can customize this class for success
   
           // Clear the message after 3 seconds (Optional)
@@ -96,9 +118,9 @@ getResumeDetails(resumeId: number): void {
         },
         (error) => {
           console.error('Error withdrawing application:', error);
-  
+          this.toaster.showError("Plase check","Error");
           // Set the message for error
-          this.applicationMessage = 'Error withdrawing application. Please try again.';
+          this.applicationMessage = '';
           this.applicationMessageClass = 'error-message'; // Customize the class for error
   
           // Clear the message after 3 seconds (Optional)

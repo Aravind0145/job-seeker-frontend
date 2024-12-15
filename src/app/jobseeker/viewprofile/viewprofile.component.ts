@@ -16,6 +16,8 @@ export class ViewprofileComponent implements OnInit {
   resumeId: number | null = null; // To store the resume ID
   fullName: string = ''; // Full name of the jobseeker
   resume: Resume | null = null;
+  resumeExists: boolean = false; // Track if resume already exists
+
 
 
   constructor(
@@ -32,8 +34,8 @@ export class ViewprofileComponent implements OnInit {
       this.fullName = state['fullName'] || 'Guest';  // Get fullName from state or default to 'Guest'
       this.id = state['id'];  // Get jobseeker ID from state
       this.resumeId = state.resumeId || null;
-
-      console.log("resumeId",this.resumeId);
+  
+      console.log("resumeId", this.resumeId);
   
       if (this.id !== null) {
         this.getJobSeekerProfile(this.id);  // Fetch jobseeker profile if id is available
@@ -41,6 +43,25 @@ export class ViewprofileComponent implements OnInit {
       if (this.resumeId !== null) {
         this.getResumeDetails(this.resumeId); // Call getResumeDetails if resumeId exists
       }
+  
+      if(this.id !== null) {
+      // Check if the resume exists for the provided job seeker ID
+      this.jobseekerService.checkResumeExistence(this.id).subscribe({
+        next: (exists: boolean) => {
+          this.resumeExists = exists;
+          console.log('Resume Exists:', this.resumeExists);
+  
+          if (this.resumeExists) {
+            // Fetch resume details if a resume exists
+          } else {
+            console.log('No resume found, ready to create a new one');
+          }
+        },
+        error: (error) => {
+          console.error('Error checking resume existence:', error);
+        },
+      });
+    }
     } else {
       console.warn('No state data found.');
     }

@@ -1,8 +1,8 @@
 <!-- Navbar Section -->
 <nav class="navbar">
   <div class="container">
-    <div class="left-nav">
-      <a class="nav-link active">RevHire</a>
+    <div class="left-nav1">
+      <a >RevHire</a>
     </div>
 
     <div class="center-nav">
@@ -15,8 +15,19 @@
       <div class="nav-item">
         <a class="nav-link">Resume</a>
         <div class="hover-content">
-          <a (click)="navigateToResumePage()" routerLinkActive="active-link">CreateResume</a>
-          <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
+          <a
+          *ngIf="!resumeExists"
+          (click)="navigateToResumePage()"
+          routerLinkActive="active-link"
+        >
+          Create Resume
+        </a>
+
+<!-- Display this text if the resume exists -->
+          <span *ngIf="resumeExists" class="disabled-link">
+            Create Resume
+          </span>
+                 <a (click)="navigateToUpdateResumePage()" routerLinkActive="active-link">UpdateResume</a>
           <a (click)="navigateToViewResumePage()" routerLinkActive="active-link">ViewResume</a>
         </div>
       </div>
@@ -63,11 +74,33 @@
     <img src="https://static.naukimg.com/s/9/105/_next/static/assets/home.svg" alt="Home" class="nav-icon"> My Home
   </a>
   
-  <a (click)="navigateToResumePage()" class="side-nav-item" routerLinkActive="active-link">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s" 
-         alt="Create Resume" 
-         class="nav-icon"> Create Resume
-  </a>
+  <a
+  *ngIf="!resumeExists"
+  (click)="navigateToResumePage()"
+  class="side-nav-item"
+  routerLinkActive="active-link"
+>
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s"
+    alt="Create Resume"
+    class="nav-icon"
+  />
+  Create Resume
+</a>
+<a
+  *ngIf="resumeExists"
+  class="side-nav-item disabled-link1"
+  aria-disabled="true"
+  tabindex="-1"
+>
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzixnbPEQp2JyQ88-7gHXAedJtKh8b0zD1bQ&s"
+    alt="Create Resume"
+    class="nav-icon"
+  />
+  Create Resume
+</a>
+
   
   
   <a (click)="navigateToUpdateResumePage()" class="side-nav-item" routerLinkActive="active-link">

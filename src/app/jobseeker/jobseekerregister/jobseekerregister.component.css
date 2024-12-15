@@ -259,10 +259,17 @@
     font-size: 14px;
   }
   .text-success, .text-danger {
-    position: absolute;
-    right: 0;
-    top: 10px;  /* Adjust as needed */
     font-size: 14px;
-    font-weight: bold;
-  }
-  
+    font-weight: 500;
+    line-height: 2rem;
+    }
+
+
+    
+    .toast-success {
+      background-color: #28a745 !important;
+    }
+    
+    .toast-error {
+      background-color: #dc3545 !important;
+    }

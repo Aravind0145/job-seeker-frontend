@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employee } from './employee';
+import { Employee } from '../employee';
 import { map, Observable } from 'rxjs';
-import { Jobpostings } from './jobpostings';
-import { Resume } from './resume';
-import { Application } from './application';
+import { Jobpostings } from '../jobpostings';
+import { Resume } from '../resume';
+import { Application } from '../application';
 
 @Injectable({
   providedIn: 'root'

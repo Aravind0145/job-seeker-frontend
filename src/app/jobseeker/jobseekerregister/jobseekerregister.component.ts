@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-jobseekerregister',
@@ -26,14 +28,13 @@ export class JobseekerregisterComponent {
 
   validDomains: string[] = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'edu.com', 'gov.com', 'yopmail.com'];
 
+
+
    
-  constructor(private jobService: JobseekerserviceService, private router: Router) {}
+  constructor(private jobService: JobseekerserviceService, private router: Router,    private toaster:ToasterService) {}
 
   // Check if the email exists
-  checkEmail(event: Event): void {
-    console.log('checkEmail called');
-    event.preventDefault();
-    
+  checkEmail() {
     this.emailExists = false;
     this.invalidDomain = false;
   
@@ -57,28 +58,24 @@ export class JobseekerregisterComponent {
       }
     }
   }
-  
 
   validateDomain(): void {
-    const domainPattern = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-    const match = this.email.match(domainPattern);
-
+    // Regular expression to match a valid email format
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    const match = this.email.match(emailPattern);
+  
     if (match) {
       const enteredDomain = match[1];
       if (!this.validDomains.includes(enteredDomain)) {
         this.invalidDomain = true;
+      } else {
+        this.invalidDomain = false; // Reset the flag if the domain is valid
       }
     } else {
-      this.invalidDomain = true;
+      this.invalidDomain = true; // Flag if the email format is invalid
     }
-  
-  }
-  preventEnter(event: Event): void {
-    event.preventDefault();
   }
   
-  
-
   validateFullName() {
     this.hasOnlySpaces = this.fullName.trim().length === 0 && this.fullName.length > 0;
   }
@@ -96,8 +93,11 @@ export class JobseekerregisterComponent {
   }
 
   // Registration method
-  register() {
+  register(event: Event) {
+    event.preventDefault()
     console.log("registration started")
+    if(this.emailExists){
+    }
 
     if (this.password !== this.confirmPassword) {
       alert('Passwords do not match');
@@ -117,15 +117,18 @@ export class JobseekerregisterComponent {
     this.jobService.registerJobSeeker(jobseeker).subscribe(
       response => {
         console.log('Registration successful', response);
-        alert('JobSeeker Registration successful');
-        setTimeout(() => {
-          this.router.navigate(['/jfrontpage']);
-        }, 5000)
+        this.toaster.showSuccess('Job Seeker Registration Successful!', 'Success'); // Success toast
+        this.fullName = '';
+    this.email = '';
+    this.password = '';
+    this.phone = '';
+    this.workStatus = '';
+    this.promotions = false;
       
       },
       error => {
         console.error('Registration failed:', error);
-        alert('Registration failed. Please try again.');
+        this.toaster.showError('Registration failed!', 'Error'); // Error toast
       }
     );
   }

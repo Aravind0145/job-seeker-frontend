@@ -30,6 +30,7 @@ export class JobseekerhomepageComponent implements OnInit {
   showSearch: boolean = false;
   isHomeActive: boolean = false;
   currentUrl: string = '';
+  resumeExists: boolean = false; // Track if resume already exists
 
   constructor(
     private router: Router,
@@ -46,9 +47,25 @@ export class JobseekerhomepageComponent implements OnInit {
     console.log("id:",this.id)
     if (this.id !== null) {
       this.getResume(this.id);
+      this.jobseekerService.checkResumeExistence(this.id).subscribe({
+        next: (exists: boolean) => {
+          this.resumeExists = exists;
+          console.log('Resume Exists:', this.resumeExists);
+  
+          if (this.resumeExists) {
+            // Fetch resume details if a resume exists
+          } else {
+            console.log('No resume found, ready to create a new one');
+          }
+        },
+        error: (error) => {
+          console.error('Error checking resume existence:', error);
+        }
+      });
     }
   
     this.getJobPostings();
+    
     
   }
   

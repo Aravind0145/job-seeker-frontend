@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobseekerserviceService } from '../../jobseekerservice.service';
 import { Resume } from '../../resume';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-updateresume',
@@ -16,36 +17,59 @@ export class UpdateresumeComponent implements OnInit {
   originalResume: Resume | null = null;
   message: string = '';          // Default empty string, no message initially
   messageClass: string = '';
+  resumeExists: boolean = false; // Track if resume already exists
+
 
 
   constructor(
     private route: ActivatedRoute,
     private jobseekerService: JobseekerserviceService,
-    private router: Router
+    private router: Router,
+    private tosater: ToasterService
   ) {}
 
   ngOnInit(): void {
     // Retrieve state data passed with navigateByUrl()
     const state = history.state;
-    
+  
     if (state) {
       this.fullName = state.fullName || 'Guest';
       this.id = state.id || null;
       this.resumeId = state.resumeId || null;
-      
+  
       console.log('Full Name:', this.fullName);
       console.log('ID:', this.id);
       console.log('Resume ID:', this.resumeId);
   
       if (this.resumeId) {
-        this.getResumeDetails(this.resumeId); // Fetch resume details
+        this.getResumeDetails(this.resumeId); // Fetch resume details if resumeId exists
       } else {
         console.error('No resumeId found.');
       }
+  
+
+      if (this.id !== null) {
+      this.jobseekerService.checkResumeExistence(this.id).subscribe({
+        next: (exists: boolean) => {
+          this.resumeExists = exists;
+          console.log('Resume Exists:', this.resumeExists);
+  
+          if (this.resumeExists) {
+            // Fetch resume details if a resume exists
+          } else {
+            console.log('No resume found, ready to create a new one');
+          }
+        },
+        error: (error) => {
+          console.error('Error checking resume existence:', error);
+        },
+      });
     } else {
       console.warn('No state data found.');
     }
   }
+}
+  
   
 
   getResumeDetails(id: number): void {
@@ -71,9 +95,9 @@ export class UpdateresumeComponent implements OnInit {
       this.jobseekerService.updateResume(updatedResume, this.resume.id).subscribe(
         (data) => {
           console.log('Resume updated successfully:', data);
-  
+          this.tosater.showSuccess("Resume Updated Successfully","Success")
           // Set success message
-          this.message = 'Resume updated successfully!';
+          this.message = '';
           this.messageClass = 'success-message';  // You can customize this class for styling
           setTimeout(() => {
             this.message = '';  // Clear the message
@@ -86,9 +110,10 @@ export class UpdateresumeComponent implements OnInit {
         },
         (error) => {
           console.error('Error updating resume:', error);
+          this.tosater.showError("Please check the feilds","Error");
           
           // Set error message
-          this.message = 'Error updating resume. Please try again.';
+          this.message = '';
           this.messageClass = 'error-message';  // Customize error message class
         }
       );

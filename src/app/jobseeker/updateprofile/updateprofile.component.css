@@ -322,7 +322,6 @@ body {
 
 .home {
   color: blue;               /* Blue text */
-  border: 1px solid black;   /* Black border */
   border-radius: 50%;        /* Make it a perfect circle */
   width: 35px;               /* Fixed width for the circle */
   height: 35px;              /* Fixed height for the circle */
@@ -334,7 +333,6 @@ body {
   margin-bottom: 10px;
   margin-top: 80px;
   margin-left: 230px;
-  background-color: yellow;
   cursor: pointer;           /* Pointer cursor on hover */
 }
 
@@ -413,4 +411,22 @@ div[ngClass] {
   padding: 5px 10px;
 }
 
+/* Success Toast Style */
+.toast-success {
+  background-color: #28a745 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+/* Error Toast Style */
+.toast-error {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.disabled-link {
+  color: gray;
+  cursor: not-allowed;
+  margin-left: 10px;
+}

@@ -21,6 +21,7 @@ import { UpdatemployeeprofileComponent } from './employee/employee/updatemployee
 import { ViewJobPostingsComponent } from './employee/employee/view-job-postings/view-job-postings.component';
 import { ResumedetailsComponent } from './employee/employee/resumedetails/resumedetails.component';
 import { UpdateapplicationComponent } from './employee/employee/updateapplication/updateapplication.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
   },
   {
     path:'emphomepage',
-    component:EmphomepageComponent
+    component:EmphomepageComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'empforgotpassword',
@@ -41,30 +43,35 @@ const routes: Routes = [
   },
   {
     path:'postjobs',
-    component:JobPostingsComponent
+    component:JobPostingsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'employeeprofile',
-    component:EmployeeviewprofileComponent
+    component:EmployeeviewprofileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'employeeupdateprofile',
-    component:UpdatemployeeprofileComponent
+    component:UpdatemployeeprofileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'viewjobpostings',
-    component:ViewJobPostingsComponent
+    component:ViewJobPostingsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'resumedetails',
-    component:ResumedetailsComponent
+    component:ResumedetailsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'updateapplication',
-    component:UpdateapplicationComponent
+    component:UpdateapplicationComponent,
+    canActivate:[AuthGuard]
   },
 
-  // its for the Jobseeker
   {
     path: 'jfrontpage', // Directly map to 'frontpage' at the root level
     component: FrontpageComponent
@@ -119,15 +126,15 @@ const routes: Routes = [
     path: 'employee',
     loadChildren: () => import('./employee/employee/employee.module').then(m => m.EmployeeModule)
   },
-  {
-    path: '',
+   {
+     path: '',
     redirectTo: 'jfrontpage', // Default route
-    pathMatch: 'full'
-  },
-  { 
+     pathMatch: 'full'
+   },
+   { 
     path: '**', 
-    redirectTo: 'jfrontpage' // Wildcard route for undefined paths
-  }
+  redirectTo: 'jfrontpage' // Wildcard route for undefined paths
+   }
 ];
 
 @NgModule({

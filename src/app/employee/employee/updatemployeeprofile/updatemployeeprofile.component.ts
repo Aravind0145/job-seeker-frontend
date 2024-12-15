@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../../../employee';
-import { EmployeeserviceService } from '../../../employeeservice.service';
+import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
+import { ToasterService } from '../../../toaster.service';
 
 @Component({
   selector: 'app-updatemployeeprofile',
@@ -35,7 +36,8 @@ export class UpdatemployeeprofileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private empService: EmployeeserviceService
+    private empService: EmployeeserviceService,
+    private toaster:ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -95,8 +97,8 @@ export class UpdatemployeeprofileComponent implements OnInit {
       .then((response) => response.json())
       .then((data) => {
         if (data && data.data && data.data.url) {
-          this.employee.profilePhoto = data.data.url; // Get the uploaded image URL
-          alert('Image uploaded successfully.');
+          this.employee.profilePhoto = data.data.url;
+          this.toaster.showSuccess("Image Uploaded","Success");
         } else {
           this.uploadError = 'Failed to upload image. Please try again.';
           alert(this.uploadError);
@@ -117,8 +119,8 @@ export class UpdatemployeeprofileComponent implements OnInit {
       this.empService.updateEmployee(this.id, this.employee).subscribe(
         (updatedEmployee: Employee) => {
 
-
-          this.message = 'updated successfully!';
+          this.toaster.showSuccess("Updated Successfully!","Success");
+          this.message = '';
           this.messageClass = 'success-message';  // You can customize this class for styling
           setTimeout(() => {
             this.message = '';  // Clear the message
@@ -127,7 +129,7 @@ export class UpdatemployeeprofileComponent implements OnInit {
         },
         (error) => {
           console.error('Error updating profile:', error);
-          alert('Failed to update profile. Please try again later.');
+          this.toaster.showError("Error updating profile","Error");
         }
       );
     }

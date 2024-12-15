@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeserviceService } from '../../../employeeservice.service';
+import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
 import { Employee } from '../../../employee';
+import { ToasterService } from '../../../toaster.service';
 
 @Component({
   selector: 'app-empregister',
@@ -34,7 +35,7 @@ export class EmpregisterComponent {
 
 
 
-  constructor(private empService: EmployeeserviceService, private router: Router) { }
+  constructor(private empService: EmployeeserviceService, private router: Router,private toaster:ToasterService) { }
 
   checkEmail(): void {
     this.validateDomain();  // Validate domain whenever the email is checked
@@ -71,11 +72,11 @@ export class EmpregisterComponent {
     this.empService. registerEmployee(employee).subscribe(
       response => {
         console.log('Registration successful', response);
-        alert('Employee Registration successful');
+        this.toaster.showSuccess("Registration successful","Success");
       },
       error => {
         console.error('Registration failed:', error);
-        alert('Registration failed. Please try again.');
+        this.toaster.showError("Registration failed","Error");
       }
     );
   }
@@ -100,9 +101,11 @@ export class EmpregisterComponent {
       const enteredDomain = match[1];
       if (!this.validDomains.includes(enteredDomain)) {
         this.invalidDomain = true;
+      } else {
+        this.invalidDomain = false; // Reset the flag if the domain is valid
       }
     } else {
-      this.invalidDomain = true;
+      this.invalidDomain = true; // Flag if the email format is invalid
     }
   
   }

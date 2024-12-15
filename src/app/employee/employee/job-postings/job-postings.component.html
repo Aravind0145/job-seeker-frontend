@@ -207,12 +207,12 @@
 --><div class="job-form-container">
   <form #jobForm="ngForm" (ngSubmit)="postJobEmployee()">
     <div class="header-container">
-      <button 
+      <a 
       (click)="navigateToHomePage()" 
         class="home"
       >
       <i class="fas fa-arrow-left"></i>
-      </button>
+    </a>
       <div *ngIf="message" [ngClass]="messageClass">
         {{ message }}
       </div>

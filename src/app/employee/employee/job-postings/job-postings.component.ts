@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms'; // Import NgForm for typing
-import { EmployeeserviceService } from '../../../employeeservice.service';
+import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
 import { Jobpostings } from '../../../jobpostings';
+import { ToasterService } from '../../../toaster.service';
 
 @Component({
   selector: 'app-job-postings',
@@ -36,7 +36,8 @@ export class JobPostingsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private employeeService: EmployeeserviceService // Inject the service
+    private employeeService: EmployeeserviceService,
+    private toaster: ToasterService
   ) {}
 
   onDateChange(event: any) {
@@ -95,7 +96,8 @@ export class JobPostingsComponent implements OnInit {
     this.employeeService.postJobEmployee(jobposting, this.id).subscribe(
       (response) => {
         console.log('Job posted successfully:', response);
-        this.message = 'Resume Created successfully!';
+        this.toaster.showSuccess("Job posted successfully", "Success");
+        this.message = '';
         this.messageClass = 'success-message';  // You can customize this class for styling
         setTimeout(() => {
           this.message = '';  // Clear the message
@@ -104,7 +106,7 @@ export class JobPostingsComponent implements OnInit {
       },
       (error) => {
         console.error('Error posting job:', error);
-        alert('Failed to post job. Please try again.');
+        this.toaster.showError("Job posting failed", "Error");
       }
     );
   }

@@ -1,6 +1,5 @@
-// src/app/auth.interceptor.ts
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -10,21 +9,24 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    console.log(isLoggedIn)
+    // Define a set of APIs to skip the interceptor (public APIs, for example)
+    const excludedUrls = ['/jobseeker/jfrontapge', '/jregister','/empregister','/updateemail']; // Add the URLs to exclude here
 
-    // If not logged in, redirect to front page
-    if (!isLoggedIn) {
+    
+    const isExcluded = excludedUrls.some(url => req.url.includes(url));
+    if (!isLoggedIn && !isExcluded) {
       this.router.navigateByUrl('/jfrontpage');
-      return next.handle(req); // or throw an error, depending on how you want to handle this
+      return next.handle(req); 
     }
-
-    // Clone request and set Authorization header (if needed)
-    const clonedRequest = req.clone({
-      setHeaders: {
-        // Example: add authorization token if available
-        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
-      }
-    });
-
-    return next.handle(clonedRequest);
+    if (!isExcluded) {
+      const clonedRequest = req.clone({
+        setHeaders: {
+          'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+        }
+      });
+      return next.handle(clonedRequest);
+    }
+    return next.handle(req);
   }
 }

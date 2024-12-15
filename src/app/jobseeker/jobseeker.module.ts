@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { JobseekerRoutingModule } from './jobseeker-routing.module';
 import { RegisterComponent } from './register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { JobseekerhomepageComponent } from './jobseekerhomepage/jobseekerhomepage.component';
@@ -40,7 +40,7 @@ import { JobseekerregisterComponent } from './jobseekerregister/jobseekerregiste
     JobseekerRoutingModule,
     FormsModule,
     RouterModule,
-    
+  
   ]
 })
 export class JobseekerModule { }
