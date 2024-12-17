@@ -131,7 +131,7 @@
       
           <div class="action-buttons">
             <button
-              *ngIf="posting.id && applicantCounts[posting.id] <= 1"
+              *ngIf="posting.id && applicantCounts[posting.id] < 1"
               class="delete-button"
               (click)="deleteJobPosting(posting.id)"
             >

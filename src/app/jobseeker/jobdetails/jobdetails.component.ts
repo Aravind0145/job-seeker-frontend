@@ -109,7 +109,8 @@ export class JobdetailsComponent implements OnInit {
     .subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        this.applicationMessage = 'Applied successfully!';
+        this.applicationMessage = '';
+        this.toaster.showSuccess("Application submitted successfully","Success");
         this.applicationMessageClass = 'success-message';
         setTimeout(() => {
           this.applicationMessage = '';  // Clear the message
