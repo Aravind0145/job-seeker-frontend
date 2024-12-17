@@ -1,0 +1,637 @@
+
+
+
+
+/* Error message styles */
+
+
+.home
+    {
+        font-family: Arial, sans-serif;
+        background: #f7f6fb;
+    }
+
+/* Navbar */
+/* Navbar styles */
+/* Navbar styles */
+/* Navbar */
+/* Navbar styles */
+.navbar {
+  background: #fff;
+  padding: 2px 4px; /* Reduced padding for an even smaller navbar */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fix the navbar to the top */
+  top: 0;
+  left: -10px;
+  right: 0;
+  z-index: 1000; /* Ensure it stays on top */
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Navbar navigation list */
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 10px; /* Further reduced gap between navbar items */
+}
+
+/* Navbar links */
+.nav-item .nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 400; /* Reduced font weight for smaller text */
+  font-size: 18px; /* Reduced font size */
+  padding: 3px 7px; /* Reduced padding for a smaller button */
+}
+
+.left-nav {
+  flex: 1;
+  margin-left: 550px;
+}.resized-image {
+  width: 200px;        /* Set the width */
+  height: 50px;        /* Set a fixed height */
+  object-fit: contain; /* Ensures the image scales without distortion */
+}
+
+/* Auth Buttons - Positioned top-right */
+/* Auth Buttons - Positioned top-right */
+.auth-buttons {
+  position: absolute;
+  top: 50%; /* Center vertically in the navbar */
+  transform: translateY(-50%); /* Adjust to align vertically */
+  right: 20px; /* Adjusts the horizontal position */
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  text-decoration: none;
+}
+
+.btn {
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none; /* Removes underline */
+  display: inline-block; /* Ensures buttons are block-like */
+  align-self: center; /* Ensures all buttons align to the center */
+}
+
+.btn a {
+  text-decoration: none; /* Ensures links inside buttons are clean */
+  color: inherit; /* Inherits button's text color */
+}
+
+.btn-outline-primary {
+  background: transparent;
+  border: 1px solid #457eff;
+  color: #457eff;
+  margin-top: 0; /* Removes the offset to align properly */
+}
+
+.btn-outline-primary:hover {
+  background: #457eff;
+  color: #fff;
+  text-decoration: none; /* Ensures no underline on hover */
+}
+
+.btn-success {
+  background: #457eff;
+  color: white;
+  border: 2px solid #457eff;
+  text-decoration: none; /* Removes underline */
+}
+
+.btn-success:hover {
+  opacity: 0.9;
+  text-decoration: none; /* Removes underline on hover */
+}
+
+
+/* Header Section */
+.header {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 28px;
+  color: #1b2437;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #9098b5;
+}
+
+
+/* Search Section */
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    border: 1px solid #eaf1f5;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(86, 141, 187, 0.12);
+    width: 80%;
+    max-width: 1000px;
+}
+
+#searchIcon {
+    width: 24px;
+    margin-right: 10px;
+}
+
+input, select {
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    flex: 1;
+}
+
+input::placeholder, select {
+    color: #9098b5;
+}
+
+input:focus, select:focus {
+    outline: none;
+}
+
+.divider {
+    width: 1px;
+    background: #eaf1f5;
+    height: 30px;
+    margin: 0 10px;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background: #457eff;
+    color: white;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
+}
+
+.search-btn:hover {
+    background: #356cd3;
+}
+
+/* Ensure Navbar and Auth Buttons Don't Overlap */
+.navbar {
+    position: relative;
+    padding-top: 30px; /* Adjust based on the button height */
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+
+  
+  /* Dropdown button */
+  .btn1 {
+    background: #457eff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 25px;
+    margin-top: 9px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .btn:hover {
+    background-color: #457eff;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 110px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 15px;
+    margin-right: 50%px;
+    left: 10px;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: #4428a7;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #e6ffe6;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+
+/* down buttons */#Slidhsow-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    #trendHead {
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 27px;
+      line-height: 10px;
+      color: #1b2437;
+    }
+
+    #main-slider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 5px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .slide {
+      width: 15%;
+      display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #f5f5f5;
+      border-radius: 16px;
+      padding: 10px;
+    }
+
+    .slide:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .images {
+      text-align: center;
+    }
+
+    .slide img {
+      height: auto;
+      width: 100%;
+      max-height: 100px;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+
+    .text {
+      text-align: center;
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .text h6 {
+      font-size: 16px;
+      color: #333;
+      margin: 5px 0;
+    }
+
+    .text p {
+      font-size: 14px;
+      color: #777;
+    }
+
+    .compo_logo {
+      height: 50px;
+      width: 50px;
+      border-radius: 14px;
+    }
+
+    .job .card {
+      border-radius: 20px;
+    }
+
+    .filter .card {
+      border-radius: 10px;
+    }
+
+
+/* Button Styles */
+.btn {
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .btn-outline-primary {
+    background: transparent;
+    border: 2px solid #457eff;
+    color: #457eff;
+  }
+  
+  .btn-outline-primary:hover {
+    background: #457eff;
+    color: #fff;
+  }
+  
+
+  
+  /* Existing CSS for the login box */
+.login-box {
+  cursor: pointer;
+  z-index: 1000;
+  position: fixed;
+  top: 350%;
+  left: 55%;
+  width: 350px;
+  padding: 40px;
+  margin-top: 80px;
+  transform: translate(-50%, -50%);
+  background-color: rgb(232, 227, 227);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+  border-radius: 20px;
+  text-align: center;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: black;
+}
+
+.login-box .user-box {
+  position: relative;
+  margin-left: 5px;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #2a2727;
+  outline: none;
+  background: transparent;
+}
+
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
+  top: -15px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.login-box form {
+  display: inline-block;
+}
+
+.login-box form input[type="submit"] {
+  width: auto;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.login-box form input[type="submit"]:hover {
+  background-color: rgb(2, 2, 46);
+  color: white;
+}
+
+/* New CSS for Forgot Password link above the submit button */
+.login-box form .forgot-password {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative; /* Change from margin to position */
+  left: 50%; /* Horizontally center the link */
+  transform: translateX(-50%); /* Ensure proper centering */
+  margin-bottom: 20px;
+  top: -2px; /* Move the link upwards */
+  transition: transform 0.5s ease;
+  color: black;
+}
+
+.login-box form .forgot-password:hover {
+  color: #457eff;
+}
+
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: -30px;
+}
+
+.error-message small {
+  color: red;
+}
+button {
+  padding: 10px 20px;
+  background: #457eff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+  
+  .vertical-line {
+    width: 2px;
+    background-color: #a70c0c; /* Color of the vertical line */
+    height: 33px; /* Adjust height according to your design */
+    display: inline-block;
+    margin-right: 15px; /* Space between the vertical line and the Employer dropdown */
+    vertical-align: middle; /* Align the line with the center of the buttons */
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+.footer {
+  position: absolute;
+  top: 700px;
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center alignment */
+  max-width: 1280px;
+  width: 100%;
+  background-color: rgb(2, 2, 46);
+  border-radius: 20px;
+}
+
+
+.footer .footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3.5rem;
+  padding: 60px;
+}
+
+.footer-row .footer-col h4 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 400;
+ margin-left: 50px;
+}
+
+.footer-col .links {
+  margin-top: 20px;
+}
+
+.footer-col .links li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.footer-col .links li a {
+  text-decoration: none;
+  color: #bfbfbf;
+}
+/* Style for the form container */
+.footer-col form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Style for the input field */
+.footer-col form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Style for the button */
+.footer-col form button {
+  padding: 10px 20px;
+  background-color: #ff7f50;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the button */
+.footer-col form button:hover {
+  background-color: #ff6347;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .footer-col form {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer-col form button {
+    width: 100%;
+  }
+
+  .footer-col form input[type="text"] {
+    width: 100%;
+  }
+}
+
+
+/* Container for the icons */
+.icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Style for the icon links */
+.icons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #444;
+  color: white;
+  text-decoration: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for the icons */
+.icons a:hover {
+  background-color: #ff7f50;
+  transform: translateY(-5px);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .icons {
+    gap: 10px;
+  }
+
+  .icons a {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}

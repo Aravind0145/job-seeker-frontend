@@ -1,0 +1,687 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar container */
+.navbar {
+  background: #fff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  border-radius: 10px;
+}/* Search Container */
+
+.search-wrapper {
+  position: relative;
+  z-index: 2; /* Keep search elements above the blurred content */
+}
+
+.Wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: -650px;
+}
+.logoContainer {
+  display: flex;
+  align-items: center;
+  padding: 9px 9px 9px 24px;
+  background: #fff;
+  border: 1.26923px solid #eaf1f5;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgb(86 141 187 / 12%);
+  border-radius: 100px;
+  width: 995px;
+  height: 68px;
+  border: 1px solid white;
+  margin-top: 60px;
+}
+#searchIcon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+#input1 {
+  width: 324px;
+  height: 38px;
+  border: none;
+}
+
+.sugginput {
+  font-size: 15px;
+  line-height: 22px;
+  font-family: "Inter";
+  color: #9098b5;
+  font-weight: 400;
+}
+.pipe1 {
+  background: #f5efea;
+  border-radius: 2.53846px;
+  width: 2px;
+  height: 28px;
+}
+#input3 {
+  width: 223px;
+  height: 40px;
+  border: none;
+}
+#input2 {
+  width: 208px;
+  height: 38px;
+  border: none;
+}
+input, select {
+  outline: none;
+}
+.search {
+  padding: 11px 28px;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 26px;
+  background: #457eff;
+  box-shadow: 0 5.07692px 12.6923px rgb(69 126 255 / 10%);
+  border-radius: 100px;
+  cursor: pointer;
+  color: white;
+  margin-left: 40px;
+  border: none;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 3px;
+  background-color: #fff;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  width: 100%;
+  position: relative;
+}
+
+.search-btn i {
+  font-size: 16px;
+  color: #007bff;
+  margin-right: 8px;
+}
+
+.search-btn:hover i {
+  color: #0056b3;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+  width: 150px;
+  background-color: transparent;
+}
+
+.search-input::placeholder {
+  color: #ccc;
+}
+
+.search-btn:focus-within .search-input {
+  border: none;
+  outline: none;
+}
+/* Initial main content styling */
+.main-wrapper {
+  transition: filter 0.3s ease; /* Smooth transition for blur effect */
+}
+
+
+/* Ensure the search button stays on top */
+.search-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Navbar Links */
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-nav {
+  flex: 1;
+  margin-left: 100px;
+  text-decoration: none;
+}
+
+.center-nav {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-left: -130px;
+}
+
+.right-nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-right: 60px;
+  margin-left: -100px;
+}
+
+/* Navbar Links */
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.nav-link.active {
+  font-size: 20px;
+  color: #457eff;
+}
+
+.nav-link:hover {
+  color: #457eff;
+}
+
+/* Profile Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #457eff;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  display: block;
+  color: #333;
+  padding: 8px 8px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #0056b3;
+}
+
+/* Logout Button */
+.logout-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #d9363e;
+}
+
+/* Main Container */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 50px;
+  padding-bottom: 80px; /* Added padding to prevent overlap with pagination */
+}
+
+/* Resume Box */
+.resume-box {
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  max-width: 300px;
+  margin: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center align the content */
+}
+
+.resume-box h2 {
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.resume-box p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.resume-box strong {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Resume Image */
+.resume-box img {
+  width: 30%;
+  height: 60px;
+  border-radius: 50px;
+  object-fit: cover; /* Ensures proper image scaling */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Navigation styling */.side-navigation {
+  position: fixed;
+  margin-top: 80px;
+  left: 40px;
+  width: 180px;
+  height: 50%;
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.side-nav-item {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.top{
+  margin-top: 40px;
+}
+
+.side-nav-item:hover {
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+
+.nav-link {
+  color: #007bff;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+
+.nav-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.resume-container {
+  flex: 1;
+  max-width: 200px;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+/* Job cards container */
+.job-cards-container {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: flex-start;
+  margin-top: 130px; /* Ensure some spacing between the resume box and job cards */
+  margin-left: 350px; /* Reduced left margin to shrink container width */
+  padding: 0 20px; /* Added padding to balance the layout */
+}
+
+/* Card Style */.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  flex: 1 1 calc(50% - 40px); /* 2 cards per row, reduced width to shrink cards */
+  max-width: calc(40% - 30px); /* Adjusted max-width to make cards smaller */
+  margin-bottom: 20px;
+  margin-left: 40px; /* Reduced left margin between cards */
+  height: auto; /* Allow the card height to adjust based on content */
+  max-height: 200px; /* Limit the maximum height of the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  position: relative; /* For z-index to work properly */
+}
+
+/* Hover effect */
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  z-index: 10; /* Bring the card to the front */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+
+/* Card header, body, footer styles */
+.card-header {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 15px; /* Reduced padding in header */
+  font-size: 1.1em; /* Reduced font size */
+  text-align: center; /* Center-align title */
+}
+
+.card-body {
+  padding: 10px 15px; /* Reduced padding in body */
+  max-height: 100px; /* Limit the body height */
+  overflow-y: auto; /* Add scroll if content overflows */
+}
+
+.card-footer {
+  padding: 8px 15px; /* Reduced padding in footer */
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+/* Apply button styling */
+
+/* Pagination Styles */
+.pagination-wrapper {
+  position: absolute; /* Position the pagination at the bottom of the page */
+  bottom: 20px; /* Distance from the bottom of the page */
+  left: 0;
+  right: 0;
+  margin-top: 20px; /* Adding space between job cards and pagination */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  z-index: 100; /* Ensure it's above other content */
+  margin-left: 800px;
+  margin-top: 2000px;
+}
+
+/* Pagination Buttons */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 5px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Disabled Pagination Button */
+.pagination button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Pagination Hover Effect */
+.pagination button:hover:not([disabled]) {
+  background-color: #0056b3;
+}
+
+
+/* Simple Footer Styles */
+.footer {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 100px;
+  border-radius: 10px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+/* Styling the job table */
+
+/* Job table container with overlay effect */
+.job-table-container {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 80%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  overflow: hidden;
+  margin-top: 100px;
+}
+
+/* Table styling */
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  margin: 20px 0;
+}
+
+/* Header row styling */
+.job-table thead tr {
+  background-color: #007bff;
+  color: #fff;
+  text-align: left;
+}
+
+/* Header cell styling */
+.job-table th {
+  padding: 12px 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Body rows styling */
+.job-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternate row background for better readability */
+.job-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect for table rows */
+.job-table tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+/* Close button styling */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-button:hover {
+  color: #e74c3c;
+  transition: color 0.3s ease;
+}
+
+/* Add a slight fade-in animation for the table */
+.job-table-container {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .job-table {
+    font-size: 14px;
+  }
+
+  .job-table th, .job-table td {
+    padding: 10px;
+  }
+}
+
+
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 130px;  /* Adjust width if needed */
+  border-radius: 15px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}
+
+.home-link {
+  font-size: 1.2em;
+  color: #007bff;
+  text-decoration: underline;
+
+}
+.user-name{
+  color: #007bff;
+
+}
+.profile-icon {
+  font-size: 35px;  /* Adjust the icon size */
+  cursor: pointer;  /* Pointer cursor on hover */
+  color: #333;      /* Icon color */
+  margin-right: 10px; /* Add some space from other elements if needed */
+}
+
+
+
+
+
+
+.resized-image {
+  width: 200px;      /* Set the width */
+  height: 35px;     /* Set the height */
+  object-fit: cover; /* Ensures the image fills the box without stretching */
+}
+
+
+/* Main content styling *//* Apply blur effect to main container */
+.main-container.blurred {
+  filter: blur(5px); /* Blur effect */
+  transition: filter 0.3s ease; /* Smooth transition */
+}
+
+
+
+/* Ensure the search container stays above the blurred content */
+.search-container {
+  position: relative;
+  z-index: 2;
+}

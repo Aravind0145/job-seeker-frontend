@@ -1,0 +1,344 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar container */
+.navbar {
+  background: #fff;
+  padding: 17px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Navbar Links */
+.nav-link {
+  text-decoration: none;
+  color: blue;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.nav-link.active {
+  font-size: 20px;
+  color: #457eff;
+}
+
+.nav-link:hover {
+  color: #457eff;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-nav {
+  flex: 1;
+  margin-left: 100px;
+}
+
+.center-nav {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-left: -130px;
+}
+
+.right-nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-right: 20px;
+  margin-left: -100px;
+}
+
+/* Navbar Links */
+/* Profile Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #457eff;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  display: block;
+  color: #333;
+  padding: 8px 16px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #0056b3;
+}
+
+/* Logout Button */
+.logout-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #d9363e;
+}
+
+
+  /* job-details.component.css */
+
+/* Container for job details */
+.job-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.job-details-card {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 30px;
+  margin: 20px;
+}
+
+.company-name {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #007bff;
+  margin-top: 30px;
+}
+
+.job-detail {
+  font-size: 1.1em;
+  margin-bottom: 12px;
+}
+
+.job-detail strong {
+  font-weight: bold;
+}
+
+.job-detail span {
+  font-weight: normal;
+  color: #555;
+}
+
+.apply-button-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.apply-button {
+  padding: 12px 25px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.apply-button:hover {
+  background-color: #218838;
+}
+
+.apply-button:focus {
+  outline: none;
+}
+
+  
+
+
+.footer {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: opx;
+  border-radius: 10px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 200px;  /* Adjust width if needed */
+  border-radius: 10px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}
+
+
+.active-link {
+  font-weight: bold;
+  color: #007bff; /* Highlight color */
+  text-decoration: underline; /* Optional */
+}
+
+.nav-item a:hover {
+  color: #0056b3;
+}
+.header-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Center align heading container */
+  position: relative; /* For absolute positioning of the button */
+  width: 100%; /* Ensure it spans the entire width of the table column */
+}
+
+.home {
+  color: blue;               /* Blue text */
+  border: 1px solid black;   /* Black border */
+  border-radius: 50%;        /* Make it a perfect circle */
+  width: 35px;               /* Fixed width for the circle */
+  height: 35px;              /* Fixed height for the circle */
+  display: flex;             /* Use flexbox to center the icon */
+  align-items: center;       /* Vertically center the icon */
+  justify-content: center;   /* Horizontally center the icon */
+  font-size: 16px;           /* Base font size */
+  font-weight: bold;         /* Bold text */
+  margin-bottom: 10px;
+  margin-top: -10px;
+  margin-left: -800px;
+  background-color: yellow;
+  cursor: pointer;           /* Pointer cursor on hover */
+}
+
+.home i {
+  font-size: 24px;           /* Increase the font size of the icon */
+}
+
+
+/* Active Effect */
+.home:active {
+  background-color: #004494; /* Even darker blue when pressed */
+}
+
+/* Base styling for the message container */
+div[ngClass] {
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-color: #004494;
+}
+
+/* Style for the error message */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Style for the success message */
+.success-message {
+  color: white;
+  border: 1px solid #c3e6cb;
+  background-color: green;
+  margin-left: 650px;
+  padding: 5px 10px;
+}
+
+.user-name{
+  color: #007bff;
+
+}
+.profile-icon {
+  font-size: 35px;  /* Adjust the icon size */
+  cursor: pointer;  /* Pointer cursor on hover */
+  color: #333;      /* Icon color */
+  margin-right: 10px; /* Add some space from other elements if needed */
+}
+
+
+
+

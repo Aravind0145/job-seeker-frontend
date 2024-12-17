@@ -1,0 +1,76 @@
+<nav class="navbar">
+  <div class="container">
+    <!-- Left side: RevHire -->
+    <div class="left-nav">
+      <a class="nav-link">RevHire</a>
+    </div>
+
+    <!-- Centered Links: Jobs, Companies, Services -->
+    <div class="center-nav">
+      <!-- Jobs Hover Effect with Default Jobs -->
+      <div class="nav-item">
+        <a (click)="navigateToHomePage()" class="nav-link home-link"  [ngClass]="{ 'active-link': isHomeActive }" routerLinkActive="active-link">Home</a>
+      </div>
+      <div class="nav-item">
+        <a (click)="navigateToPostJobsPage()" routerLinkActive="active-link">Post Jobs</a>
+      </div>
+
+      <!-- Companies Hover Effect with Default Companies -->
+      <div class="nav-item">
+        <a (click)="navigateToViewJobPostings()" routerLinkActive="active-link">View Job Postings</a>
+      </div>
+
+      <!-- Services Hover Effect -->
+      <div class="nav-item">
+    
+      </div>
+    </div>
+
+
+    <!-- Right side: Profile and Logout -->
+    <div class="right-nav">
+      <!-- Display full name before the Profile button -->
+      <span class="user-name">{{ fullName }}</span> <!-- Show fullName here -->
+      <div class="dropdown">
+        <i class="fas fa-user-circle profile-icon"></i>
+        <div class="dropdown-content">
+          <a (click)="navigateToProfile()" routerLinkActive="active-link">View Profile</a>
+
+          <a (click)="navigateToUpdateProfile()" routerLinkActive="active-link">Update Profile</a>
+            </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+
+</nav>
+
+
+<div class="postjobs-box">
+  <div class="postjobs">
+    <a (click)="navigateToProfile()">View Profile</a>
+  </div>
+  <div class="postjobs">
+    <a (click)="navigateToUpdateProfile()">Update Profile</a>
+  </div>
+  <div class="postjobs">
+    <a (click)="navigateToPostJobsPage()">Post Jobs</a>
+  </div>
+  <div class="postjobs">
+  <a (click)="navigateToViewJobPostings()">View Job Postings</a>
+    </div>
+  </div>
+
+  
+  <div>
+    <img src="https://img.freepik.com/free-photo/cherful-positive-young-colleagues-using-laptop-computer_171337-753.jpg">
+  </div>
+
+
+
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

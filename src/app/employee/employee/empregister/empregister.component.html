@@ -1,0 +1,271 @@
+<nav class="navbar">
+  <div class="container">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link active">RevHire</a></li>
+      <li class="nav-item login-button">
+        <a class="nav-link" routerLink="/jfrontpage">BacktoHome</a>
+          <a class="nav-link" routerLink="/employee/emplogin">Login</a>
+        </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="content">
+  <div class="signup-box">
+    <h2>Create Account for Employee</h2>
+    <form (ngSubmit)="empregister()" #signupForm="ngForm">
+
+      <!-- Company Information -->
+      <h3>Company Information</h3>
+      <div class="user-box">
+        <input 
+          type="text" 
+          name="companyName" 
+          [(ngModel)]="companyName" 
+          required 
+          minlength="3"
+          #companyNameInput="ngModel"
+          (ngModelChange)="validateCompanyName()" 
+          (blur)="validateCompanyName()"
+        />
+        <label>Company Name</label>
+      
+        <!-- Error for required field -->
+        <small *ngIf="companyNameInput.touched && companyNameInput.invalid && companyNameInput.hasError('required')" class="text-danger">
+          Company name is required.
+        </small>
+      
+        <!-- Error for only spaces -->
+        <small *ngIf="hasOnlySpacesCompany && companyNameInput.touched" class="text-danger">
+          Please enter a valid company name (not just spaces).
+        </small>
+      
+        <!-- Error for minimum length -->
+        <small *ngIf="companyNameInput.touched && companyNameInput.hasError('minlength')" class="text-danger">
+          Company name must be at least 3 characters long.
+        </small>
+      </div>
+      
+
+      <div class="user-box">
+        <input 
+          type="url" 
+          name="websiteUrl" 
+          [(ngModel)]="websiteUrl" 
+          required 
+          #websiteUrlInput="ngModel"
+          pattern="https?://.+"
+        />
+        <label>Website URL</label>
+        <small *ngIf="websiteUrlInput.touched && websiteUrlInput.invalid" class="text-danger">
+          Please enter a valid website URL (e.g., https://www.example.com).
+        </small>
+      </div>
+
+      <!-- Recruiter Information -->
+      <h3>Recruiter Information</h3>
+      <div class="user-box">
+        <input
+        type="text"
+        name="fullName"
+        [(ngModel)]="fullName"
+        #fullNameInput="ngModel"
+        required
+        minlength="3"
+        (ngModelChange)="validateFullName()"
+        (blur)="validateFullName()"  
+      />
+      <label>Full Name</label>
+      
+      <!-- Error for required field -->
+      <small *ngIf="fullNameInput.invalid && fullNameInput.touched && fullNameInput.hasError('required')">
+        Full name is required.
+      </small>
+    
+      <!-- Error for only spaces -->
+      <small *ngIf="hasOnlySpaces && fullNameInput.touched">
+        Please enter a valid name (not just spaces).
+      </small>
+    
+      <!-- Error for minimum length -->
+      <small *ngIf="fullNameInput.invalid && fullNameInput.touched && fullNameInput.hasError('minlength')">
+        Full name must be at least 3 characters long.
+      </small>        
+     
+      </div>
+      <div class="user-box">
+        <input 
+          type="email" 
+          name="officialEmail" 
+          [(ngModel)]="officialEmail" 
+          required 
+          email
+          #emailInput="ngModel"
+        />
+        <label>Official Email Address</label>
+      
+        <!-- Validation for required field -->
+        <small *ngIf="emailInput.touched && emailInput.hasError('required')" class="text-danger">
+          Official email is required.
+        </small>
+      
+        <!-- Validation for incorrect email format -->
+        <small *ngIf="emailInput.touched && emailInput.hasError('email')" class="text-danger">
+          Please enter a valid email address (e.g., user&#64;example.com).
+        </small>
+      
+        <!-- Validation for custom domain check -->
+        <small *ngIf="emailInput.touched && invalidDomain" class="text-danger">
+          Please enter a valid domain (e.g., user&#64;gmail.com).
+        </small>
+      
+        <!-- Validation for email already exists -->
+        <small *ngIf="emailExists && !emailInput.invalid" class="text-danger">
+          This email is already registered.
+        </small>
+      </div>
+      
+      
+      <!-- Designation -->
+      <div class="user-box">
+        <input 
+          type="text" 
+          name="designation" 
+          [(ngModel)]="designation" 
+          required 
+          #designationInput="ngModel"
+        />
+        <label>Designation</label>
+        <small *ngIf="designationInput.touched && designationInput.invalid" class="text-danger">
+          Designation is required.
+        </small>
+      </div>
+
+      <!-- Mobile Number -->
+      <div class="user-box">
+        <input
+          type="tel"
+          name="mobileNumber"
+          [(ngModel)]="mobileNumber"
+          (keypress)="restrictToDigits($event)"
+          (input)="validatePhoneLength()"
+          maxlength="10"
+          required
+          pattern="^[0-9]{10}$"
+          #mobileInput="ngModel"
+        />
+        <label>Mobile Number</label>
+
+        <!-- Validation for required field -->
+        <small *ngIf="mobileInput.touched && mobileInput.hasError('required')" class="text-danger">
+          Mobile number is required.
+        </small>
+      
+        <!-- Validation for exact 10 digits -->
+        <small *ngIf="mobileInput.touched && mobileInput.value?.length < 10" class="text-danger">
+          Mobile number must be exactly 10 digits.
+        </small>
+      </div>
+      
+      <!-- Password -->
+      <h3>Account Security</h3>
+      <div class="user-box">
+        <input 
+          type="password" 
+          name="password" 
+          [(ngModel)]="password" 
+          required 
+          minlength="6" 
+          #passwordInput="ngModel"
+        />
+        <label>Password</label>
+        <small *ngIf="passwordInput.touched && passwordInput.invalid" class="text-danger">
+          Password must be at least 6 characters.
+        </small>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="user-box">
+        <input 
+          type="password" 
+          name="confirmPassword" 
+          [(ngModel)]="confirmPassword" 
+          required 
+          #confirmPasswordInput="ngModel"
+        />
+        <label>Confirm Password</label>
+        <small *ngIf="confirmPasswordInput.touched && confirmPassword !== password" class="text-danger">
+          Passwords do not match.
+        </small>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit" [disabled]="signupForm.invalid || emailExists">Register</button>
+      </div>
+      <br>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+  <div class="talent-section">
+    <h2>Find & Hire the Right Talent with Us</h2>
+    <p>Trusted by <span class="highlight">9 Cr+ candidates</span> | <span class="highlight">5 Lakh+ employers</span></p>
+    <!-- Image after the content -->
+    <img src="https://static.naukimg.com/s/5/117/i/five-people.31225a6fa508252883ae.png" alt="Talent Image" class="talent-image">
+</div>
+
+
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>

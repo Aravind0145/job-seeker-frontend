@@ -1,0 +1,356 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar container */
+  .navbar {
+    background: #fff;
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  /* Navbar Links */
+  .nav-link {
+    text-decoration: none;
+    color:blue;
+    font-weight: 500;
+    padding: 10px;
+  }
+  
+  
+  .container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .left-nav1 {
+    flex: 1;
+    margin-left: 100px;
+    font-size: 1.2em !important;
+    color: #457eff;
+
+  }
+  
+  .center-nav {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-left: -130px;
+  }
+  
+  .right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-right: 20px;
+    margin-left: -100px;
+  }
+  
+
+  /* Profile Dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropbtn {
+    background-color: #457eff;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    text-decoration: none;
+    display: block;
+    color: #333;
+    padding: 8px 16px;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #0056b3;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d9363e;
+  }
+  
+
+
+/* Heading Styling */
+.table-heading1 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 20px;
+  
+  border-radius: 8px;
+ 
+  text-align: center; /* Ensures text aligns centrally */
+  
+}
+  
+  /* Table Styling */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-top: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+  }
+  
+  .table th {
+    color: #007bff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .table td {
+    color: #333;
+  }
+  
+  
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Button Styling */
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Table Heading Adjustments for Small Screens */
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .table {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+  
+  
+  }
+  
+
+  
+
+  
+  
+.footer {
+    background-color: #333;
+    color: white;
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 250px;
+    border-radius: 10px;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  
+.hover-content {
+  display: none;  /* Hide by default */
+  position: absolute;
+  background-color: white; /* Set background color to white */
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 200px;  /* Adjust width if needed */
+  border-radius: 10px;
+}
+
+.hover-content h4 {
+  color: black; /* Set heading text color to black */
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Show hover content when mouse is over the link */
+.nav-item:hover .hover-content {
+  display: block;
+}
+
+/* Style for hover content links */
+.hover-content a {
+  color: black; /* Set link text color to black */
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.hover-content a:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}.highlight-link {
+  color:  #007bff; /* Default color for Jobsapplied */
+  font-weight: bold; /* Make it stand out */
+  text-decoration: underline; /* No underline by default */
+  cursor: pointer; /* Make it look clickable */
+  font-size: 1.0em;
+}
+
+.nav_link:hover {
+  color:  #0056b3; /* Change color on hover */
+  text-decoration: none; /* Underline on hover */
+}
+
+.nav_link.active-link.highlight-link {
+  color: #ff5722; /* Different color when active */
+  text-decoration: underline; /* Underline when active */
+ 
+}
+.header-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Center align heading container */
+  position: relative; /* For absolute positioning of the button */
+  width: 100%; /* Ensure it spans the entire width of the table column */
+}
+
+.home1 {
+  color: blue;               /* Blue text */
+  border: 1px solid black;   /* Black border */
+  border-radius: 50%;        /* Make it a perfect circle */
+  width: 35px;               /* Fixed width for the circle */
+  height: 35px;              /* Fixed height for the circle */
+  display: flex;             /* Use flexbox to center the icon */
+  align-items: center;       /* Vertically center the icon */
+  justify-content: center;   /* Horizontally center the icon */
+  font-size: 16px;           /* Base font size */
+  font-weight: bold;         /* Bold text */
+  margin-top: 40px;
+  margin-left: 0px;
+  background-color: yellow;
+  cursor: pointer;           /* Pointer cursor on hover */
+}
+
+.home1 i {
+  font-size: 24px;           /* Increase the font size of the icon */
+}
+
+
+/* Active Effect */
+.home1:active {
+  background-color: #004494; /* Even darker blue when pressed */
+}
+
+
+div[ngClass] {
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-color: #004494;
+}
+
+/* Style for the error message */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Style for the success message */
+.success-message {
+  color: white;
+  border: 1px solid #c3e6cb;
+  background-color: green;
+  margin-left: 900px;
+  padding: 5px 10px;
+  margin-top: 70px;
+}
+
+.user-name{
+  color: #007bff;
+
+}
+.profile-icon {
+  font-size: 35px;  /* Adjust the icon size */
+  cursor: pointer;  /* Pointer cursor on hover */
+  color: #333;      /* Icon color */
+  margin-right: 10px; /* Add some space from other elements if needed */
+}
+
+
+

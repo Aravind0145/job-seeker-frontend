@@ -1,0 +1,94 @@
+<nav class="navbar">
+  <div class="container">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link active">RevHire</a></li>
+      <!-- Register button as a separate nav-item with class login-button -->
+      <li class="nav-item login-button">
+        <a class="nav-link" routerLink="/jfrontpage">BacktoHome</a>
+        <a class="nav-link" routerLink="/empregister">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+<div class="naukri-banner">
+    <h1>Hire Talent with RevHire!</h1>
+    <p>Find, engage, and hire talent on India’s leading recruitment platform</p>
+    <hr class="divider" />
+    <div class="features">
+      <ul>
+        <li>Job Posting</li>
+        <li>esdex</li>
+        <li>Assisted Hiring</li>
+      </ul>
+    </div>
+  
+    <button class="hire-btn" (click)="startHiring()">Start Hiring Now</button>
+
+    <div class="image-container">
+        <img
+          src="https://img.freepik.com/free-vector/man-search-hiring-job-online-from-laptop_1150-52728.jpg"
+          alt="Hiring Talent"
+        />
+      </div>
+
+  </div>
+  
+
+    <div class="login-box">
+      <h2>Login</h2>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        
+        <!-- Email Field -->
+        <div class="user-box">
+          <input 
+            type="email" 
+            name="email" 
+            [(ngModel)]="email" 
+            required 
+            email 
+            #emailInput="ngModel">
+          <label>Email</label>
+          <div *ngIf="emailInput.invalid && emailInput.touched" class="error-message">
+            <small>Email is required and must be valid</small>
+          </div>
+        </div>
+  
+        <!-- Password Field -->
+        <div class="user-box">
+          <input 
+            type="password" 
+            name="password" 
+            [(ngModel)]="password" 
+            required 
+            minlength="6" 
+            #passwordInput="ngModel">
+          <label>Password</label>
+          <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error-message">
+            <small>Password must be at least 6 characters</small>
+          </div>
+        </div>
+  
+        <!-- Forgot Password link above the submit button -->
+        <a routerLink="/employee/empforgotpassword" class="forgot-password">Forgot Password</a>
+  
+        <!-- Submit Button -->
+        <!--<div>
+          <input type="submit" value="Login" >
+        </div> -->
+
+        <div>
+          <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        </div>
+    
+      </form>
+    </div>
+  
+
+    
+<footer class="footer">
+  <p>&copy; 2024 RevHire. All Rights Reserved.</p>
+</footer>
