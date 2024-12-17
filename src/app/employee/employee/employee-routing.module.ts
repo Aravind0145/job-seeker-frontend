@@ -26,7 +26,7 @@ const routes: Routes = [
     component:EmphomepageComponent
   },
   {
-    path:'empforgotpassword',
+    path:'forgot-password',
     component:EmpforgotpasswordComponent
   },
   {

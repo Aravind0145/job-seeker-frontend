@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
+import { EmployeeserviceService } from '../../../Servicess/employeeservice.service';
 
 @Component({
   selector: 'app-emphomepage',

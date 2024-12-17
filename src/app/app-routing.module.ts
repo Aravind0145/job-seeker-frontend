@@ -21,7 +21,9 @@ import { UpdatemployeeprofileComponent } from './employee/employee/updatemployee
 import { ViewJobPostingsComponent } from './employee/employee/view-job-postings/view-job-postings.component';
 import { ResumedetailsComponent } from './employee/employee/resumedetails/resumedetails.component';
 import { UpdateapplicationComponent } from './employee/employee/updateapplication/updateapplication.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
+import { EmployeeLoginGuard } from './guards/employee-login.guard';
 
 const routes: Routes = [
   {
@@ -35,10 +37,11 @@ const routes: Routes = [
   {
     path:'emphomepage',
     component:EmphomepageComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    
   },
   {
-    path:'empforgotpassword',
+    path:'forgot-password',
     component:EmpforgotpasswordComponent
   },
   {
@@ -74,7 +77,8 @@ const routes: Routes = [
 
   {
     path: 'jfrontpage', // Directly map to 'frontpage' at the root level
-    component: FrontpageComponent
+    component: FrontpageComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'jregister', // Direct route for registration
@@ -82,7 +86,9 @@ const routes: Routes = [
   },
   {
     path:'jobseekerhomepage',
-    component:JobseekerhomepageComponent
+    component:JobseekerhomepageComponent,
+    
+
     
   },
   

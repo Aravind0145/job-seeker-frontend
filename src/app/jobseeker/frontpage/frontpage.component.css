@@ -523,11 +523,12 @@ button:disabled {
   color: #fff;
   font-size: 1.2rem;
   font-weight: 400;
- margin-left: 50px;
+ margin-left: 20px;
 }
 
 .footer-col .links {
   margin-top: 20px;
+  margin-left: -20x;
 }
 
 .footer-col .links li {

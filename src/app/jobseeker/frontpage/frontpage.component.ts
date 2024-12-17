@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { JobseekerserviceService } from '../../jobseekerservice.service';
+import { JobseekerserviceService } from '../../Servicess/jobseekerservice.service';
 import { Router } from '@angular/router';
-import { ToasterService } from '../../toaster.service';
+import { ToasterService } from '../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-frontpage',

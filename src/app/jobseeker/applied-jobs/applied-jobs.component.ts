@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JobseekerserviceService } from '../../jobseekerservice.service';
-import { Resume } from '../../resume';
-import { ToasterService } from '../../toaster.service';
+import { JobseekerserviceService } from '../../Servicess/jobseekerservice.service';
+import { Resume } from '../../Interfaces/resume';
+import { ToasterService } from '../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-applied-jobs',

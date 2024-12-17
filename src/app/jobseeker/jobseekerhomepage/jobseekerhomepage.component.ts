@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Resume } from '../../resume';
-import { JobseekerserviceService } from '../../jobseekerservice.service';
-import { Jobpostings } from '../../jobpostings';
-import { JobseekerSharedService } from '../../jobseeker-shared.service';
+import { Resume } from '../../Interfaces/resume';
+import { JobseekerserviceService } from '../../Servicess/jobseekerservice.service';
+import { Jobpostings } from '../../Interfaces/jobpostings';
+import { JobseekerSharedService } from '../../Servicess/jobseeker-shared.service';
 
 @Component({
   selector: 'app-jobseekerhomepage',

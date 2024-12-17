@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';  // Import PlatformLocation
-import { JobseekerserviceService } from '../../jobseekerservice.service';
-import { Jobseeker } from '../../jobseeker';
-import { Resume } from '../../resume'; // Ensure the correct import path for Resume model
+import { JobseekerserviceService } from '../../Servicess/jobseekerservice.service';
+import { Jobseeker } from '../../Interfaces/jobseeker';
+import { Resume } from '../../Interfaces/resume'; // Ensure the correct import path for Resume model
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { ToasterService } from '../../toaster.service';
+import { ToasterService } from '../../Servicess/toaster.service';
 
 
 @Component({

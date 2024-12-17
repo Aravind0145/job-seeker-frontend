@@ -390,30 +390,22 @@ div[ngClass] {
   color: #007bff !important;
 }
 
-
-
-button:disabled {
-  background-color: #cccccc;
-  pointer-events: none;  /* Disable interaction with the link */
-  cursor: not-allowed; 
-}
-
-/* Style for the "Save Changes" link (acts like a button) */
-a.btn-primary {
-  color: white; /* Text color for normal state */
-  background-color: #007bff; /* Primary button color */
-  padding: 10px 30px; /* Padding to match button size */
-  text-decoration: none; /* Remove underline */
+/* Style for the Save Changes button */
+.save-button {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 30px;
+  text-decoration: none;
   display: inline-block;
-  margin-left: 250px;
-  border-radius: 5px; /* Optional: Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px;
+  cursor: pointer;
+  border: none; /* Remove default button border */
 }
 
-/* Disabled state for the anchor tag */
-a.btn-primary.disabled-link {
-  background-color: #cccccc; /* Grey out the link when it's disabled */
-  color: #666666; /* Grey text color */
-  pointer-events: none; /* Disable interaction */
-  cursor: not-allowed; /* Change cursor to not-allowed */
+/* Disabled state for the Save Changes button */
+.save-button:disabled,
+.save-button.disabled-link {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
-import { ToasterService } from '../../../toaster.service';
+import { EmployeeserviceService } from '../../../Servicess/employeeservice.service';
+import { ToasterService } from '../../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-emplogin',

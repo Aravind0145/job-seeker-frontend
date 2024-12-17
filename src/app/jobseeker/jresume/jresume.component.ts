@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Resume } from '../../resume'; // Ensure the interface is updated to include new fields
-import { JobseekerserviceService } from '../../jobseekerservice.service';
+import { Resume } from '../../Interfaces/resume'; // Ensure the interface is updated to include new fields
+import { JobseekerserviceService } from '../../Servicess/jobseekerservice.service';
 import { HttpClient } from '@angular/common/http';
-import { ToasterService } from '../../toaster.service';
+import { ToasterService } from '../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-jresume',
@@ -104,7 +104,6 @@ export class JresumeComponent implements OnInit {
       .then((data) => {
         if (data && data.data && data.data.url) {
           this.profilePhoto = data.data.url; // Get the uploaded image URL
-          alert('Image uploaded successfully.');
         } else {
           this.uploadError = 'Failed to upload image. Please try again.';
           alert(this.uploadError);
@@ -231,19 +230,54 @@ export class JresumeComponent implements OnInit {
     this.resumeService.saveResume(resume, this.jobseekerId).subscribe({
       next: (response) => {
         console.log('Resume saved', response);
-        this.toaster.showSuccess("Resume Created sucessfylly!","Success")
+        this.toaster.showSuccess("Resume Created successfully!", "Success");
         this.message = '';
-          this.messageClass = 'success-message';  // You can customize this class for styling
-          setTimeout(() => {
-            this.message = '';  // Clear the message
-            this.messageClass = '';  // Reset the class
-          }, 5000); // Navigate to jobseeker front page after saving resume
+        this.messageClass = 'success-message';  // You can customize this class for styling
+    
+        // Reset all the fields to default values
+        this.headline = '';
+        this.firstName = '';
+        this.middleName = '';
+        this.lastName = '';
+        this.email = '';
+        this.phoneNumber = '';
+        this.dob = '';
+        this.languages = '';
+        this.linkedinurl = '';
+        this.permanentAddress = '';
+        this.currentAddress = '';
+        this.profilePhoto = '';
+        this.xth = '';
+        this.xthYear = '';
+        this.xii = '';
+        this.xiiYear = '';
+        this.graduation = '';
+        this.graduationYear = '';
+        this.pg = '';
+        this.pgStatus = '';
+        this.skills = '';
+        this.projectTitle = '';
+        this.projectDescription = '';
+        this.certificateName = '';
+        this.certificateDescription = '';
+        this.companyName = '';
+        this.startDate = '';
+        this.endDate = '';
+        this.jobTitle = '';
+        this.jobDescription = '';
+    
+        // Clear the message after a delay
+        setTimeout(() => {
+          this.message = '';  // Clear the message
+          this.messageClass = '';  // Reset the class
+        }, 5000); // Delay for 5 seconds before clearing the message
       },
       error: (error) => {
         console.error('Failed to save resume:', error);
-        this.toaster.showError("Failed to create resume!","Error");
+        this.toaster.showError("Failed to create resume!", "Error");
       }
     });
+    
   }
 
   isFormUnchanged(): boolean {

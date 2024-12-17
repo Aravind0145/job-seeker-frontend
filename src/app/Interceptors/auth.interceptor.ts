@@ -11,7 +11,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     console.log(isLoggedIn)
     // Define a set of APIs to skip the interceptor (public APIs, for example)
-    const excludedUrls = ['/jobseeker/jfrontapge', '/jregister','/empregister','/updateemail']; // Add the URLs to exclude here
+    const excludedUrls = ['/jobseeker/update-emails', '/jregister','/register','/update-email','/forgot-password','/employee/login']; // Add the URLs to exclude here
 
     
     const isExcluded = excludedUrls.some(url => req.url.includes(url));

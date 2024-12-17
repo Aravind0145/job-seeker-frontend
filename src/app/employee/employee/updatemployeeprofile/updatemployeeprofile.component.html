@@ -94,10 +94,6 @@
           <td><input id="websiteUrl" [(ngModel)]="employee.websiteUrl" name="websiteUrl" required /></td>
         </tr>
         <tr>
-          <td><label for="industryType">Industry Type:</label></td>
-          <td><input id="industryType" [(ngModel)]="employee.industryType" name="industryType" required /></td>
-        </tr>
-        <tr>
           <td><label for="fullName">Full Name:</label></td>
           <td><input id="fullName" [(ngModel)]="employee.fullName" name="fullName" required /></td>
         </tr>
@@ -135,12 +131,16 @@
         </tr>
       </table>
   
-      <a href="javascript:void(0);" 
-      class="btn btn-primary" 
-      [class.disabled-link]="!isFormModified()" 
+      <button
+      type="submit"
+      class="save-button"
+      [disabled]="!isFormModified()"
+      [class.disabled-link]="!isFormModified()"
       [attr.aria-disabled]="!isFormModified()">
       Save Changes
-   </a>
+    </button>
+    
+    
        </form>
   </div>
   

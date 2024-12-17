@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from '../../../employee';
-import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
-import { ToasterService } from '../../../toaster.service';
+import { Employee } from '../../../Interfaces/employee';
+import { EmployeeserviceService } from '../../../Servicess/employeeservice.service';
+import { ToasterService } from '../../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-updatemployeeprofile',
@@ -116,24 +116,31 @@ export class UpdatemployeeprofileComponent implements OnInit {
 
   onSubmit(): void {
     if (this.id !== null) {
+      console.log('Updating employee with ID:', this.id);
+      console.log('Employee data:', this.employee);
+  
       this.empService.updateEmployee(this.id, this.employee).subscribe(
         (updatedEmployee: Employee) => {
-
-          this.toaster.showSuccess("Updated Successfully!","Success");
+          console.log('Updated Employee:', updatedEmployee);
+          this.toaster.showSuccess("Updated Successfully!", "Success");
           this.message = '';
           this.messageClass = 'success-message';  // You can customize this class for styling
           setTimeout(() => {
             this.message = '';  // Clear the message
             this.messageClass = '';  // Reset the class
-          }, 5000); 
+          }, 5000);
         },
         (error) => {
           console.error('Error updating profile:', error);
-          this.toaster.showError("Error updating profile","Error");
+          this.toaster.showError("Error updating profile", "Error");
         }
       );
+    } else {
+      console.error('Employee ID is null or undefined!');
+      this.toaster.showError("Invalid Employee ID", "Error");
     }
   }
+  
   
   navigateToHomePage(): void {
     this.isHomeActive = true;

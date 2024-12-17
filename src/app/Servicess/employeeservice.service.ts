@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employee } from '../employee';
+import { Employee } from '../Interfaces/employee';
 import { map, Observable } from 'rxjs';
-import { Jobpostings } from '../jobpostings';
-import { Resume } from '../resume';
-import { Application } from '../application';
+import { Jobpostings } from '../Interfaces/jobpostings';
+import { Resume } from '../Interfaces/resume';
+import { Application } from '../Interfaces/application';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,13 @@ export class EmployeeserviceService {
   constructor(private http: HttpClient) { }
 
   registerEmployee(emp: Employee): Observable<Employee> {
-    return this.http.post<Employee>(`${this.apiUrl}/employee/empregister`, emp);
+    return this.http.post<Employee>(`${this.apiUrl}/employee/register`, emp);
   }
 
 
 
   employeelogin(email: string, password: string): Observable<{ role: string, id: number, fullName:string }> {
-    return this.http.post<{ role: string, id: number,fullName:string }>(`${this.apiUrl}/employee/emplogin`, { email, password }).pipe(
+    return this.http.post<{ role: string, id: number,fullName:string }>(`${this.apiUrl}/employee/login`, { email, password }).pipe(
       map(response => {
         console.log('Response from server:', response);
         if (response && response.role && response.id && response.fullName) {
@@ -44,13 +44,13 @@ updatePasswordEmployee(email: string, password: string): Observable<any> {
     password: password
   };
 
-  return this.http.put<any>(`${this.apiUrl}/employee/empforgotpassword`, updateData);
+  return this.http.put<any>(`${this.apiUrl}/employee/forgot-password`, updateData);
 }
 
 
 
 checkEmailExists(email: string): Observable<{ exists: boolean }> {
-  return this.http.get<{ exists: boolean }>(`${this.apiUrl}/employee/updateemail`, {
+  return this.http.get<{ exists: boolean }>(`${this.apiUrl}/employee/update-email`, {
     params: { email }
   });
 }
@@ -60,39 +60,39 @@ checkEmailExists(email: string): Observable<{ exists: boolean }> {
 
 
 postJobEmployee(job:Jobpostings, id: number):Observable<Jobpostings>{
-  return this.http.post<Jobpostings>(`${this.apiUrl}/employee/postjobs/${id}`,job);
+  return this.http.post<Jobpostings>(`${this.apiUrl}/employee/post-jobs/${id}`,job);
 }
 
 
 getEmployeeProfile(id: number): Observable<Employee> {
-  return this.http.get<Employee>(`${this.apiUrl}/employee/empprofile/${id}`);
+  return this.http.get<Employee>(`${this.apiUrl}/employee/emp-profile/${id}`);
 }
 
 updateEmployee(id: number, employee: Employee): Observable<Employee> {
-  return this.http.put<Employee>(`${this.apiUrl}/employee/updateemployeeprofile/${id}`, employee);
+  return this.http.put<Employee>(`${this.apiUrl}/employee/update-employee-profile/${id}`, employee);
 }
 
 getJobPostingsById(id: number): Observable<Jobpostings[]> {
-  return this.http.get<Jobpostings[]>(`${this.apiUrl}/employee/viewjobpostings/${id}`);
+  return this.http.get<Jobpostings[]>(`${this.apiUrl}/employee/view-jobpostings/${id}`);
 }
 
 getApplicantCount(jobPostingId: number): Observable<number> {
-  return this.http.get<number>(`${this.apiUrl}/employee/appliedcounts/${jobPostingId}`);
+  return this.http.get<number>(`${this.apiUrl}/employee/applied-counts/${jobPostingId}`);
 }
 
 getResumesByJobPostingId(jobPostingId: number): Observable<Resume[]> {
-  return this.http.get<Resume[]>(`${this.apiUrl}/employee/resumedetails/${jobPostingId}`);
+  return this.http.get<Resume[]>(`${this.apiUrl}/employee/resume-details/${jobPostingId}`);
 }
 
 
 // employeeservice.service.ts
 getApplicationsByJobPostingId(jobPostingId: number): Observable<Application[]> {
-  return this.http.get<Application[]>(`${this.apiUrl}/employee/applicationdetails/${jobPostingId}`);
+  return this.http.get<Application[]>(`${this.apiUrl}/employee/application-details/${jobPostingId}`);
 }
 
 // Update application
 updateApplication(id: number, application: Application): Observable<Application> {
-  return this.http.put<Application>(`${this.apiUrl}/employee/updateapplication/${id}`, application);
+  return this.http.put<Application>(`${this.apiUrl}/employee/update-application/${id}`, application);
 }
 postJobPostingAndJobSeeker(
   jobPostingId: number,
@@ -109,7 +109,7 @@ postJobPostingAndJobSeeker(
 
 
 deleteJobPosting(jobPostingId: number): Observable<void> {
-  return this.http.delete<void>(`${this.apiUrl}/DeleteJobposting/${jobPostingId}`);
+  return this.http.delete<void>(`${this.apiUrl}/Delete-Jobposting/${jobPostingId}`);
 }
 
 }

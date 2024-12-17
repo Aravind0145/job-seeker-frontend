@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Resume } from '../../resume'; // Ensure the path to the Resume model is correct
+import { Resume } from '../../Interfaces/resume'; // Ensure the path to the Resume model is correct
 import { ActivatedRoute, Router } from '@angular/router';
-import { JobseekerserviceService } from '../../jobseekerservice.service';
+import { JobseekerserviceService } from '../../Servicess/jobseekerservice.service';
 
 @Component({
   selector: 'app-viewresume',

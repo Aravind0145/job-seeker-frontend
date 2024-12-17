@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { JobseekerserviceService } from '../../jobseekerservice.service';
-import { Jobseeker } from '../../jobseeker';
+import { JobseekerserviceService } from '../../Servicess/jobseekerservice.service';
+import { Jobseeker } from '../../Interfaces/jobseeker';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Resume } from '../../resume';
+import { Resume } from '../../Interfaces/resume';
 
 @Component({
   selector: 'app-viewprofile',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
-import { ToasterService } from '../../../toaster.service';
+import { EmployeeserviceService } from '../../../Servicess/employeeservice.service';
+import { ToasterService } from '../../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-empforgotpassword',
@@ -33,11 +33,15 @@ export class EmpforgotpasswordComponent {
             this.message = '';
             console.log(response);
             this.toaster.showSuccess('Password updated successfully',"Success");
-            this.router.navigate(['/emplogin']); 
+            
+            
+            this.email = '';
+            this.password = '';
+            this.confirmPassword = '';
           },
           error => {
             this.message = '';
-            this.toaster.showError('Error updating password',"Error");
+            this.toaster.showError('Please cehck mail or password',"Error");
             console.error(error);
           }
         );

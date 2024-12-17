@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Jobseeker } from './jobseeker';
+import { Jobseeker } from '../Interfaces/jobseeker';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
-import { Resume } from './resume';
-import { Jobpostings } from './jobpostings';
-import { Application } from './application';
+import { Resume } from '../Interfaces/resume';
+import { Jobpostings } from '../Interfaces/jobpostings';
+import { Application } from '../Interfaces/application';
 
 
 @Injectable({
@@ -18,23 +18,23 @@ export class JobseekerserviceService {
   constructor(private http: HttpClient) { }
 
   registerJobSeeker(admin: Jobseeker): Observable<Jobseeker> {
-    return this.http.post<Jobseeker>(`${this.apiUrl}/jobseeker/jregister`, admin);
+    return this.http.post<Jobseeker>(`${this.apiUrl}/jobseeker/register`, admin);
   }
 
   saveResume(resume: Resume, jobseekerId: number): Observable<Resume> {
-    return this.http.post<Resume>(`${this.apiUrl}/jobseeker/jobseekerresume/${jobseekerId}`, resume);
+    return this.http.post<Resume>(`${this.apiUrl}/jobseeker/resume/${jobseekerId}`, resume);
   }
 
   // Inside the JobseekerserviceService
 checkResumeExistence(jobseekerId: number): Observable<boolean> {
-  return this.http.get<boolean>(`${this.apiUrl}/jobseeker/jobseekerresume/check/${jobseekerId}`);
+  return this.http.get<boolean>(`${this.apiUrl}/jobseeker/resume/check/${jobseekerId}`);
 }
 
   
 
 
   jobseekerlogin(email: string, password: string): Observable<{ role: string, id: number, fullName:string }> {
-    return this.http.post<{ role: string, id: number,fullName:string }>(`${this.apiUrl}/jobseeker/jfrontpage`, { email, password }).pipe(
+    return this.http.post<{ role: string, id: number,fullName:string }>(`${this.apiUrl}/jobseeker/frontpage`, { email, password }).pipe(
       map(response => {
         console.log('Response from server:', response);
         if (response && response.role && response.id && response.fullName) {
@@ -54,13 +54,13 @@ checkResumeExistence(jobseekerId: number): Observable<boolean> {
 
 
   getResume(id: number): Observable<Resume> {
-    return this.http.get<Resume>(`${this.apiUrl}/jobseeker/jobseekerhomepage/${id}`);
+    return this.http.get<Resume>(`${this.apiUrl}/jobseeker/homepage/${id}`);
   }
 
 
   getJobPostings(page: number, size: number): Observable<{ data: Jobpostings[]; totalCount: number }> {
     return this.http.get<{ data: Jobpostings[]; totalCount: number }>(
-      `${this.apiUrl}/jobseeker/listjobpostings/${page}/${size}`
+      `${this.apiUrl}/jobseeker/list-jobpostings/${page}/${size}`
     );
   }
   
@@ -76,13 +76,13 @@ checkResumeExistence(jobseekerId: number): Observable<boolean> {
       password: password
     };
   
-    return this.http.put<any>(`${this.apiUrl}/jobseeker/jobseekerforgotpassword`, updateData);
+    return this.http.put<any>(`${this.apiUrl}/jobseeker/forgot-password`, updateData);
   }
   
 
 
   checkEmailExists(email: string): Observable<{ exists: boolean }> {
-    return this.http.get<{ exists: boolean }>(`${this.apiUrl}/jobseeker/jfrontapge`, {
+    return this.http.get<{ exists: boolean }>(`${this.apiUrl}/jobseeker/update-emails`, {
       params: { email }
     });
   }
@@ -104,7 +104,7 @@ checkResumeExistence(jobseekerId: number): Observable<boolean> {
     resumeId:number
   ): Observable<any> {
     // Construct the URL with the dynamic path parameters
-    const url = `${this.apiUrl}/jobseeker/jobdetails/${jobPostingId}/${jobSeekerId}/${resumeId}`;
+    const url = `${this.apiUrl}/jobseeker/job-details/${jobPostingId}/${jobSeekerId}/${resumeId}`;
   
     // Send the application object in the body if needed
     return this.http.post<any>(url, application);
@@ -112,15 +112,15 @@ checkResumeExistence(jobseekerId: number): Observable<boolean> {
 
 
   getJobSeekerProfile(id: number): Observable<Jobseeker> {
-    return this.http.get<Jobseeker>(`${this.apiUrl}/jobseeker/viewprofile/${id}`);
+    return this.http.get<Jobseeker>(`${this.apiUrl}/jobseeker/view-profile/${id}`);
   }
   
   updateJobSeeker(id: number, jobseeker: Jobseeker): Observable<Jobseeker> {
-    return this.http.put<Jobseeker>(`${this.apiUrl}/jobseeker/updateprofile/${id}`, jobseeker);
+    return this.http.put<Jobseeker>(`${this.apiUrl}/jobseeker/update-profile/${id}`, jobseeker);
   }
   
   updateResume(resume: Resume, id: number): Observable<Resume> {
-    return this.http.put<Resume>(`${this.apiUrl}/jobseeker/updateresume/${id}`, resume);
+    return this.http.put<Resume>(`${this.apiUrl}/jobseeker/update-resume/${id}`, resume);
   }
   
 
@@ -136,14 +136,14 @@ checkResumeExistence(jobseekerId: number): Observable<boolean> {
 
   searchJobs(searchCriteria: any): Observable<any[]> {
     // Construct the URL by appending the search criteria directly into the path
-    const url = `${this.apiUrl}/jobseeker/searchjob/${searchCriteria.jobTitle || ''}/${searchCriteria.location || ''}/${searchCriteria.experience || ''}`;
+    const url = `${this.apiUrl}/jobseeker/search-job/${searchCriteria.jobTitle || ''}/${searchCriteria.location || ''}/${searchCriteria.experience || ''}`;
 
     return this.http.get<any[]>(url);
 }
 
 
 getResumeById(id: number): Observable<Resume> {
-  return this.http.get<Resume>(`${this.apiUrl}/jobseeker/viewresume/${id}`);
+  return this.http.get<Resume>(`${this.apiUrl}/jobseeker/view-resume/${id}`);
 }
 
 

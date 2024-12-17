@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
-import { Jobpostings } from '../../../jobpostings';
-import { ToasterService } from '../../../toaster.service';
+import { EmployeeserviceService } from '../../../Servicess/employeeservice.service';
+import { Jobpostings } from '../../../Interfaces/jobpostings';
+import { ToasterService } from '../../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-job-postings',
@@ -99,6 +99,19 @@ export class JobPostingsComponent implements OnInit {
         this.toaster.showSuccess("Job posted successfully", "Success");
         this.message = '';
         this.messageClass = 'success-message';  // You can customize this class for styling
+        this.id = null;
+    this.jobTitle = '';
+    this.jobDescription = '';
+    this.rolesAndResponsibilities = '';
+    this.companyName = '';
+    this.location = '';
+    this.employmentType = '';
+    this.salary = '';
+    this.jobCategory = '';
+    this.skills = '';
+    this.experience = '';
+    this.education = '';
+    this.numberOfOpenings = null;
         setTimeout(() => {
           this.message = '';  // Clear the message
           this.messageClass = '';  // Reset the class

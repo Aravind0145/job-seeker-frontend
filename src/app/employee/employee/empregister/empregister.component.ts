@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
-import { Employee } from '../../../employee';
-import { ToasterService } from '../../../toaster.service';
+import { EmployeeserviceService } from '../../../Servicess/employeeservice.service';
+import { Employee } from '../../../Interfaces/employee';
+import { ToasterService } from '../../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-empregister',
@@ -73,12 +73,24 @@ export class EmpregisterComponent {
       response => {
         console.log('Registration successful', response);
         this.toaster.showSuccess("Registration successful","Success");
+        this.resetForm();
       },
       error => {
         console.error('Registration failed:', error);
         this.toaster.showError("Registration failed","Error");
       }
     );
+  }
+
+  resetForm() {
+    this.companyName = '';
+    this.websiteUrl = '';
+    this.industryType = '';
+    this.fullName = '';
+    this.officialEmail = '';
+    this.mobileNumber = '';
+    this.designation = '';
+    this.password = '';
   }
 
 

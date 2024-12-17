@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Application } from '../../../application';
-import { EmployeeserviceService } from '../../../jobseeker/employeeservice.service';
-import { ToasterService } from '../../../toaster.service';
+import { Application } from '../../../Interfaces/application';
+import { EmployeeserviceService } from '../../../Servicess/employeeservice.service';
+import { ToasterService } from '../../../Servicess/toaster.service';
 
 @Component({
   selector: 'app-updateapplication',
