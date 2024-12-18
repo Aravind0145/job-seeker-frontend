@@ -13,7 +13,6 @@ export class UpdatemployeeprofileComponent implements OnInit {
   employee: Employee = {
     companyName: '',
     websiteUrl: '',
-    industryType: '',
     fullName: '',
     officialEmail: '',
     mobileNumber: '',

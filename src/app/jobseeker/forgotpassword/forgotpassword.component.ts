@@ -14,6 +14,9 @@ export class ForgotpasswordComponent {
   password: string = '';
   confirmPassword: string = '';
   message: string = '';
+  invalidDomain: boolean = false;
+  validDomains: string[] = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'edu.com', 'gov.com', 'yopmail.com'];
+
 
 
   constructor(
@@ -47,6 +50,20 @@ export class ForgotpasswordComponent {
     } else {
       this.message = 'Passwords do not match.';
     }
+  }
+
+  
+  validateDomain(): void {
+    const domainPattern = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    const match = this.email.match(domainPattern);
+
+    if (match) {
+      const enteredDomain = match[1];
+      this.invalidDomain = !this.validDomains.includes(enteredDomain);
+    } else {
+      this.invalidDomain = true; // Flag if the email format is invalid
+    }
+
   }
 
   }

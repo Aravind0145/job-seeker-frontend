@@ -46,11 +46,6 @@ export class JresumeComponent implements OnInit {
   projectDescription: string = '';
   certificateName: string = '';
   certificateDescription: string = '';
-  companyName: string = '';
-  startDate: string = '';
-  endDate: string = '';
-  jobTitle: string = '';
-  jobDescription: string = ''; 
   originalResume: Resume | null = null;
   message: string = '';
   messageClass: string = '';
@@ -219,11 +214,6 @@ export class JresumeComponent implements OnInit {
       projectDescription: this.projectDescription,
       certificateName: this.certificateName,
       certificateDescription: this.certificateDescription,
-      companyName: this.companyName,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      jobTitle: this.jobTitle,
-      jobDescription: this.jobDescription 
     };
 
     // Call the service to save the resume (implementation depends on the service)
@@ -260,12 +250,7 @@ export class JresumeComponent implements OnInit {
         this.projectDescription = '';
         this.certificateName = '';
         this.certificateDescription = '';
-        this.companyName = '';
-        this.startDate = '';
-        this.endDate = '';
-        this.jobTitle = '';
-        this.jobDescription = '';
-    
+        
         // Clear the message after a delay
         setTimeout(() => {
           this.message = '';  // Clear the message

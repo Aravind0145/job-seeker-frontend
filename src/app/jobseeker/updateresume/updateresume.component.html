@@ -190,26 +190,7 @@
             <td><label for="certificateDescription">Certificate Description::<span class="required-star">*</span></label></td>
             <td><textarea id="certificateDescription" [(ngModel)]="resume.certificateDescription" name="certificateDescription"></textarea></td>
           </tr>
-          <tr>
-            <td><label for="companyName">Company Name:</label></td>
-            <td><input id="companyName" [(ngModel)]="resume.companyName" name="companyName" /></td>
-          </tr>
-          <tr>
-            <td><label for="startDate">Start Date:</label></td>
-            <td><input id="startDate" [(ngModel)]="resume.startDate" name="startDate" type="date" /></td>
-          </tr>
-          <tr>
-            <td><label for="endDate">End Date:</label></td>
-            <td><input id="endDate" [(ngModel)]="resume.endDate" name="endDate" type="date" /></td>
-          </tr>
-          <tr>
-            <td><label for="jobTitle">Job Title:</label></td>
-            <td><input id="jobTitle" [(ngModel)]="resume.jobTitle" name="jobTitle" /></td>
-          </tr>
-          <tr>
-            <td><label for="jobDescription">Job Description:</label></td>
-            <td><textarea id="jobDescription" [(ngModel)]="resume.jobDescription" name="jobDescription"></textarea></td>
-          </tr>
+          
         </table>
     
         <button type="submit" [disabled]="!isFormModified()">Save Changes</button>

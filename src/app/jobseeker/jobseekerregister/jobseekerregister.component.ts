@@ -19,6 +19,7 @@ export class JobseekerregisterComponent {
   phone: string = '';
   workStatus: string = '';
   promotions: boolean = false;
+  test:boolean = false;
 
   invalidDomain: boolean = false;
 
@@ -121,6 +122,7 @@ export class JobseekerregisterComponent {
         this.fullName = '';
     this.email = '';
     this.password = '';
+    this.confirmPassword='';
     this.phone = '';
     this.workStatus = '';
     this.promotions = false;

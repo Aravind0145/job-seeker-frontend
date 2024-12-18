@@ -12,7 +12,6 @@ import { ToasterService } from '../../../Servicess/toaster.service';
 export class EmpregisterComponent {
   companyName: string = '';
   websiteUrl: string = '';
-  industryType: string = '';
   fullName: string = '';
   officialEmail: string = '';
   mobileNumber: string = '';
@@ -60,7 +59,6 @@ export class EmpregisterComponent {
     const employee: Employee = {
       companyName: this.companyName,
       websiteUrl: this.websiteUrl,
-      industryType: this.industryType,
       fullName: this.fullName,
       officialEmail: this.officialEmail,
       mobileNumber: this.mobileNumber,
@@ -85,7 +83,6 @@ export class EmpregisterComponent {
   resetForm() {
     this.companyName = '';
     this.websiteUrl = '';
-    this.industryType = '';
     this.fullName = '';
     this.officialEmail = '';
     this.mobileNumber = '';

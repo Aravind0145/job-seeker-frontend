@@ -26,9 +26,6 @@ export interface Resume {
   projectDescription: string;
   certificateName: string;
   certificateDescription: string;
-  companyName: string;
-  startDate: string;
-  endDate: string;
-  jobTitle: string;
-  jobDescription: string;  
+  
+  
 }

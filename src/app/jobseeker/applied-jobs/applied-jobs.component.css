@@ -284,7 +284,6 @@ body {
   position: relative; /* For absolute positioning of the button */
   width: 100%; /* Ensure it spans the entire width of the table column */
 }
-
 .home1 {
   color: blue;               /* Blue text */
   border-radius: 50%;        /* Make it a perfect circle */
@@ -296,19 +295,39 @@ body {
   font-size: 16px;           /* Base font size */
   font-weight: bold;         /* Bold text */
   margin-top: 40px;
-  margin-left: 0px;
+  margin-left: 20px;
   cursor: pointer;           /* Pointer cursor on hover */
+  position: relative;        /* Required for positioning the tooltip */
 }
 
 .home1 i {
-  font-size: 24px;           /* Increase the font size of the icon */
+  font-size: 24px;
+}
+
+/* Tooltip styling */
+.home1::after {
+  content: 'Go Back';          /* Tooltip text */
+  position: absolute;
+  bottom: -30px;               /* Position the tooltip below the icon */
+  left: 50%;                   /* Align to center */
+  transform: translateX(-50%); /* Center horizontally */
+  background-color: #333;      /* Dark background for the tooltip */
+  color: #fff;                 /* White text */
+  padding: 5px 8px;            /* Padding for the tooltip */
+  border-radius: 5px;          /* Rounded corners */
+  white-space: nowrap;         /* Prevent text wrapping */
+  font-size: 14px;             /* Font size for the tooltip */
+  opacity: 0;                  /* Hidden by default */
+  transition: opacity 0.3s;    /* Smooth transition for the tooltip */
+  pointer-events: none;        /* Prevent tooltip from blocking interactions */
+}
+
+/* Show tooltip on hover */
+.home1:hover::after {
+  opacity: 1;                  /* Make the tooltip visible */
 }
 
 
-/* Active Effect */
-.home1:active {
-  background-color: #004494; /* Even darker blue when pressed */
-}
 
 
 div[ngClass] {

@@ -140,11 +140,13 @@
           <input type="checkbox" name="promotions" [(ngModel)]="promotions" required>
           Send me important updates to mail
         </label>
+        
+
       </div>
 
       <!-- Submit Button -->
       <div>
-        <button type="submit" [disabled]="signupForm.invalid || !promotions">
+        <button type="submit" [disabled]="signupForm.invalid">
           Register
         </button>
       </div>
