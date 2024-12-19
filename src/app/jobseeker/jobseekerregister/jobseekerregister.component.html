@@ -37,7 +37,7 @@
       <div class="user-box">
         <label>Full Name</label>
         <input type="text" name="fullName" [(ngModel)]="fullName" #fullNameInput="ngModel" required minlength="3"
-          (ngModelChange)="validateFullName()" (blur)="validateFullName()" />
+           (blur)="validateFullName()" />
 
 
         <!-- Error for required field -->
@@ -146,7 +146,7 @@
 
       <!-- Submit Button -->
       <div>
-        <button type="submit" [disabled]="signupForm.invalid">
+        <button type="submit" [disabled]="signupForm.invalid || !promotions">
           Register
         </button>
       </div>

@@ -28,7 +28,7 @@ export class UpdateprofileComponent implements OnInit, OnDestroy {
   routeFullName: string = '';
   resumeId: number | null = null;
   resume: Resume | null = null;
-  originalResume: Jobseeker | null = null;
+  originalJobseeker: Jobseeker | null = null;
   message: string = '';
   messageType: string = '';
   uploadingImage: boolean = false;  // To track the uploading state
@@ -101,7 +101,7 @@ export class UpdateprofileComponent implements OnInit, OnDestroy {
     this.jobseekerService.getJobSeekerProfile(id).subscribe(
       (jobseeker: Jobseeker) => {
         this.jobseeker = jobseeker;
-        this.originalResume = { ...jobseeker };
+        this.originalJobseeker = { ...jobseeker };
         console.log('Jobseeker Data:', this.jobseeker);
       },
       error => {
@@ -111,7 +111,7 @@ export class UpdateprofileComponent implements OnInit, OnDestroy {
   }
 
   isFormModified(): boolean {
-    return JSON.stringify(this.jobseeker) !== JSON.stringify(this.originalResume);
+    return JSON.stringify(this.jobseeker) !== JSON.stringify(this.originalJobseeker);
   }
 
   getResumeDetails(resumeId: number): void {

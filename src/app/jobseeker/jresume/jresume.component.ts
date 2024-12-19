@@ -213,7 +213,7 @@ export class JresumeComponent implements OnInit {
       projectTitle: this.projectTitle,
       projectDescription: this.projectDescription,
       certificateName: this.certificateName,
-      certificateDescription: this.certificateDescription,
+      certificateDescription: this.certificateDescription
     };
 
     // Call the service to save the resume (implementation depends on the service)

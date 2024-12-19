@@ -194,7 +194,6 @@ export class JobseekerhomepageComponent implements OnInit {
     localStorage.removeItem('role');
     localStorage.removeItem('fullName');
     localStorage.removeItem('id');
-    // Redirect to the login or front page
     this.router.navigateByUrl('/jfrontapge');
   }
   
